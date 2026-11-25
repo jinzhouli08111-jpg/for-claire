@@ -21,9 +21,13 @@ _tools/
 _pytmp/
 _verify/
 _shots/
+_shots2/
 _quicktest/
 src/
 *.zip
+
+# —— DSH 本地配置与技能 ——
+.dsh/
 
 # —— 根目录的临时脚本（子目录里的 _lint.js 等要保留）——
 /_*.js
@@ -34,8 +38,5 @@ src/
 # —— 猫图的过程文件，只留最终版本 ——
 cats/_*.png
 
-# ���� DSH ���������뼼�� ����
-.dsh/
-
-# ���� ��ͼ��ʱĿ¼��Chromium profile �ܴ󣩡���
-_shots2/
+# —— 页面截图属于生成物，只保留 docs/screenshots 里的成品 ——
+claire-essay-helper-web/*.png
