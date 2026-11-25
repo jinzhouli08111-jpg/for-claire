@@ -29,6 +29,28 @@
 
 ---
 
+## 界面
+
+首页：一只张开双爪的小猫，六个功能分别落在肉垫上，鼠标移上去浮出说明卡片。
+
+![首页](docs/screenshots/01-home.webp)
+
+| 论文打磨 | AI 查重 |
+|---|---|
+| ![论文打磨](docs/screenshots/02-essay.webp) | ![AI 查重](docs/screenshots/03-check.webp) |
+
+| AI 模板 | 智能 PPT |
+|---|---|
+| ![AI 模板](docs/screenshots/04-template.webp) | ![智能 PPT](docs/screenshots/05-ppt.webp) |
+
+| 思维导图 | 草稿箱 |
+|---|---|
+| ![思维导图](docs/screenshots/06-mindmap.webp) | ![草稿箱](docs/screenshots/07-draft.webp) |
+
+截图用 Edge 无头浏览器按 1440×1000 抓取，缩到 1200px 宽存成 WebP，七张合计约 220 KB。
+
+---
+
 ## 仓库里有什么
 
 | 目录 | 是什么 | 技术栈 |

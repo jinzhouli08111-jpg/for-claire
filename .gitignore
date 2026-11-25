@@ -36,3 +36,6 @@ cats/_*.png
 
 # —— DSH 本地配置与技能 ——
 .dsh/
+
+# —— 截图临时目录（Chromium profile 很大）——
+_shots2/
