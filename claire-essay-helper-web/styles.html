@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>风格对比 · For Claire</title>
+<style>
+  :root { --font: "Manrope", -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif; }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; min-height: 100vh; padding: 48px 24px 72px;
+    background: #eef2ef; color: #16211b; font-family: var(--font);
+  }
+  h1 { font-size: 32px; letter-spacing: -.02em; margin: 0 0 8px; }
+  .lead { color: #5f6d65; font-size: 15px; margin: 0 0 36px; }
+  .row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; max-width: 1180px; }
+  .item { background: #fff; border-radius: 20px; overflow: hidden; box-shadow: 0 10px 30px rgba(16,60,38,.10); }
+  .item a { display: block; text-decoration: none; color: inherit; }
+  .thumb { height: 240px; position: relative; overflow: hidden; }
+  .thumb iframe { position: absolute; top: 0; left: 0; width: 1280px; height: 900px; border: 0; transform: scale(.28); transform-origin: top left; pointer-events: none; }
+  .cap { padding: 18px 20px 20px; }
+  .cap strong { display: block; font-size: 17px; margin-bottom: 6px; }
+  .cap span { font-size: 13px; line-height: 20px; color: #66746c; }
+  .cap em { display: inline-block; margin-top: 12px; font-style: normal; font-weight: 600; font-size: 13px; color: #0f7a37; }
+  @media (max-width: 900px) { .row { grid-template-columns: 1fr; } .thumb { height: 200px; } }
+</style>
+</head>
+<body>
+  <h1>三种视觉方向</h1>
+  <p class="lead">点开任意一个看完整首页。选定后我把那一套铺到全部七个页面。</p>
+  <div class="row">
+    <div class="item">
+      <a href="./home-a.html">
+        <div class="thumb"><iframe src="./home-a.html" loading="lazy" title="A"></iframe></div>
+        <div class="cap"><strong>A · 暖纸墨绿</strong>
+          <span>米白纸感底 · 衬线大标题 · 金色编号 · 细线分隔。像一本学术刊物。</span><br>
+          <em>打开看 →</em></div>
+      </a>
+    </div>
+    <div class="item">
+      <a href="./home-b.html">
+        <div class="thumb"><iframe src="./home-b.html" loading="lazy" title="B"></iframe></div>
+        <div class="cap"><strong>B · 薄荷玻璃</strong>
+          <span>绿色光晕 · 毛玻璃卡片 · 24px 大圆角 · 悬浮位移。干净、亮、亲切。</span><br>
+          <em>打开看 →</em></div>
+      </a>
+    </div>
+    <div class="item">
+      <a href="./home-c.html">
+        <div class="thumb"><iframe src="./home-c.html" loading="lazy" title="C"></iframe></div>
+        <div class="cap"><strong>C · 深夜墨绿</strong>
+          <span>深色底 · 绿色网格 · 等宽编号 · 大号渐变标题。最工具、最专注。</span><br>
+          <em>打开看 →</em></div>
+      </a>
+    </div>
+  </div>
+</body>
+</html>

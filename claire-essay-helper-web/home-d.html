@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>For Claire · 专属学习助手</title>
+<meta name="description" content="For Claire 是 Claire 的专属学习小站：论文打磨、AI 查重、模板生成、智能 PPT、思维导图，五个工具一个入口。" />
+<meta name="theme-color" content="#16a34a" />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cpath d='M14 22 L18 4 L32 15 Z' fill='%2316a34a'/%3E%3Cpath d='M50 22 L46 4 L32 15 Z' fill='%2316a34a'/%3E%3Ccircle cx='32' cy='37' r='21' fill='%2322c55e'/%3E%3Ccircle cx='25' cy='35' r='3' fill='%231f2a23'/%3E%3Ccircle cx='39' cy='35' r='3' fill='%231f2a23'/%3E%3C/svg%3E" />
+<style>
+  :root {
+    --font: "Manrope", -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
+    --brand: #16a34a; --brand-deep: #0f7a37; --brand-soft: #dcf5e5;
+    --ink: #14231b; --muted: #5f7268; --faint: #8a9a90;
+    --ease: cubic-bezier(.22,1,.36,1);
+    --cat: #c9f0d9; --cat-line: #14532d; --cat-belly: #f2fbf5;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; min-height: 100vh; position: relative; overflow-x: hidden;
+    background: #eef7f1; color: var(--ink); font-family: var(--font);
+    -webkit-font-smoothing: antialiased;
+  }
+  body::before, body::after {
+    content: ""; position: fixed; border-radius: 50%; pointer-events: none; z-index: 0; filter: blur(70px);
+  }
+  body::before {
+    width: 660px; height: 660px; top: -240px; left: -180px;
+    background: radial-gradient(circle, rgba(52,211,153,.34), rgba(52,211,153,0) 70%);
+  }
+  body::after {
+    width: 740px; height: 740px; bottom: -320px; right: -240px;
+    background: radial-gradient(circle, rgba(22,163,74,.20), rgba(22,163,74,0) 70%);
+  }
+  .wrap { position: relative; z-index: 1; max-width: 1080px; margin: 0 auto; padding: 36px 28px 72px; }
+
+  .nav { display: flex; align-items: center; justify-content: space-between; margin-bottom: 28px; }
+  .pill {
+    display: inline-flex; align-items: center; gap: 8px; padding: 8px 16px; border-radius: 999px;
+    background: rgba(255,255,255,.72); backdrop-filter: blur(16px);
+    border: 1px solid rgba(255,255,255,.9); box-shadow: 0 2px 12px rgba(22,163,74,.08);
+    font-size: 13px; font-weight: 700; color: var(--brand-deep);
+  }
+  .pill .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--brand); }
+  .pill.quiet { color: var(--muted); font-weight: 500; }
+
+  .hero { text-align: center; margin-bottom: 8px; }
+  h1 {
+    font-family: Georgia, "Times New Roman", "Songti SC", serif;
+    font-style: italic; font-weight: 700;
+    font-size: 64px; line-height: 1; letter-spacing: -.02em; margin: 0 0 14px;
+    background: linear-gradient(135deg, #16a34a 0%, #0d9488 56%, #22c55e 100%);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+    filter: drop-shadow(0 2px 3px rgba(21,128,61,.14));
+  }
+  .sub { font-size: 16px; line-height: 28px; color: var(--muted); margin: 0 auto; max-width: 34em; }
+
+  /* ——— 舞台：猫 + 爪上的入口 ——— */
+  .stage { position: relative; width: 100%; aspect-ratio: 1000 / 560; margin-top: 4px; }
+  .cat { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+
+  /* 猫的动效 */
+  .arm-l, .arm-r { transform-box: fill-box; transform-origin: 100% 60%; animation: swayL 4.6s var(--ease) infinite alternate; }
+  .arm-r { transform-origin: 0% 60%; animation-name: swayR; }
+  @keyframes swayL { from { transform: rotate(1.2deg); } to { transform: rotate(-2.6deg); } }
+  @keyframes swayR { from { transform: rotate(-1.2deg); } to { transform: rotate(2.6deg); } }
+  .body-g { transform-box: fill-box; transform-origin: 50% 100%; animation: breathe 4.2s ease-in-out infinite; }
+  @keyframes breathe { 0%,100% { transform: scale(1,1); } 50% { transform: scale(1.012,1.02); } }
+  .tail { transform-box: fill-box; transform-origin: 6% 92%; animation: wag 3.4s ease-in-out infinite; }
+  @keyframes wag { 0%,100% { transform: rotate(-4deg); } 50% { transform: rotate(7deg); } }
+  .eyes { transform-box: fill-box; transform-origin: 50% 50%; animation: blink 5.6s infinite; }
+  @keyframes blink { 0%,90%,100% { transform: scaleY(1); } 94% { transform: scaleY(.1); } }
+  .head-g { transform-box: fill-box; transform-origin: 50% 90%; animation: nod 6s ease-in-out infinite; }
+  @keyframes nod { 0%,100% { transform: rotate(-1deg); } 50% { transform: rotate(1.4deg); } }
+
+  /* 卡片（爪子上 + 头顶） */
+  .stack { position: absolute; display: flex; flex-direction: column; gap: 12px; transform: translateX(-50%); z-index: 2; }
+  .stack-l { left: 23.2%; bottom: 36.5%; }
+  .stack-r { left: 76.8%; bottom: 36.5%; }
+
+  .card {
+    display: flex; align-items: flex-start; gap: 11px; width: 208px;
+    padding: 14px 16px; border-radius: 20px; text-decoration: none; color: inherit;
+    background: rgba(255,255,255,.82); backdrop-filter: blur(18px);
+    border: 1px solid rgba(255,255,255,.95);
+    box-shadow: 0 10px 26px rgba(16,60,38,.09);
+    transition: transform .5s var(--ease), box-shadow .5s var(--ease), background-color .3s var(--ease);
+    animation: floaty 6s ease-in-out infinite;
+  }
+  @keyframes floaty { 0%,100% { translate: 0 0; } 50% { translate: 0 -5px; } }
+  .stack .card:nth-child(1) { animation-delay: -.4s; }
+  .stack .card:nth-child(2) { animation-delay: -3.1s; }
+  .stack-r .card:nth-child(1) { animation-delay: -1.7s; }
+  .stack-r .card:nth-child(2) { animation-delay: -4.4s; }
+
+  .card:hover { transform: translateY(-4px) scale(1.02); background: #fff; box-shadow: 0 20px 44px rgba(16,60,38,.16); }
+  .card .ico {
+    flex: none; width: 34px; height: 34px; border-radius: 11px; display: grid; place-items: center;
+    background: linear-gradient(150deg, #dcf5e5, #eefaf2); color: var(--brand-deep);
+  }
+  .card .ico svg { width: 17px; height: 17px; }
+  .card h2 { font-size: 15px; line-height: 20px; font-weight: 700; margin: 0 0 3px; letter-spacing: -.01em; }
+  .card p { font-size: 11.5px; line-height: 16px; color: var(--muted); margin: 0; }
+  .card > div { min-width: 0; }
+
+  .topcard {
+    position: absolute; left: 50%; bottom: 88%; transform: translateX(-50%); z-index: 2;
+    display: inline-flex; align-items: center; gap: 9px; padding: 10px 18px; border-radius: 999px;
+    text-decoration: none; color: inherit; white-space: nowrap;
+    background: rgba(255,255,255,.86); backdrop-filter: blur(18px);
+    border: 1px solid rgba(255,255,255,.95); box-shadow: 0 10px 26px rgba(16,60,38,.10);
+    font-size: 14px; font-weight: 700;
+    transition: transform .5s var(--ease), box-shadow .5s var(--ease), background-color .3s var(--ease);
+    animation: floaty 6.6s ease-in-out infinite -1.2s;
+  }
+  .topcard:hover { transform: translateX(-50%) translateY(-4px); background: #fff; box-shadow: 0 18px 40px rgba(16,60,38,.16); }
+  .topcard .ico { width: 26px; height: 26px; border-radius: 9px; display: grid; place-items: center; background: linear-gradient(150deg, #dcf5e5, #eefaf2); color: var(--brand-deep); }
+  .topcard .ico svg { width: 15px; height: 15px; }
+
+  .tailcard {
+    position: absolute; left: 71.5%; bottom: 13%; z-index: 2; transform: translateX(-50%);
+    display: inline-flex; align-items: center; gap: 8px; padding: 8px 15px; border-radius: 999px;
+    background: rgba(255,255,255,.55); border: 1px dashed #b9d5c6;
+    font-size: 12.5px; font-weight: 600; color: var(--faint); white-space: nowrap;
+    animation: floaty 7.2s ease-in-out infinite -3.4s;
+  }
+  .tag2 { font-size: 10.5px; padding: 2px 7px; border-radius: 999px; background: rgba(22,163,74,.10); color: var(--brand-deep); }
+
+  footer { margin-top: 56px; text-align: center; font-size: 12px; color: var(--faint); letter-spacing: .04em; }
+
+  @media (max-width: 860px) {
+    .card { width: 180px; }
+  }
+  /* 窄屏：猫变小，卡片改为竖排列表 */
+  @media (max-width: 720px) {
+    .wrap { padding: 28px 18px 56px; }
+    h1 { font-size: 44px; }
+    .sub { font-size: 15px; line-height: 26px; }
+    .stage { aspect-ratio: auto; display: flex; flex-direction: column; align-items: stretch; gap: 12px; margin-top: 12px; }
+    .cat { position: static; width: 260px; height: auto; margin: 0 auto 4px; }
+    .stack { position: static; transform: none; gap: 12px; }
+    .card { width: 100%; animation: none; }
+    .topcard, .tailcard { position: static; transform: none; align-self: center; animation: none; }
+    .topcard:hover { transform: none; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    * { animation: none !important; transition: none !important; }
+  }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <nav class="nav">
+      <span class="pill"><span class="dot"></span>For Claire</span>
+      <span class="pill quiet">学习工具箱</span>
+    </nav>
+
+    <header class="hero">
+      <h1>For Claire</h1>
+      <p class="sub">论文、查重、模板、幻灯与导图。挑一只爪子，就开始。</p>
+    </header>
+
+    <div class="stage">
+      <svg class="cat" viewBox="0 0 1000 560" role="img" aria-label="一只伸出双爪的卡通猫">
+        <!-- 地面阴影 -->
+        <ellipse cx="500" cy="524" rx="196" ry="20" fill="#16a34a" opacity=".09"/>
+
+        <!-- 尾巴 -->
+        <g class="tail">
+          <path d="M572 476 Q664 486 700 436 Q718 408 698 392" fill="none" stroke="#14532d" stroke-width="34" stroke-linecap="round"/>
+          <path d="M572 476 Q664 486 700 436 Q718 408 698 392" fill="none" stroke="#c9f0d9" stroke-width="22" stroke-linecap="round"/>
+        </g>
+
+        <!-- 左臂 -->
+        <g class="arm-l">
+          <path d="M470 384 Q350 372 258 386" fill="none" stroke="#14532d" stroke-width="48" stroke-linecap="round"/>
+          <path d="M470 384 Q350 372 258 386" fill="none" stroke="#c9f0d9" stroke-width="34" stroke-linecap="round"/>
+          <circle cx="248" cy="388" r="31" fill="#c9f0d9" stroke="#14532d" stroke-width="7"/>
+          <circle cx="238" cy="380" r="6" fill="#f9c6c9"/>
+          <circle cx="252" cy="374" r="5" fill="#f9c6c9"/>
+          <circle cx="264" cy="382" r="5.5" fill="#f9c6c9"/>
+        </g>
+
+        <!-- 右臂 -->
+        <g class="arm-r">
+          <path d="M530 384 Q650 372 742 386" fill="none" stroke="#14532d" stroke-width="48" stroke-linecap="round"/>
+          <path d="M530 384 Q650 372 742 386" fill="none" stroke="#c9f0d9" stroke-width="34" stroke-linecap="round"/>
+          <circle cx="752" cy="388" r="31" fill="#c9f0d9" stroke="#14532d" stroke-width="7"/>
+          <circle cx="762" cy="380" r="6" fill="#f9c6c9"/>
+          <circle cx="748" cy="374" r="5" fill="#f9c6c9"/>
+          <circle cx="736" cy="382" r="5.5" fill="#f9c6c9"/>
+        </g>
+
+        <!-- 身体 -->
+        <g class="body-g">
+          <rect x="418" y="300" width="164" height="212" rx="64" fill="#c9f0d9" stroke="#14532d" stroke-width="7"/>
+          <ellipse cx="500" cy="436" rx="55" ry="68" fill="#f2fbf5"/>
+          <path d="M470 380 Q500 392 530 380" fill="none" stroke="#14532d" stroke-width="5" stroke-linecap="round" opacity=".45"/>
+        </g>
+
+        <!-- 头 -->
+        <g class="head-g">
+          <!-- 耳朵 -->
+          <path d="M424 152 L406 68 L486 116 Z" fill="#c9f0d9" stroke="#14532d" stroke-width="7" stroke-linejoin="round"/>
+          <path d="M576 152 L594 68 L514 116 Z" fill="#c9f0d9" stroke="#14532d" stroke-width="7" stroke-linejoin="round"/>
+          <path d="M436 138 L426 90 L470 116 Z" fill="#f9c6c9"/>
+          <path d="M564 138 L574 90 L530 116 Z" fill="#f9c6c9"/>
+          <!-- 脸 -->
+          <circle cx="500" cy="216" r="106" fill="#c9f0d9" stroke="#14532d" stroke-width="7"/>
+          <!-- 腮红 -->
+          <ellipse cx="436" cy="248" rx="19" ry="11" fill="#f9c6c9" opacity=".55"/>
+          <ellipse cx="564" cy="248" rx="19" ry="11" fill="#f9c6c9" opacity=".55"/>
+          <!-- 眼睛 -->
+          <g class="eyes">
+            <circle cx="462" cy="208" r="13.5" fill="#14532d"/>
+            <circle cx="538" cy="208" r="13.5" fill="#14532d"/>
+            <circle cx="467" cy="202" r="4.6" fill="#ffffff"/>
+            <circle cx="543" cy="202" r="4.6" fill="#ffffff"/>
+          </g>
+          <!-- 鼻子与嘴 -->
+          <path d="M489 233 L511 233 L500 245 Z" fill="#f9a8b8" stroke="#14532d" stroke-width="4" stroke-linejoin="round"/>
+          <path d="M500 245 Q500 258 484 260" fill="none" stroke="#14532d" stroke-width="5" stroke-linecap="round"/>
+          <path d="M500 245 Q500 258 516 260" fill="none" stroke="#14532d" stroke-width="5" stroke-linecap="round"/>
+          <!-- 胡须 -->
+          <path d="M406 226 L338 216 M406 244 L334 246" stroke="#14532d" stroke-width="4.5" stroke-linecap="round" opacity=".7"/>
+          <path d="M594 226 L662 216 M594 244 L666 246" stroke="#14532d" stroke-width="4.5" stroke-linecap="round" opacity=".7"/>
+        </g>
+      </svg>
+
+      <!-- 左爪：两个入口 -->
+      <div class="stack stack-l">
+        <a class="card" href="./preview.html">
+          <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 013 3L7 19l-4 1 1-4z"/></svg></span>
+          <div><h2>论文打磨</h2><p>降 AI 痕迹 · 学术化 · 三份 A 级版本</p></div>
+        </a>
+        <a class="card" href="./ai-check.html">
+          <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.6-3.6"/></svg></span>
+          <div><h2>AI 查重</h2><p>看「改前 → 改后」的趋势变化</p></div>
+        </a>
+      </div>
+
+      <!-- 右爪：两个入口 -->
+      <div class="stack stack-r">
+        <a class="card" href="./ai-template.html">
+          <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M3 9h18M9 21V9"/></svg></span>
+          <div><h2>AI 模板</h2><p>一句话生成版式 · 5 类模板库</p></div>
+        </a>
+        <a class="card" href="./ppt.html">
+          <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M12 16v4M8 20h8"/></svg></span>
+          <div><h2>智能 PPT</h2><p>边聊边改 · 导出可编辑文件</p></div>
+        </a>
+      </div>
+
+      <!-- 头顶：第五个入口 -->
+      <a class="topcard" href="./mindmap.html">
+        <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><circle cx="4.5" cy="5.5" r="2"/><circle cx="19.5" cy="5.5" r="2"/><circle cx="4.5" cy="18.5" r="2"/><path d="M6.2 6.9L9.8 10M14.2 10l3.6-3.1M9.8 14l-3.6 3.1"/></svg></span>
+        思维导图 <span class="tag2">拖拽建图</span>
+      </a>
+
+      <!-- 尾巴尖：敬请期待 -->
+      <span class="tailcard">润色翻译 <span class="tag2">敬请期待</span></span>
+    </div>
+
+    <footer>For Claire · 专属于你的学习小站</footer>
+  </div>
+</body>
+</html>

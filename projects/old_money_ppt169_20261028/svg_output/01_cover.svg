@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720" font-family="Arial, Microsoft YaHei" data-pptx-page-role="cover">
+  <rect id="bg" data-pptx-role="background" x="0" y="0" width="1280" height="720" fill="#FAF7F1"/>
+  <rect id="edge-mark" data-pptx-role="decoration" x="96" y="86" width="88" height="2" fill="#A98A57"/>
+
+  <g id="cover-kicker" data-pptx-bounds="96 106 480 36">
+    <text x="96" y="132" font-family="Georgia, SimSun" font-size="15" letter-spacing="6" fill="#7A7268">OLD MONEY AESTHETIC</text>
+  </g>
+
+  <g id="cover-title" data-pptx-bounds="96 170 660 250">
+    <text x="96" y="302" font-family="Georgia, SimSun" font-size="120" fill="#1E3527">老钱风</text>
+    <text x="102" y="374" font-family="Georgia, SimSun" font-size="32" font-style="italic" fill="#7A7268">The Old Money Aesthetic</text>
+  </g>
+
+  <g id="cover-hook" data-pptx-bounds="96 448 640 100">
+    <text x="96" y="494" font-family="Georgia, SimSun" font-size="30" fill="#23201C">真正贵的东西，从不喧哗。</text>
+    <text x="96" y="536" font-family="Arial, Microsoft YaHei" font-size="19" fill="#7A7268">它只是安静地存在着，等认出它的人走近。</text>
+  </g>
+
+  <g id="cover-seal" data-pptx-bounds="890 186 300 292">
+    <circle cx="1030" cy="318" r="112" fill="#1E3527"/>
+    <circle cx="1030" cy="318" r="94" fill="none" stroke="#A98A57" stroke-width="1.5"/>
+    <text x="1030" y="342" text-anchor="middle" font-family="Georgia, SimSun" font-size="64" letter-spacing="4" fill="#C9AE7E">OM</text>
+  </g>
+
+  <rect id="cover-rule" data-pptx-role="decoration" x="96" y="596" width="1084" height="1" fill="#D9D2C5"/>
+
+  <g id="cover-meta" data-pptx-bounds="96 620 1084 44">
+    <text x="96" y="652" font-family="Arial, Microsoft YaHei" font-size="15" letter-spacing="3" fill="#A98A57">风格解析 · 共八页</text>
+    <text x="1180" y="652" text-anchor="end" font-family="Georgia, SimSun" font-size="15" letter-spacing="2" fill="#7A7268">MMXXVI</text>
+  </g>
+</svg>

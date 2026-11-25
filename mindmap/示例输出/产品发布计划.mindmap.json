@@ -1,0 +1,624 @@
+{
+  "version": 1,
+  "title": "产品发布计划",
+  "canvas": {
+    "w": 1600,
+    "h": 1000,
+    "bg": "#FFFFFF",
+    "grid": true
+  },
+  "nodes": [
+    {
+      "id": "n1mv7",
+      "x": 680,
+      "y": 420,
+      "w": 240,
+      "h": 132,
+      "shape": "ellipse",
+      "fill": "#1D4ED8",
+      "stroke": "#1E40AF",
+      "strokeWidth": 2,
+      "text": "产品发布计划",
+      "textColor": "#FFFFFF",
+      "fontSize": 24,
+      "bold": true,
+      "align": "center"
+    },
+    {
+      "id": "n2l56",
+      "x": 1060,
+      "y": 268,
+      "w": 190,
+      "h": 78,
+      "shape": "roundRect",
+      "fill": "#DBEAFE",
+      "stroke": "#2563EB",
+      "strokeWidth": 2,
+      "text": "需求与用户",
+      "textColor": "#1E3A8A",
+      "fontSize": 17,
+      "bold": true,
+      "align": "center"
+    },
+    {
+      "id": "n35ec",
+      "x": 1060,
+      "y": 452,
+      "w": 190,
+      "h": 78,
+      "shape": "roundRect",
+      "fill": "#DCFCE7",
+      "stroke": "#16A34A",
+      "strokeWidth": 2,
+      "text": "功能开发",
+      "textColor": "#14532D",
+      "fontSize": 17,
+      "bold": true,
+      "align": "center"
+    },
+    {
+      "id": "n4h9a",
+      "x": 1060,
+      "y": 636,
+      "w": 190,
+      "h": 78,
+      "shape": "roundRect",
+      "fill": "#FEF3C7",
+      "stroke": "#D97706",
+      "strokeWidth": 2,
+      "text": "上线验证",
+      "textColor": "#78350F",
+      "fontSize": 17,
+      "bold": true,
+      "align": "center"
+    },
+    {
+      "id": "n5qtz",
+      "x": 1330,
+      "y": 196,
+      "w": 175,
+      "h": 66,
+      "shape": "roundRect",
+      "fill": "#DBEAFE",
+      "stroke": "#2563EB",
+      "strokeWidth": 2,
+      "text": "用户访谈 30 人",
+      "textColor": "#1E3A8A",
+      "fontSize": 14,
+      "bold": false,
+      "align": "center"
+    },
+    {
+      "id": "n62nz",
+      "x": 1330,
+      "y": 286,
+      "w": 175,
+      "h": 66,
+      "shape": "roundRect",
+      "fill": "#DBEAFE",
+      "stroke": "#2563EB",
+      "strokeWidth": 2,
+      "text": "竞品分析报告",
+      "textColor": "#1E3A8A",
+      "fontSize": 14,
+      "bold": false,
+      "align": "center"
+    },
+    {
+      "id": "n75vk",
+      "x": 1330,
+      "y": 404,
+      "w": 175,
+      "h": 66,
+      "shape": "roundRect",
+      "fill": "#DCFCE7",
+      "stroke": "#16A34A",
+      "strokeWidth": 2,
+      "text": "核心功能开发",
+      "textColor": "#14532D",
+      "fontSize": 14,
+      "bold": false,
+      "align": "center"
+    },
+    {
+      "id": "n88e5",
+      "x": 1330,
+      "y": 494,
+      "w": 175,
+      "h": 66,
+      "shape": "roundRect",
+      "fill": "#DCFCE7",
+      "stroke": "#16A34A",
+      "strokeWidth": 2,
+      "text": "性能与兼容性",
+      "textColor": "#14532D",
+      "fontSize": 14,
+      "bold": false,
+      "align": "center"
+    },
+    {
+      "id": "n924f",
+      "x": 1330,
+      "y": 636,
+      "w": 175,
+      "h": 66,
+      "shape": "roundRect",
+      "fill": "#FEF3C7",
+      "stroke": "#D97706",
+      "strokeWidth": 2,
+      "text": "灰度发布 10%",
+      "textColor": "#78350F",
+      "fontSize": 14,
+      "bold": false,
+      "align": "center"
+    },
+    {
+      "id": "nahte",
+      "x": 520,
+      "y": 268,
+      "w": 190,
+      "h": 78,
+      "shape": "roundRect",
+      "fill": "#EDE9FE",
+      "stroke": "#7C3AED",
+      "strokeWidth": 2,
+      "text": "发布节奏",
+      "textColor": "#4C1D95",
+      "fontSize": 17,
+      "bold": true,
+      "align": "center"
+    },
+    {
+      "id": "nbx12",
+      "x": 500,
+      "y": 452,
+      "w": 200,
+      "h": 104,
+      "shape": "diamond",
+      "fill": "#FCE7F3",
+      "stroke": "#DB2777",
+      "strokeWidth": 2,
+      "text": "风险可控？",
+      "textColor": "#831843",
+      "fontSize": 16,
+      "bold": true,
+      "align": "center"
+    },
+    {
+      "id": "ncem3",
+      "x": 520,
+      "y": 636,
+      "w": 190,
+      "h": 78,
+      "shape": "roundRect",
+      "fill": "#CFFAFE",
+      "stroke": "#0891B2",
+      "strokeWidth": 2,
+      "text": "团队分工",
+      "textColor": "#164E63",
+      "fontSize": 17,
+      "bold": true,
+      "align": "center"
+    },
+    {
+      "id": "ndr2z",
+      "x": 270,
+      "y": 200,
+      "w": 170,
+      "h": 66,
+      "shape": "roundRect",
+      "fill": "#EDE9FE",
+      "stroke": "#7C3AED",
+      "strokeWidth": 2,
+      "text": "里程碑排期",
+      "textColor": "#4C1D95",
+      "fontSize": 14,
+      "bold": false,
+      "align": "center"
+    },
+    {
+      "id": "ne9my",
+      "x": 270,
+      "y": 286,
+      "w": 170,
+      "h": 66,
+      "shape": "roundRect",
+      "fill": "#EDE9FE",
+      "stroke": "#7C3AED",
+      "strokeWidth": 2,
+      "text": "评审节点",
+      "textColor": "#4C1D95",
+      "fontSize": 14,
+      "bold": false,
+      "align": "center"
+    },
+    {
+      "id": "nffv2",
+      "x": 250,
+      "y": 400,
+      "w": 175,
+      "h": 66,
+      "shape": "cloud",
+      "fill": "#FCE7F3",
+      "stroke": "#DB2777",
+      "strokeWidth": 2,
+      "text": "回滚预案",
+      "textColor": "#831843",
+      "fontSize": 14,
+      "bold": false,
+      "align": "center"
+    },
+    {
+      "id": "nge5c",
+      "x": 250,
+      "y": 486,
+      "w": 175,
+      "h": 66,
+      "shape": "cloud",
+      "fill": "#FCE7F3",
+      "stroke": "#DB2777",
+      "strokeWidth": 2,
+      "text": "监控告警",
+      "textColor": "#831843",
+      "fontSize": 14,
+      "bold": false,
+      "align": "center"
+    },
+    {
+      "id": "nhij9",
+      "x": 270,
+      "y": 620,
+      "w": 170,
+      "h": 66,
+      "shape": "roundRect",
+      "fill": "#CFFAFE",
+      "stroke": "#0891B2",
+      "strokeWidth": 2,
+      "text": "设计与研发",
+      "textColor": "#164E63",
+      "fontSize": 14,
+      "bold": false,
+      "align": "center"
+    },
+    {
+      "id": "nimm6",
+      "x": 270,
+      "y": 706,
+      "w": 170,
+      "h": 66,
+      "shape": "roundRect",
+      "fill": "#CFFAFE",
+      "stroke": "#0891B2",
+      "strokeWidth": 2,
+      "text": "市场与运营",
+      "textColor": "#164E63",
+      "fontSize": 14,
+      "bold": false,
+      "align": "center"
+    },
+    {
+      "id": "njxt5",
+      "x": 726,
+      "y": 574,
+      "w": 224,
+      "h": 44,
+      "shape": "textbox",
+      "fill": "#FFFFFF",
+      "stroke": "#FFFFFF",
+      "strokeWidth": 2,
+      "text": "目标：9 月 15 日全量上线",
+      "textColor": "#64748B",
+      "fontSize": 14,
+      "bold": true,
+      "align": "center"
+    }
+  ],
+  "edges": [
+    {
+      "id": "ekp62",
+      "from": {
+        "node": "n1mv7",
+        "side": "auto"
+      },
+      "to": {
+        "node": "n2l56",
+        "side": "auto"
+      },
+      "route": "curve",
+      "dash": "solid",
+      "color": "#8FA3BF",
+      "width": 2.5,
+      "arrowStart": false,
+      "arrowEnd": true
+    },
+    {
+      "id": "elvxe",
+      "from": {
+        "node": "n1mv7",
+        "side": "auto"
+      },
+      "to": {
+        "node": "n35ec",
+        "side": "auto"
+      },
+      "route": "curve",
+      "dash": "solid",
+      "color": "#8FA3BF",
+      "width": 2.5,
+      "arrowStart": false,
+      "arrowEnd": true
+    },
+    {
+      "id": "emxga",
+      "from": {
+        "node": "n1mv7",
+        "side": "auto"
+      },
+      "to": {
+        "node": "n4h9a",
+        "side": "auto"
+      },
+      "route": "curve",
+      "dash": "solid",
+      "color": "#8FA3BF",
+      "width": 2.5,
+      "arrowStart": false,
+      "arrowEnd": true
+    },
+    {
+      "id": "enh8q",
+      "from": {
+        "node": "n1mv7",
+        "side": "auto"
+      },
+      "to": {
+        "node": "nahte",
+        "side": "auto"
+      },
+      "route": "curve",
+      "dash": "solid",
+      "color": "#8FA3BF",
+      "width": 2.5,
+      "arrowStart": false,
+      "arrowEnd": true
+    },
+    {
+      "id": "eoznr",
+      "from": {
+        "node": "n1mv7",
+        "side": "auto"
+      },
+      "to": {
+        "node": "nbx12",
+        "side": "auto"
+      },
+      "route": "curve",
+      "dash": "solid",
+      "color": "#8FA3BF",
+      "width": 2.5,
+      "arrowStart": false,
+      "arrowEnd": true
+    },
+    {
+      "id": "epemr",
+      "from": {
+        "node": "n1mv7",
+        "side": "auto"
+      },
+      "to": {
+        "node": "ncem3",
+        "side": "auto"
+      },
+      "route": "curve",
+      "dash": "solid",
+      "color": "#8FA3BF",
+      "width": 2.5,
+      "arrowStart": false,
+      "arrowEnd": true
+    },
+    {
+      "id": "eq49v",
+      "from": {
+        "node": "n2l56",
+        "side": "auto"
+      },
+      "to": {
+        "node": "n5qtz",
+        "side": "auto"
+      },
+      "route": "curve",
+      "dash": "dash",
+      "color": "#60A5FA",
+      "width": 1.6,
+      "arrowStart": false,
+      "arrowEnd": true
+    },
+    {
+      "id": "er0n2",
+      "from": {
+        "node": "n2l56",
+        "side": "auto"
+      },
+      "to": {
+        "node": "n62nz",
+        "side": "auto"
+      },
+      "route": "curve",
+      "dash": "dash",
+      "color": "#60A5FA",
+      "width": 1.6,
+      "arrowStart": false,
+      "arrowEnd": true
+    },
+    {
+      "id": "esg52",
+      "from": {
+        "node": "n35ec",
+        "side": "auto"
+      },
+      "to": {
+        "node": "n75vk",
+        "side": "auto"
+      },
+      "route": "elbow",
+      "dash": "solid",
+      "color": "#4ADE80",
+      "width": 1.8,
+      "arrowStart": false,
+      "arrowEnd": true
+    },
+    {
+      "id": "et5w8",
+      "from": {
+        "node": "n35ec",
+        "side": "auto"
+      },
+      "to": {
+        "node": "n88e5",
+        "side": "auto"
+      },
+      "route": "elbow",
+      "dash": "solid",
+      "color": "#4ADE80",
+      "width": 1.8,
+      "arrowStart": false,
+      "arrowEnd": true
+    },
+    {
+      "id": "eu0yg",
+      "from": {
+        "node": "n4h9a",
+        "side": "auto"
+      },
+      "to": {
+        "node": "n924f",
+        "side": "auto"
+      },
+      "route": "straight",
+      "dash": "dot",
+      "color": "#F59E0B",
+      "width": 1.8,
+      "arrowStart": false,
+      "arrowEnd": true
+    },
+    {
+      "id": "evhc6",
+      "from": {
+        "node": "nahte",
+        "side": "auto"
+      },
+      "to": {
+        "node": "ndr2z",
+        "side": "auto"
+      },
+      "route": "curve",
+      "dash": "dash",
+      "color": "#A78BFA",
+      "width": 1.6,
+      "arrowStart": false,
+      "arrowEnd": true
+    },
+    {
+      "id": "ewbjm",
+      "from": {
+        "node": "nahte",
+        "side": "auto"
+      },
+      "to": {
+        "node": "ne9my",
+        "side": "auto"
+      },
+      "route": "curve",
+      "dash": "dash",
+      "color": "#A78BFA",
+      "width": 1.6,
+      "arrowStart": false,
+      "arrowEnd": true
+    },
+    {
+      "id": "expu4",
+      "from": {
+        "node": "nbx12",
+        "side": "auto"
+      },
+      "to": {
+        "node": "nffv2",
+        "side": "auto"
+      },
+      "route": "curve",
+      "dash": "dot",
+      "color": "#F472B6",
+      "width": 1.8,
+      "arrowStart": false,
+      "arrowEnd": true
+    },
+    {
+      "id": "eybun",
+      "from": {
+        "node": "nbx12",
+        "side": "auto"
+      },
+      "to": {
+        "node": "nge5c",
+        "side": "auto"
+      },
+      "route": "curve",
+      "dash": "dot",
+      "color": "#F472B6",
+      "width": 1.8,
+      "arrowStart": false,
+      "arrowEnd": true
+    },
+    {
+      "id": "ezovo",
+      "from": {
+        "node": "ncem3",
+        "side": "auto"
+      },
+      "to": {
+        "node": "nhij9",
+        "side": "auto"
+      },
+      "route": "elbow",
+      "dash": "solid",
+      "color": "#22D3EE",
+      "width": 1.8,
+      "arrowStart": false,
+      "arrowEnd": true
+    },
+    {
+      "id": "e10zz2",
+      "from": {
+        "node": "ncem3",
+        "side": "auto"
+      },
+      "to": {
+        "node": "nimm6",
+        "side": "auto"
+      },
+      "route": "elbow",
+      "dash": "solid",
+      "color": "#22D3EE",
+      "width": 1.8,
+      "arrowStart": false,
+      "arrowEnd": true
+    },
+    {
+      "id": "e11w6i",
+      "from": {
+        "node": "n4h9a",
+        "side": "auto"
+      },
+      "to": {
+        "node": "nbx12",
+        "side": "auto"
+      },
+      "route": "straight",
+      "dash": "dash",
+      "color": "#94A3B8",
+      "width": 1.4,
+      "arrowStart": true,
+      "arrowEnd": true
+    }
+  ]
+}

@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>思维导图工作台 · 可编辑导出 PPT / Word / PDF</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+<div class="app">
+  <!-- ================= 顶栏 ================= -->
+  <header class="topbar">
+    <div class="brand">
+      <span class="brand-logo">◎</span>
+      <span class="brand-text">思维导图工作台</span>
+    </div>
+
+    <input id="docTitle" class="doc-title" type="text" value="未命名思维导图" title="点击修改导图标题" />
+
+    <div class="tools">
+      <div class="tool-group">
+        <button class="tbtn" id="btnUndo" title="撤销 (Ctrl+Z)">↶</button>
+        <button class="tbtn" id="btnRedo" title="重做 (Ctrl+Shift+Z)">↷</button>
+      </div>
+      <div class="tool-group">
+        <button class="tbtn big" id="btnAutoLayout" title="一键整理为左右分支思维导图">自动排版</button>
+        <button class="tbtn big" id="btnCenter" title="居中并添加大圈中心主题">新建中心主题</button>
+      </div>
+      <div class="tool-group">
+        <button class="tbtn" id="btnZoomOut" title="缩小">−</button>
+        <span class="zoom-label" id="zoomLabel">100%</span>
+        <button class="tbtn" id="btnZoomIn" title="放大">＋</button>
+        <button class="tbtn wide" id="btnFit" title="适应画布 (Ctrl+0)">适应</button>
+      </div>
+      <div class="tool-group">
+        <label class="switch" title="显示网格">
+          <input type="checkbox" id="chkGrid" checked /><span>网格</span>
+        </label>
+      </div>
+      <div class="tool-group">
+        <button class="tbtn wide" id="btnDraft" title="把当前状态存进草稿箱，并可随时取回">草稿箱</button>
+        <button class="tbtn wide danger" id="btnClear" title="一键清空画布（可 Ctrl+Z 撤销）">清空</button>
+      </div>
+      <button class="tbtn primary wide" id="btnExport">导出 ▾</button>
+    </div>
+  </header>
+
+  <!-- ================= 草稿箱 ================= -->
+  <div class="modal-mask" id="draftModal" hidden>
+    <div class="modal">
+      <div class="modal-head">
+        <h3>草稿箱</h3>
+        <span class="modal-sub" id="draftSub">共 0 份</span>
+        <button class="modal-close" id="draftClose" title="关闭">×</button>
+      </div>
+      <div class="modal-body" id="draftList"></div>
+      <div class="modal-foot">
+        <span class="modal-tip">打开时会先保存当前状态；最多保留 20 份，最新的排在最前面。</span>
+        <button class="btn-soft" id="draftSaveNew">再存一份快照</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= 主工作区 ================= -->
+  <main class="workspace">
+    <!-- 操作区 -->
+    <section class="canvas-area" id="canvasArea">
+      <svg id="canvas" class="canvas" xmlns="http://www.w3.org/2000/svg"></svg>
+      <div id="textEditorLayer" class="text-editor-layer"></div>
+      <div class="canvas-hint" id="canvasHint">
+        从右侧「图形库」拖入图形 → 双击图形打字 → 选中图形后从边缘圆点拖出连线
+      </div>
+      <div class="statusbar">
+        <span id="statusText">就绪</span>
+        <span class="spacer"></span>
+        <span id="statNodes">0 个图形</span>
+        <span id="statEdges">0 条连线</span>
+      </div>
+    </section>
+
+    <!-- 右侧栏：图形库 + 属性 -->
+    <aside class="sidebar">
+      <div class="panel panel-library">
+        <div class="panel-head">
+          <h2>图形库</h2>
+          <span class="panel-tip">拖到左侧操作区</span>
+        </div>
+        <div class="panel-body" id="shapeLibrary"></div>
+        <div class="panel-foot">
+          <span>提示：拖拽图形入画布，或双击图形直接添加</span>
+        </div>
+      </div>
+
+      <div class="panel panel-inspector">
+        <div class="panel-head">
+          <h2 id="inspectorTitle">属性</h2>
+          <span class="panel-tip" id="inspectorSub">未选中</span>
+        </div>
+        <div class="panel-body" id="inspectorBody"></div>
+      </div>
+    </aside>
+  </main>
+
+  <!-- 导出菜单 -->
+  <div class="export-menu" id="exportMenu" hidden>
+    <button class="export-item" data-action="pptx">
+      <span class="ei-icon">P</span>
+      <span class="ei-text"><b>PowerPoint（.pptx）</b><small>原生图形 + 文本框 + 曲线，可在 PPT 中继续编辑</small></span>
+    </button>
+    <button class="export-item" data-action="docx">
+      <span class="ei-icon">W</span>
+      <span class="ei-text"><b>Word（.docx）</b><small>每个图形都是 Word 形状对象，可继续编辑</small></span>
+    </button>
+    <button class="export-item" data-action="pdf">
+      <span class="ei-icon">F</span>
+      <span class="ei-text"><b>PDF（矢量打印）</b><small>打开打印窗口 → 目标选「另存为 PDF」</small></span>
+    </button>
+    <div class="export-sep"></div>
+    <button class="export-item" data-action="svg">
+      <span class="ei-icon">S</span>
+      <span class="ei-text"><b>SVG 矢量图</b><small>全矢量，可在 Illustrator / Figma 中编辑</small></span>
+    </button>
+    <button class="export-item" data-action="png">
+      <span class="ei-icon">I</span>
+      <span class="ei-text"><b>PNG 图片</b><small>2 倍高清位图，适合直接分享</small></span>
+    </button>
+    <button class="export-item" data-action="json">
+      <span class="ei-icon">J</span>
+      <span class="ei-text"><b>保存工程（.json）</b><small>保存后可再次导入继续编辑</small></span>
+    </button>
+    <button class="export-item" data-action="open">
+      <span class="ei-icon">↑</span>
+      <span class="ei-text"><b>打开工程（.json）</b><small>载入之前保存的思维导图</small></span>
+    </button>
+    <div class="export-sep"></div>
+    <button class="export-item" data-action="print">
+      <span class="ei-icon">⎙</span>
+      <span class="ei-text"><b>打印导图</b><small>直接调用系统打印对话框</small></span>
+    </button>
+  </div>
+
+  <div class="toast" id="toast" hidden></div>
+  <input type="file" id="fileInput" accept=".json,application/json" hidden />
+</div>
+
+<script src="js/model.js"></script>
+<script src="js/shapes.js"></script>
+<script src="js/render.js"></script>
+<script src="js/ooxml.js"></script>
+<script src="js/exporters.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>

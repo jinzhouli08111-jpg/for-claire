@@ -1,0 +1,944 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="theme-color" content="#16a34a" />
+<meta name="description" content="粘贴论文初稿，选任务和力度，教授按六步给出任务清单，逐条列出原句、改句和说明，最后出三份 A 级版本。" />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Claire Essay 助手" />
+<meta property="og:description" content="粘贴论文初稿，选任务和力度，教授按六步给出任务清单，逐条列出原句、改句和说明，最后出三份 A 级版本。" />
+<meta property="og:locale" content="zh_CN" />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cpath d='M14 22 L18 4 L32 15 Z' fill='%2316a34a'/%3E%3Cpath d='M50 22 L46 4 L32 15 Z' fill='%2316a34a'/%3E%3Ccircle cx='32' cy='37' r='21' fill='%2322c55e'/%3E%3Ccircle cx='25' cy='35' r='3' fill='%231f2a23'/%3E%3Ccircle cx='39' cy='35' r='3' fill='%231f2a23'/%3E%3C/svg%3E" />
+<link rel="stylesheet" href="/ds.css" />
+<title>Claire Essay 助手</title>
+<style>
+  :root {
+    --bg: #f5f9f6;
+    --panel: #ffffff;
+    --ink: #1f2a23;
+    --muted: #6b7a70;
+    --line: #e3ebe5;
+    --brand: #16a34a;
+    --brand-dark: #15803d;
+    --brand-soft: #e9f7ee;
+    --ok: #16a34a;
+    --warn: #d97706;
+    --quote-bg: #edf7f0;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font);
+    line-height: 1.7;
+  }
+  .topbar {
+    position: sticky; top: 0; z-index: 30;
+    height: 64px;
+    padding: 0 var(--s-300);
+    background: rgba(255, 255, 255, .82);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--line);
+    display: flex;
+    align-items: center;
+    gap: var(--s-100);
+  }
+  .logo {
+    width: 38px; height: 38px; border-radius: 12px;
+    background: linear-gradient(135deg, #22c55e, #0d9488);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .topbar h1 { font-size: 18px; line-height: 24px; margin: 0; font-weight: 600; }
+  .topbar .sub { font-size: 12px; color: var(--muted); margin-top: 0px; }
+  .back {
+    color: var(--brand-dark); text-decoration: none; font-size: 14px; font-weight: 600;
+    padding: 4px 8px; border-radius: 8px; border: 1px solid var(--line); background: #fff;
+    white-space: nowrap;
+  }
+  .back:hover { border-color: var(--brand); background: var(--brand-soft); }
+  .badge {
+    margin-left: auto;
+    font-size: 12px; color: var(--brand-dark);
+    background: var(--brand-soft);
+    padding: 4px 8px; border-radius: 999px; white-space: nowrap;
+  }
+
+  /* —— 草稿箱 —— */
+  .topbar-right { margin-left: auto; display: flex; align-items: center; gap: 8px; }
+  .topbar-right .badge { margin-left: 0; }
+  .drafts-wrap { position: relative; }
+  .drafts-btn {
+    border: 1px solid var(--line); background: #fff; color: #374151;
+    border-radius: 8px; padding: 4px 12px; font-size: 12px; cursor: pointer;
+    font-family: inherit; display: flex; align-items: center; gap: 4px; user-select: none;
+  }
+  .drafts-btn:hover { border-color: var(--brand); color: var(--brand-dark); }
+  .drafts-btn .n {
+    background: var(--brand-soft); color: var(--brand-dark); border-radius: 999px;
+    padding: 0 8px; font-size: 12px; font-weight: 700; min-width: 18px; text-align: center;
+  }
+  .drafts-panel {
+    display: none; position: absolute; right: 0; top: calc(100% + 8px); width: 336px;
+    max-height: 420px; overflow-y: auto; background: #fff; border: 1px solid var(--line);
+    border-radius: 12px; box-shadow: 0 12px 32px rgba(16,24,40,.14); z-index: 60; padding: 8px;
+  }
+  .drafts-panel.open { display: block; }
+  .dp-head {
+    font-size: 12px; color: var(--muted); padding: 4px 8px 8px;
+    border-bottom: 1px solid var(--line); margin-bottom: 4px;
+    display: flex; justify-content: space-between; align-items: center; gap: 8px;
+  }
+  .dp-clear {
+    border: 1px solid #f0d6d6; background: #fff; color: #b91c1c; cursor: pointer;
+    font-size: 12px; padding: 2px 8px; border-radius: 8px; font-family: inherit; white-space: nowrap;
+  }
+  .dp-clear:hover { background: #fef2f2; border-color: #f5b5b5; }
+  .dp-clear:disabled { opacity: .45; cursor: default; }
+  .dp-row { display: block; padding: 8px; border-radius: 8px; cursor: pointer; position: relative; }
+  .dp-row:hover { background: #f4faf6; }
+  .dp-row.sel { background: var(--brand-soft); }
+  .dp-title {
+    font-size: 14px; font-weight: 600; overflow: hidden; text-overflow: ellipsis;
+    white-space: nowrap; padding-right: 24px;
+  }
+  .dp-sub { font-size: 12px; color: var(--muted); margin-top: 2px; }
+  .dp-del {
+    position: absolute; right: 6px; top: 7px; border: 1px solid transparent; background: transparent;
+    color: #c3cdc6; cursor: pointer; font-size: 14px; line-height: 1; padding: 2px 4px; border-radius: 6px;
+    font-family: inherit;
+  }
+  .dp-row:hover .dp-del { border-color: #f0d6d6; color: #b91c1c; background: #fff; }
+  .dp-del:hover { color: #fff !important; background: #dc2626 !important; border-color: #dc2626 !important; }
+  .dp-empty { font-size: 12px; color: #9ca3af; padding: 16px 8px; text-align: center; line-height: 1.7; }
+  .dp-hint { font-size: 12px; color: #9ca3af; padding: 8px 8px 4px; text-align: center; border-top: 1px solid var(--line); margin-top: 4px; }
+  .wrap { max-width: 1080px; margin: var(--s-400) auto var(--s-600); padding: 0 var(--s-300); }
+  .grid { display: grid; grid-template-columns: 5fr 7fr; gap: 16px; align-items: start; }
+  @media (max-width: 860px) { .grid { grid-template-columns: 1fr; } }
+  .card {
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: var(--r-2xl);
+    padding: var(--s-300);
+    box-shadow: var(--shadow-1);
+  }
+  .card h2 { font-size: 16px; line-height: 24px; font-weight: 600; margin: 0 0 var(--s-50); }
+  .card .hint { font-size: 12px; color: var(--muted); margin: 0 0 12px; }
+  label.field { display: block; font-size: 14px; font-weight: 600; margin: 12px 0 4px; }
+  input[type=text], textarea {
+    width: 100%; border: 1px solid var(--line); border-radius: var(--r-xl);
+    padding: var(--s-100); font-size: 14px; font-family: inherit;
+    color: var(--ink); background: var(--bg-soft); outline: none;
+    transition: border-color var(--dur) var(--ease), background-color var(--dur) var(--ease), box-shadow var(--dur) var(--ease);
+  }
+  input[type=text]:focus, textarea:focus {
+    border-color: var(--brand); background: #fff;
+    box-shadow: 0 0 0 3px rgba(22, 163, 74, .12);
+  }
+  textarea { min-height: 260px; resize: vertical; line-height: 1.7; }
+  .tasks { margin-top: 16px; }
+  .tasks .hint { margin-bottom: 8px; }
+  .task-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 8px 12px;
+  }
+  .task-grid label {
+    display: flex; align-items: center; gap: 8px;
+    font-size: 14px; cursor: pointer; color: #374151;
+  }
+  .task-grid input { accent-color: var(--brand); width: 15px; height: 15px; }
+  .btn {
+    margin-top: 16px; width: 100%;
+    border: none; border-radius: var(--r-xl); cursor: pointer;
+    background: var(--brand); color: #fff;
+    font-size: 16px; line-height: 24px; font-weight: 600; padding: var(--s-100);
+    box-shadow: 0 1px 2px rgba(22, 163, 74, .18);
+    transition: background var(--dur) var(--ease);
+  }
+  .btn:hover { background: var(--brand-dark); box-shadow: 0 6px 18px rgba(22, 163, 74, .22); }
+  .btn:active { transform: translateY(1px); }
+  .btn:disabled { background: #c7ccdd; cursor: not-allowed; }
+  .status {
+    min-height: 22px; font-size: 14px; color: var(--muted);
+    margin-top: 8px; display: flex; align-items: center; gap: 8px;
+  }
+  .dot {
+    width: 8px; height: 8px; border-radius: 50%; background: var(--brand);
+    display: inline-block; animation: pulse 1s infinite;
+  }
+  @keyframes pulse { 0%,100%{opacity:.3} 50%{opacity:1} }
+  .out {
+    min-height: 420px; max-height: 74vh; overflow-y: auto;
+    font-size: 14px;
+  }
+  .placeholder { color: #9ca3af; font-size: 14px; text-align: center; padding: 64px 16px; }
+  .cat-big { display: block; margin: 0 auto 12px; opacity: .92; }
+  .intensity { margin-top: 16px; }
+  .intensity .hint { margin-bottom: 8px; }
+  .seg { display: flex; background: #eaf2ec; border-radius: 12px; padding: 2px; gap: 2px; }
+  .seg-btn {
+    flex: 1; border: none; background: transparent; border-radius: 8px;
+    padding: 8px 0; font-size: 14px; cursor: pointer; color: #4b5563;
+    transition: all var(--dur) var(--ease);
+  }
+  .seg-btn.active { background: #fff; color: var(--brand-dark); font-weight: 600; box-shadow: 0 1px 2px rgba(16,24,40,.08); }
+  .intensity-tip { font-size: 12px; color: var(--muted); margin-top: 8px; }
+
+  /* —— 字数要求 —— */
+  .wc { margin-top: 16px; }
+  .wc .hint { margin-bottom: 8px; }
+  .wc-row { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
+  .wc-row label { font-size: 14px; font-weight: 600; white-space: nowrap; }
+  .wc-row input {
+    width: 104px; border: 1px solid var(--line); border-radius: 8px;
+    padding: 8px 8px; font-size: 14px; font-family: inherit;
+    color: var(--ink); background: #fbfcfe; outline: none;
+  }
+  .wc-row input:focus { border-color: var(--brand); background: #fff; }
+  .wc-now { font-size: 12px; color: var(--muted); margin-left: auto; text-align: right; }
+  .wc-tip { font-size: 12px; color: var(--muted); margin-top: 8px; line-height: 1.7; }
+  .wc-tip.warn { color: var(--warn); }
+  .wc-panel {
+    display: none; margin-bottom: 12px; padding: 12px 12px;
+    background: #f7fbf8; border: 1px solid var(--line); border-radius: 12px;
+  }
+  .wc-panel.show { display: block; }
+  .wc-title { font-size: 12px; font-weight: 700; margin-bottom: 8px; }
+  .wc-item { display: flex; align-items: baseline; gap: 8px; font-size: 14px; padding: 2px 0; }
+  .wc-name { flex: 1; color: #374151; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .wc-num { font-weight: 600; font-variant-numeric: tabular-nums; }
+  .wc-delta { font-size: 12px; width: 56px; text-align: right; font-variant-numeric: tabular-nums; }
+  .wc-item.ok .wc-num, .wc-item.ok .wc-delta { color: var(--ok); }
+  .wc-item.bad .wc-num, .wc-item.bad .wc-delta { color: #b91c1c; }
+  .wc-foot { font-size: 12px; color: var(--muted); margin-top: 8px; line-height: 1.7; }
+  .wc-fix { margin-top: 8px; }
+  .wc-fix button {
+    border: 1px solid var(--line); background: #fff; border-radius: 8px;
+    padding: 8px 12px; font-size: 12px; cursor: pointer; color: #374151;
+  }
+  .wc-fix button:hover { border-color: var(--brand); color: var(--brand-dark); }
+  .out h1,.out h2,.out h3,.out h4 { margin: 1.1em 0 .5em; line-height: 1.4; }
+  .out h1 { font-size: 1.3em; } .out h2 { font-size: 1.18em; } .out h3 { font-size: 1.05em; }
+  .out p { margin: .6em 0; }
+  .out ul, .out ol { margin: .5em 0 .5em 1.4em; padding: 0; }
+  .out li { margin: .25em 0; }
+  .out blockquote {
+    margin: .7em 0; padding: 8px 12px; border-left: 3px solid var(--brand);
+    background: var(--quote-bg); border-radius: 0 8px 8px 0; color: #374151;
+  }
+  .out blockquote p { margin: .25em 0; }
+  .out hr { border: none; border-top: 1px solid var(--line); margin: 1.2em 0; }
+  .out code { background: #eef1f6; padding: 0px 4px; border-radius: 4px; font-size: .92em; }
+  .out strong { color: #111827; }
+  .actions { display: none; gap: 8px; margin-top: 12px; }
+  .actions button {
+    border: 1px solid var(--line); background: #fff; border-radius: 8px;
+    padding: 8px 12px; font-size: 14px; cursor: pointer; color: #374151;
+  }
+  .actions button:hover { border-color: var(--brand); color: var(--brand-dark); }
+  .foot {
+    text-align: center; font-size: 12px; color: #9ca3af;
+    margin: 24px 0 32px; line-height: 1.6;
+  }
+  .err {
+    color: #b91c1c; background: #fef2f2; border: 1px solid #fecaca;
+    padding: 12px 12px; border-radius: 12px; font-size: 14px; white-space: pre-wrap;
+  }
+
+  /* __responsive__ */
+  @media (max-width: 640px) {
+    .topbar { padding: 0 var(--s-200); gap: var(--s-75); }
+    .topbar h1 { font-size: 16px; }
+    .topbar .sub { display: none; }
+    .badge { display: none; }
+    .wrap { padding: 0 var(--s-200); }
+  }
+  @media (max-width: 460px) {
+    .logo { display: none; }
+  }
+</style>
+</head>
+<body>
+  <a class="skip-link" href="#main">跳到主要内容</a>
+  <div class="topbar">
+    <a class="back" href="./home.html">← 返回首页</a>
+    <div class="logo">
+      <svg width="26" height="26" viewBox="0 0 64 64" aria-hidden="true">
+        <path d="M14 22 L18 4 L32 15 Z" fill="#ffffff"/>
+        <path d="M50 22 L46 4 L32 15 Z" fill="#ffffff"/>
+        <circle cx="32" cy="37" r="21" fill="#ffffff"/>
+        <path d="M19 19 L21 10 L27 16 Z" fill="#f9c6c9"/>
+        <path d="M45 19 L43 10 L37 16 Z" fill="#f9c6c9"/>
+        <circle cx="25" cy="35" r="3" fill="#1f2a23"/>
+        <circle cx="39" cy="35" r="3" fill="#1f2a23"/>
+        <path d="M32 40 L28.8 45 L35.2 45 Z" fill="#f9c6c9"/>
+        <path d="M28.8 45 Q32 48.5 35.2 45" stroke="#1f2a23" stroke-width="2" fill="none" stroke-linecap="round"/>
+        <path d="M13 40 L3 38 M13 46 L3 47 M51 40 L61 38 M51 46 L61 47" stroke="#1f2a23" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+    </div>
+    <div>
+      <h1>Claire Essay 助手</h1>
+      <div class="sub">专业学科教授 · 六步打磨你的论文</div>
+    </div>
+    <div class="topbar-right">
+      <div class="drafts-wrap">
+        <button class="drafts-btn" id="draftsBtn" type="button" title="双击展开草稿箱">草稿箱<span class="n" id="draftCount">0</span></button>
+        <div class="drafts-panel" id="draftsPanel"></div>
+      </div>
+      <span class="badge">教授模式</span>
+    </div>
+  </div>
+
+  <div id="main" role="main" class="wrap">
+    <div class="grid">
+      <!-- 左：输入 -->
+      <div class="card">
+        <h2>提交论文</h2>
+        <p class="hint">粘贴正文，选好任务，教授会给出任务清单并逐步打磨。</p>
+
+        <label class="field">论文题目（可选）</label>
+        <input type="text" id="topic" placeholder="例如：论人工智能对现代教育的影响" />
+
+        <label class="field">论文正文</label>
+        <textarea id="essay" placeholder="在这里粘贴你的论文初稿……"></textarea>
+
+        <div class="tasks">
+          <p class="hint">选择要执行的任务（默认全选）</p>
+          <div class="task-grid">
+            <label><input type="checkbox" class="task" value="题目契合分析" checked> 题目契合分析</label>
+            <label><input type="checkbox" class="task" value="降AI痕迹" checked> 降 AI 痕迹</label>
+            <label><input type="checkbox" class="task" value="贴题加关联词" checked> 贴题加关联词</label>
+            <label><input type="checkbox" class="task" value="口语学术化" checked> 口语学术化</label>
+            <label><input type="checkbox" class="task" value="语法校对" checked> 语法校对</label>
+            <label><input type="checkbox" class="task" value="主题深化" checked> 主题深化</label>
+            <label><input type="checkbox" class="task" value="流畅度润色" checked> 流畅度润色</label>
+            <label><input type="checkbox" class="task" value="三份A级版本" checked> 三份 A 级版本</label>
+          </div>
+        </div>
+
+        <div class="intensity">
+          <p class="hint">AI 修饰力度</p>
+          <div class="seg" id="intensity">
+            <button type="button" class="seg-btn" data-v="mild" onclick="setIntensity(this)">轻度</button>
+            <button type="button" class="seg-btn active" data-v="medium" onclick="setIntensity(this)">中度</button>
+            <button type="button" class="seg-btn" data-v="strong" onclick="setIntensity(this)">重度</button>
+          </div>
+          <div class="intensity-tip" id="intensityTip">中度：保留原意，适度润色与优化。</div>
+        </div>
+
+        <div class="wc">
+          <p class="hint">字数要求（不填就不管字数）</p>
+          <div class="wc-row">
+            <label for="targetWords">目标字数</label>
+            <input type="number" id="targetWords" min="50" max="20000" step="10" placeholder="例如 1200" />
+            <span class="wc-now" id="wcNow">原文 0 字</span>
+          </div>
+          <div class="seg" id="strategy">
+            <button type="button" class="seg-btn active" data-v="keep" onclick="setStrategy(this)">保句精简</button>
+            <button type="button" class="seg-btn" data-v="cut" onclick="setStrategy(this)">删改整合</button>
+          </div>
+          <div class="wc-tip" id="wcTip">先粘贴正文。填了目标字数才会强制每版都达标（误差 ±50）。</div>
+        </div>
+
+        <button class="btn" id="runBtn" onclick="start()">开始打磨</button>
+        <div class="status" id="status"></div>
+      </div>
+
+      <!-- 右：结果 -->
+      <div class="card">
+        <h2>教授反馈</h2>
+        <p class="hint">修改结果会逐条列出（原句 → 改句 → 说明）。</p>
+        <div class="wc-panel" id="wcPanel"></div>
+        <div class="out" id="out">
+          <div class="placeholder">
+            <svg class="cat-big" width="72" height="72" viewBox="0 0 64 64" aria-hidden="true">
+              <path d="M14 22 L18 4 L32 15 Z" fill="#d7e9dc"/>
+              <path d="M50 22 L46 4 L32 15 Z" fill="#d7e9dc"/>
+              <circle cx="32" cy="37" r="21" fill="#d7e9dc"/>
+              <path d="M19 19 L21 10 L27 16 Z" fill="#f3c2c6"/>
+              <path d="M45 19 L43 10 L37 16 Z" fill="#f3c2c6"/>
+              <circle cx="25" cy="35" r="2.6" fill="#7c8a81"/>
+              <circle cx="39" cy="35" r="2.6" fill="#7c8a81"/>
+              <path d="M32 40 L29 45 L35 45 Z" fill="#f3c2c6"/>
+              <path d="M29 45 Q32 48 35 45" stroke="#7c8a81" stroke-width="2" fill="none" stroke-linecap="round"/>
+            </svg>
+            <div>结果会显示在这里。<br/>点击左侧「开始打磨」。</div>
+          </div>
+        </div>
+        <div class="actions" id="actions">
+          <button onclick="copyResult()">复制结果</button>
+          <button onclick="downloadMd()">下载 Markdown</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="foot">
+      Claire Essay 助手 · 定位为写作辅助与语言润色，请合规使用。<br/>
+      论文内容仅在浏览器与本应用后端之间传输，不落库、不留存。
+    </div>
+  </div>
+
+<script>
+var full = '';
+
+function esc(s) {
+  return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+}
+
+function inline(s) {
+  s = esc(s);
+  s = s.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+  s = s.replace(/\*([^*]+)\*/g, '<em>$1</em>');
+  return s;
+}
+
+function renderMarkdown(text) {
+  var lines = text.split('\n');
+  var html = [];
+  var i, line, m;
+  var listType = '';
+  var quoteOpen = false;
+
+  function closeList() { if (listType) { html.push('</' + listType + '>'); listType = ''; } }
+  function closeQuote() { if (quoteOpen) { html.push('</blockquote>'); quoteOpen = false; } }
+
+  for (i = 0; i < lines.length; i++) {
+    line = lines[i];
+    if (/^\s*$/.test(line)) { closeList(); closeQuote(); continue; }
+
+    m = line.match(/^(#{1,6})\s+(.*)$/);
+    if (m) { closeList(); closeQuote(); html.push('<h' + m[1].length + '>' + inline(m[2]) + '</h' + m[1].length + '>'); continue; }
+
+    if (/^\s*(-{3,}|\*{3,})\s*$/.test(line)) { closeList(); closeQuote(); html.push('<hr/>'); continue; }
+
+    m = line.match(/^\s*>\s?(.*)$/);
+    if (m) { closeList(); if (!quoteOpen) { quoteOpen = true; html.push('<blockquote>'); } html.push('<p>' + inline(m[1]) + '</p>'); continue; }
+
+    m = line.match(/^\s*[-*+]\s+(.*)$/);
+    if (m) { closeQuote(); if (listType !== 'ul') { closeList(); listType = 'ul'; html.push('<ul>'); } html.push('<li>' + inline(m[1]) + '</li>'); continue; }
+
+    m = line.match(/^\s*\d+[.)]\s+(.*)$/);
+    if (m) { closeQuote(); if (listType !== 'ol') { closeList(); listType = 'ol'; html.push('<ol>'); } html.push('<li>' + inline(m[1]) + '</li>'); continue; }
+
+    closeList(); closeQuote();
+    html.push('<p>' + inline(line) + '</p>');
+  }
+  closeList(); closeQuote();
+  return html.join('\n');
+}
+
+var INTENSITY_TIPS = {
+  mild: '轻度：尽量保留原文，只做必要微调。',
+  medium: '中度：保留原意，适度润色与优化。',
+  strong: '重度：深度改写，让表达更学术、更流畅。'
+};
+
+function setIntensity(btn) {
+  var btns = document.querySelectorAll('#intensity .seg-btn');
+  for (var i = 0; i < btns.length; i++) btns[i].classList.remove('active');
+  btn.classList.add('active');
+  document.getElementById('intensityTip').textContent = INTENSITY_TIPS[btn.getAttribute('data-v')];
+  updateWc();
+}
+
+function getIntensity() {
+  var el = document.querySelector('#intensity .seg-btn.active');
+  return el ? el.getAttribute('data-v') : 'medium';
+}
+
+// ============================================================
+// 字数模块
+// ============================================================
+var TOL = 50;               // 允许误差（字）
+var lastVersions = [];      // 上一轮解析出的各版字数
+
+// 与后端 worker.js 里的 countWords 必须完全一致：
+// 中文每字算 1，英文每个单词算 1，数字串算 1
+function countWords(t) {
+  var s = String(t || '');
+  var n = 0;
+  var m = s.match(/[\u3400-\u4dbf\u4e00-\u9fff\uf900-\ufaff]/g);
+  if (m) n += m.length;
+  m = s.match(/[A-Za-z]+(?:['’\-][A-Za-z]+)*/g);
+  if (m) n += m.length;
+  m = s.match(/\d+(?:[.,]\d+)*/g);
+  if (m) n += m.length;
+  return n;
+}
+
+function countSentences(t) {
+  var parts = String(t || '').split(/[。！？!?；;…]+|[.!?]+(?=\s|$)|\n+/);
+  var n = 0;
+  for (var i = 0; i < parts.length; i++) {
+    if (parts[i].trim().length >= 3) n++;
+  }
+  return n;
+}
+
+function fmtNum(n) {
+  return String(n).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+}
+
+function setStrategy(btn) {
+  var btns = document.querySelectorAll('#strategy .seg-btn');
+  for (var i = 0; i < btns.length; i++) btns[i].classList.remove('active');
+  btn.classList.add('active');
+  updateWc();
+}
+
+function getStrategy() {
+  var el = document.querySelector('#strategy .seg-btn.active');
+  return el ? el.getAttribute('data-v') : 'keep';
+}
+
+function getTarget() {
+  var v = parseInt(document.getElementById('targetWords').value, 10);
+  if (!v || v < 50) return 0;
+  return Math.min(v, 20000);
+}
+
+function hasVersionsTask() {
+  var boxes = document.querySelectorAll('.task:checked');
+  for (var i = 0; i < boxes.length; i++) {
+    if (boxes[i].value === '三份A级版本') return true;
+  }
+  return false;
+}
+
+// 原文多少字、预计改后多少字、目标能不能达到
+function updateWc() {
+  var essay = document.getElementById('essay').value;
+  var n = countWords(essay);
+  var sen = countSentences(essay);
+  var target = getTarget();
+  var strategy = getStrategy();
+  var nowEl = document.getElementById('wcNow');
+  var tipEl = document.getElementById('wcTip');
+
+  nowEl.textContent = n ? ('原文 ' + fmtNum(n) + ' 字 · ' + sen + ' 句') : '原文 0 字';
+  tipEl.className = 'wc-tip';
+
+  if (!target) {
+    if (!n) { tipEl.textContent = '先粘贴正文。填了目标字数才会强制每版都达标（误差 ±50）。'; return; }
+    var f = { mild: 0.97, medium: 0.92, strong: 0.85 }[getIntensity()] || 0.92;
+    var est = n * f;
+    tipEl.textContent = '预计改后约 ' + fmtNum(Math.round(est * 0.96)) + '–' + fmtNum(Math.round(est * 1.03)) +
+      ' 字（按当前力度估）。填了目标字数才会强制每版都达标。';
+    return;
+  }
+
+  if (!n) { tipEl.textContent = '先粘贴正文，才知道离目标差多少。'; return; }
+
+  var lo = target - TOL;
+  var hi = target + TOL;
+  var head = '预计改后 ' + fmtNum(lo) + '–' + fmtNum(hi) + ' 字。';
+
+  if (target >= n) {
+    tipEl.className = 'wc-tip warn';
+    tipEl.textContent = head + ' 目标不低于原文（' + fmtNum(n) + ' 字），两个策略都是往下压，到不了；这次会按扩写处理。';
+    return;
+  }
+
+  var cutPct = Math.round((1 - target / n) * 100);
+
+  if (!hasVersionsTask()) {
+    tipEl.className = 'wc-tip warn';
+    tipEl.textContent = head + ' 需减 ' + cutPct + '%，但没勾「三份 A 级版本」，结果里没有成稿可以核对字数，建议勾上。';
+    return;
+  }
+  if (cutPct >= 50) {
+    tipEl.className = 'wc-tip warn';
+    tipEl.textContent = head + ' 要砍掉 ' + cutPct + '%，三份版本很难都不丢论点，建议改完自己再过一遍。';
+    return;
+  }
+  if (strategy === 'keep' && cutPct > 25) {
+    tipEl.className = 'wc-tip warn';
+    tipEl.textContent = head + ' 需减 ' + cutPct + '%，逐句精简一般只能减 20% 左右，这个目标建议换「删改整合」。';
+    return;
+  }
+
+  tipEl.textContent = head + ' 需减 ' + fmtNum(n - target) + ' 字（-' + cutPct + '%），按「' +
+    (strategy === 'keep' ? '保句精简：句数不变，每句平均压到 ' + Math.round(target / sen) + ' 字' : '删改整合：约少 ' + Math.round((n - target) / Math.max(1, Math.round(n / sen))) + ' 句') + '」执行。';
+}
+
+// 从结果里切出三份版本（靠【本版字数：N】做分隔）
+function parseVersions(text) {
+  var out = [];
+  var re = /【本版字数[：:]\s*(\d+)\s*】/g;
+  var last = 0;
+  var m;
+  while ((m = re.exec(text)) !== null) {
+    var chunk = text.slice(last, m.index);
+    var lines = chunk.split('\n');
+    var lastHead = -1;
+    for (var i = 0; i < lines.length; i++) {
+      if (/^\s*#{1,6}\s+\S/.test(lines[i])) lastHead = i;
+    }
+    var title = lastHead >= 0 ? lines[lastHead].replace(/^\s*#{1,6}\s+/, '').trim() : ('第 ' + (out.length + 1) + ' 版');
+    var body = (lastHead >= 0 ? lines.slice(lastHead + 1) : lines).join('\n').trim();
+    out.push({ title: title, declared: parseInt(m[1], 10), text: body });
+    last = m.index + m[0].length;
+  }
+  return out;
+}
+
+// 结果出来后的字数核对面板
+function renderWcPanel() {
+  var panel = document.getElementById('wcPanel');
+  var target = getTarget();
+  var versions = parseVersions(full);
+  lastVersions = [];
+
+  if (!versions.length) {
+    if (target) {
+      panel.className = 'wc-panel show';
+      panel.innerHTML = '<div class="wc-title">字数核对</div><div class="wc-foot">结果里没找到【本版字数：N】标记，没法核对。可能是模型没按格式输出，再跑一次通常就好了。</div>';
+    } else {
+      panel.className = 'wc-panel';
+      panel.innerHTML = '';
+    }
+    return;
+  }
+
+  var rows = [];
+  var allOk = true;
+  for (var i = 0; i < versions.length; i++) {
+    var v = versions[i];
+    var n = countWords(v.text);
+    v.count = n;
+    lastVersions.push(v);
+    var delta = target ? (n - target) : 0;
+    var ok = !target || Math.abs(delta) <= TOL;
+    if (!ok) allOk = false;
+    rows.push(
+      '<div class="wc-item ' + (target ? (ok ? 'ok' : 'bad') : '') + '">' +
+        '<span class="wc-name">' + esc(v.title) + '</span>' +
+        '<span class="wc-num">' + fmtNum(n) + ' 字</span>' +
+        (target ? '<span class="wc-delta">' + (delta > 0 ? '+' : (delta < 0 ? '-' : '±')) + Math.abs(delta) + '</span>' : '') +
+      '</div>'
+    );
+  }
+
+  var title = target
+    ? '字数核对 · 目标 ' + fmtNum(target) + ' 字（' + fmtNum(target - TOL) + '–' + fmtNum(target + TOL) + '）'
+    : '各版字数';
+
+  var html = '<div class="wc-title">' + title + '</div>' + rows.join('');
+
+  if (!target) {
+    html += '<div class="wc-foot">没填目标字数，这里只显示长度。填了才会强制每版落在 ±' + TOL + ' 字内。</div>';
+  } else if (allOk) {
+    html += '<div class="wc-foot">✓ 三份都在允许区间内，可以直接用。</div>';
+  } else {
+    html += '<div class="wc-foot">有版本超出 ±' + TOL + ' 字。点下面再压一轮，会把它上一轮的实测字数告诉模型。</div>' +
+            '<div class="wc-fix"><button onclick="start(true)">按目标字数再调一次</button></div>';
+  }
+
+  panel.className = 'wc-panel show';
+  panel.innerHTML = html;
+}
+
+function start(fix) {
+  var essay = document.getElementById('essay').value;
+  var topic = document.getElementById('topic').value;
+  if (!essay.trim()) { setStatus('请先粘贴论文正文', true); return; }
+
+  var tasks = [];
+  var boxes = document.querySelectorAll('.task:checked');
+  for (var i = 0; i < boxes.length; i++) tasks.push(boxes[i].value);
+  var intensity = getIntensity();
+  var target = getTarget();
+  var strategy = getStrategy();
+
+  var payload = { topic: topic, essay: essay, tasks: tasks, intensity: intensity };
+  if (target) {
+    payload.targetWords = target;
+    payload.strategy = strategy;
+    if (fix && lastVersions.length) {
+      payload.prevCounts = [];
+      for (var k = 0; k < lastVersions.length; k++) {
+        payload.prevCounts.push({ title: lastVersions[k].title, count: lastVersions[k].count });
+      }
+    }
+  }
+
+  var btn = document.getElementById('runBtn');
+  var out = document.getElementById('out');
+  var panel = document.getElementById('wcPanel');
+  btn.disabled = true;
+  out.innerHTML = '';
+  panel.className = 'wc-panel';
+  panel.innerHTML = '';
+  document.getElementById('actions').style.display = 'none';
+  full = '';
+  setStatus(target ? ('教授正在打磨，目标 ' + fmtNum(target) + ' 字……') : '教授正在打磨……', false, true);
+
+  fetch('/api/chat', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload)
+  }).then(function(res) {
+    if (!res.ok) {
+      return res.json().then(function(j) { throw new Error(j.error || ('HTTP ' + res.status)); });
+    }
+    return readStream(res);
+  }).then(function() {
+    setStatus('已完成', false, false);
+    document.getElementById('actions').style.display = 'flex';
+    renderWcPanel();
+    try {
+      saveDraft({
+        id: 'd' + Date.now().toString(36) + Math.random().toString(36).slice(2, 6),
+        title: draftTitle(topic, essay),
+        time: Date.now(),
+        topic: topic,
+        essay: essay,
+        words: countWords(essay),
+        tasks: tasks,
+        intensity: intensity,
+        target: target || 0,
+        strategy: strategy || '',
+        result: full,
+        counts: lastVersions.map(function (v) { return { title: v.title, count: v.count }; })
+      });
+      renderDraftCount();
+    } catch (e) {}
+  }).catch(function(e) {
+    out.innerHTML = '<div class="err">' + esc(e.message || String(e)) + '</div>';
+    setStatus('出错了，请重试', true, false);
+  }).finally(function() {
+    btn.disabled = false;
+  });
+}
+
+async function readStream(res) {
+  var reader = res.body.getReader();
+  var decoder = new TextDecoder();
+  var buf = '';
+  while (true) {
+    var r = await reader.read();
+    if (r.done) break;
+    buf += decoder.decode(r.value, { stream: true });
+    var idx;
+    while ((idx = buf.indexOf('\n')) >= 0) {
+      var line = buf.slice(0, idx).replace(/\r$/, '');
+      buf = buf.slice(idx + 1);
+      if (line.indexOf('data:') === 0) {
+        var payload = line.slice(5).trim();
+        if (payload === '[DONE]') continue;
+        try {
+          var j = JSON.parse(payload);
+          var delta = j.choices && j.choices[0] && j.choices[0].delta && j.choices[0].delta.content;
+          if (delta) {
+            full += delta;
+            document.getElementById('out').innerHTML = renderMarkdown(full);
+            var o = document.getElementById('out');
+            o.scrollTop = o.scrollHeight;
+          }
+        } catch (e) {}
+      }
+    }
+  }
+}
+
+function setStatus(text, isErr, showDot) {
+  var el = document.getElementById('status');
+  el.innerHTML = (showDot ? '<span class="dot"></span>' : '') + esc(text);
+  el.style.color = isErr ? '#b91c1c' : '#6b7280';
+}
+
+function copyResult() {
+  if (!full) return;
+  var done = function() { setStatus('已复制到剪贴板', false, false); };
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(full).then(done, function() { fallbackCopy(done); });
+  } else { fallbackCopy(done); }
+}
+
+function fallbackCopy(done) {
+  var ta = document.createElement('textarea');
+  ta.value = full;
+  document.body.appendChild(ta);
+  ta.select();
+  try { document.execCommand('copy'); done(); } catch (e) {}
+  document.body.removeChild(ta);
+}
+
+function downloadMd() {
+  if (!full) return;
+  var blob = new Blob([full], { type: 'text/markdown;charset=utf-8' });
+  var a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'claire-essay-result.md';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(a.href);
+}
+
+// —— 字数实时更新 ——
+document.getElementById('essay').addEventListener('input', updateWc);
+document.getElementById('targetWords').addEventListener('input', updateWc);
+var __taskBoxes = document.querySelectorAll('.task');
+for (var __t = 0; __t < __taskBoxes.length; __t++) {
+  __taskBoxes[__t].addEventListener('change', updateWc);
+}
+updateWc();
+
+// ============================================================
+// 草稿箱：每次打磨完成自动存一份，存在浏览器本地
+// ============================================================
+var DRAFT_KEY = 'claire_drafts_v1';
+var DRAFT_MAX = 30;
+
+function loadDrafts() {
+  try {
+    var raw = localStorage.getItem(DRAFT_KEY);
+    if (!raw) return [];
+    var arr = JSON.parse(raw);
+    return Array.isArray(arr) ? arr : [];
+  } catch (e) { return []; }
+}
+
+function saveDraftList(list) {
+  try { localStorage.setItem(DRAFT_KEY, JSON.stringify(list)); return true; }
+  catch (e) { return false; }
+}
+
+// 空间不够就丢最旧的，直到写得进去
+function saveDraft(rec) {
+  var list = loadDrafts();
+  list.unshift(rec);
+  if (list.length > DRAFT_MAX) list = list.slice(0, DRAFT_MAX);
+  while (true) {
+    if (saveDraftList(list)) return true;
+    if (list.length <= 1) return false;
+    list.pop();
+  }
+}
+
+function draftTitle(topic, essay) {
+  var t = String(topic || '').trim();
+  if (t) return t.length > 40 ? t.slice(0, 40) + '…' : t;
+  var s = String(essay || '').replace(/\s+/g, ' ').trim();
+  return s.length > 24 ? s.slice(0, 24) + '…' : (s || '未命名');
+}
+
+function fmtDraftTime(ts) {
+  var d = new Date(ts);
+  function p(n) { return (n < 10 ? '0' : '') + n; }
+  return (d.getMonth() + 1) + '/' + d.getDate() + ' ' + p(d.getHours()) + ':' + p(d.getMinutes());
+}
+
+function renderDraftCount() {
+  var el = document.getElementById('draftCount');
+  if (el) el.textContent = loadDrafts().length;
+}
+
+function renderDraftPanel() {
+  var panel = document.getElementById('draftsPanel');
+  var list = loadDrafts();
+  var html = '<div class="dp-head">'
+    + '<span>最近 ' + list.length + ' 篇</span>'
+    + '<button class="dp-clear" id="draftClearAll"' + (list.length ? '' : ' disabled') + '>清除全部</button>'
+    + '</div>';
+
+  if (!list.length) {
+    html += '<div class="dp-empty">还没有草稿。<br/>打磨完成后会自动存一份。</div>';
+  } else {
+    for (var i = 0; i < list.length; i++) {
+      var d = list[i];
+      var sub = fmtDraftTime(d.time) + ' · ' + (d.words || 0) + ' 字';
+      if (d.target) sub += ' · 目标 ' + d.target;
+      html += '<div class="dp-row" data-id="' + esc(d.id) + '" title="双击打开">' +
+        '<div class="dp-title">' + esc(d.title || '未命名') + '</div>' +
+        '<div class="dp-sub">' + esc(sub) + '</div>' +
+        '<button class="dp-del" data-del="' + esc(d.id) + '" title="删除这篇草稿">×</button>' +
+      '</div>';
+    }
+  }
+  html += '<div class="dp-hint">只存在这台设备的浏览器里，不会上传</div>';
+  panel.innerHTML = html;
+}
+
+/* 批量清除所有草稿 */
+function clearAllDrafts() {
+  var list = loadDrafts();
+  if (!list.length) return;
+  if (!window.confirm('确定清除全部 ' + list.length + ' 篇草稿吗？此操作不可恢复。')) return;
+  saveDraftList([]);
+  renderDraftPanel();
+  renderDraftCount();
+}
+
+function toggleDraftPanel(force) {
+  var panel = document.getElementById('draftsPanel');
+  var open = typeof force === 'boolean' ? force : !panel.classList.contains('open');
+  if (open) renderDraftPanel();
+  panel.classList.toggle('open', open);
+}
+
+function removeDraft(id) {
+  var list = loadDrafts().filter(function (d) { return d.id !== id; });
+  saveDraftList(list);
+  renderDraftPanel();
+  renderDraftCount();
+}
+
+function openDraft(id) {
+  location.href = './draft.html?id=' + encodeURIComponent(id);
+}
+
+(function wireDrafts() {
+  var btn = document.getElementById('draftsBtn');
+  var panel = document.getElementById('draftsPanel');
+  if (!btn || !panel) return;
+
+  // 触屏没有双击，单击直接展开；桌面上按双击
+  var touch = !!(window.matchMedia && window.matchMedia('(hover: none)').matches);
+  var toggleEvent = touch ? 'click' : 'dblclick';
+
+  btn.addEventListener(toggleEvent, function (e) {
+    e.preventDefault();
+    e.stopPropagation();
+    toggleDraftPanel();
+  });
+
+  panel.addEventListener('click', function (e) {
+    // 清除全部
+    if (e.target && e.target.id === 'draftClearAll') {
+      e.stopPropagation();
+      clearAllDrafts();
+      return;
+    }
+    var del = e.target.closest ? e.target.closest('[data-del]') : null;
+    if (del) {
+      e.stopPropagation();
+      removeDraft(del.getAttribute('data-del'));
+      return;
+    }
+    var row = e.target.closest ? e.target.closest('.dp-row') : null;
+    if (!row) return;
+    if (touch) { openDraft(row.getAttribute('data-id')); return; }
+    var rows = panel.querySelectorAll('.dp-row');
+    for (var i = 0; i < rows.length; i++) rows[i].classList.remove('sel');
+    row.classList.add('sel');
+  });
+
+  panel.addEventListener('dblclick', function (e) {
+    var row = e.target.closest ? e.target.closest('.dp-row') : null;
+    if (row) openDraft(row.getAttribute('data-id'));
+  });
+
+  document.addEventListener('click', function (e) {
+    if (!panel.classList.contains('open')) return;
+    if (btn.contains(e.target) || panel.contains(e.target)) return;
+    toggleDraftPanel(false);
+  });
+
+  renderDraftCount();
+})();
+</script>
+</body>
+</html>

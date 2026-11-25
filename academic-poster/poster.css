@@ -1,0 +1,218 @@
+/* ============================================================
+ * poster.css —— 海报版式（所有颜色来自 CSS 变量）
+ * ============================================================ */
+
+:root {
+  --c-main: #1B3A5C;
+  --c-main-dark: #0E2033;
+  --c-light: #E8EDF2;
+  --c-accent: #B08A3E;
+  --c-bg: #FFFFFF;
+  --c-text: #1A1A1A;
+  --c-muted: #5A6570;
+  --c-line: #DCE2E8;
+  --c-on-main: #FFFFFF;
+
+  --serif: Georgia, "Times New Roman", "Noto Serif SC", "Songti SC", serif;
+  --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue",
+          Arial, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+
+body {
+  font-family: var(--sans);
+  background: #EEF1F4;
+  color: #1A1A1A;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* ---------------- 顶栏 ---------------- */
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 10px 18px;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid #E2E6EA;
+}
+
+.brand { display: flex; align-items: center; gap: 8px; font-size: 13px; white-space: nowrap; }
+.brand .dot {
+  width: 9px; height: 9px; border-radius: 50%;
+  background: var(--c-main);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--c-main) 18%, transparent);
+}
+.brand .muted {
+  color: #7A858F; font-size: 11.5px; padding-left: 6px;
+  border-left: 1px solid #DFE4E9; margin-left: 4px;
+}
+
+.tabs {
+  display: flex; gap: 4px; background: #F2F4F6;
+  border-radius: 10px; padding: 3px; margin-left: auto;
+}
+.tab {
+  appearance: none; border: 0; background: transparent; color: #5A6570;
+  font: 600 12.5px/1 var(--sans); padding: 8px 16px; border-radius: 8px;
+  cursor: pointer; transition: background .16s, color .16s;
+}
+.tab:hover { color: #1A1A1A; }
+.tab.is-active {
+  background: var(--c-main); color: var(--c-on-main);
+  box-shadow: 0 2px 8px color-mix(in srgb, var(--c-main) 30%, transparent);
+}
+
+.actions { display: flex; align-items: center; gap: 8px; }
+
+.btn {
+  appearance: none; border: 1px solid #DDE2E7; background: #fff; color: #1A1A1A;
+  font: 600 12.5px/1 var(--sans); padding: 9px 14px; border-radius: 9px;
+  cursor: pointer; transition: border-color .16s, background .16s, transform .06s;
+}
+.btn:hover { border-color: var(--c-main); }
+.btn:active { transform: translateY(1px); }
+.btn:disabled { opacity: .55; cursor: progress; }
+.btn--primary { background: var(--c-main); border-color: var(--c-main); color: var(--c-on-main); }
+.btn--ghost { background: transparent; }
+
+#status { font-size: 12px; color: #5A6570; min-width: 90px; }
+
+/* ---------------- 舞台 ---------------- */
+.stage-wrap { padding: 22px 18px 90px; display: flex; justify-content: center; }
+#stage { display: flex; justify-content: center; align-items: flex-start; width: 100%; }
+
+.poster-box {
+  display: none; overflow: hidden; border-radius: 4px;
+  box-shadow: 0 10px 40px rgba(16, 24, 40, .14), 0 1px 0 rgba(16, 24, 40, .06);
+}
+.poster-box.is-active { display: block; }
+
+/* ---------------- 海报本体 ---------------- */
+.poster {
+  display: flex; flex-direction: column;
+  background: var(--c-bg); color: var(--c-text);
+  overflow: hidden; transform-origin: top left; font-family: var(--sans);
+}
+
+.poster__head {
+  position: relative; background: var(--c-main); color: var(--c-on-main);
+  padding: 34px 44px 26px; flex: 0 0 auto;
+}
+.poster__head::after {
+  content: ""; position: absolute; left: 0; right: 0; bottom: 0;
+  height: 4px; background: var(--c-accent);
+}
+.poster__head-inner { position: relative; }
+
+.poster__kicker {
+  margin: 0 0 10px; font: 700 10.5px/1 var(--sans);
+  letter-spacing: .3em; text-transform: uppercase; opacity: .82;
+}
+.poster__title {
+  margin: 0 0 10px; font-family: var(--serif); font-weight: 700;
+  letter-spacing: .005em; text-wrap: balance;
+}
+.poster__subtitle { margin: 0 0 14px; font-family: var(--serif); font-style: italic; opacity: .92; }
+.poster__byline { margin: 0; font-size: 11.5px; letter-spacing: .02em; opacity: .9; }
+.poster__byline--sub { opacity: .72; margin-top: 2px; }
+
+.poster__body { flex: 1 1 auto; display: grid; align-content: start; min-height: 0; }
+.col { display: flex; flex-direction: column; min-width: 0; }
+
+.sec { break-inside: avoid; }
+.sec__title {
+  display: flex; align-items: baseline; gap: 7px; margin: 0 0 7px;
+  font: 700 11px/1.3 var(--sans); letter-spacing: .14em;
+  text-transform: uppercase; color: var(--c-main-dark);
+}
+.sec__num {
+  font-family: var(--serif); font-size: 10.5px; letter-spacing: 0;
+  color: var(--c-accent); font-weight: 700;
+}
+.sec__p {
+  margin: 0 0 8px; line-height: 1.62; color: var(--c-text);
+  hyphens: auto; text-align: justify; text-justify: inter-word;
+}
+.sec__p:last-child { margin-bottom: 0; }
+
+.figure { margin: 10px 0 14px; }
+.figure__img { display: block; width: 100%; height: auto; border: 1px solid var(--c-line); }
+.figure__ph {
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 6px; border: 1px dashed var(--c-line);
+  background: repeating-linear-gradient(45deg, color-mix(in srgb, var(--c-main) 4%, #fff) 0 10px, transparent 10px 20px);
+}
+.figure__ph-tag { font: 700 10px/1 var(--sans); letter-spacing: .28em; color: var(--c-muted); }
+.figure__ph-note { font-size: 10px; color: var(--c-muted); opacity: .85; }
+.figure__cap {
+  margin-top: 6px; font-family: var(--serif); font-style: italic;
+  font-size: 9.5px; line-height: 1.45; color: var(--c-muted);
+}
+
+.poster__foot {
+  flex: 0 0 auto; display: flex; align-items: center; gap: 14px;
+  padding: 0 44px 18px;
+}
+.poster__foot-line { height: 1px; flex: 1 1 auto; background: var(--c-line); }
+.poster__foot-text {
+  font-size: 9.5px; letter-spacing: .08em; text-transform: uppercase; color: var(--c-muted);
+}
+
+/* ---------------- 各格式差异 ---------------- */
+
+/* PPT 16:9 */
+.poster--ppt .poster__head { padding: 26px 40px 20px; }
+.poster--ppt .poster__title { font-size: 29px; line-height: 1.18; }
+.poster--ppt .poster__subtitle { font-size: 14px; }
+.poster--ppt .poster__body { grid-template-columns: repeat(3, 1fr); gap: 22px; padding: 22px 40px 8px; }
+.poster--ppt .sec { border-top: 2px solid var(--c-main); padding-top: 9px; margin-bottom: 14px; }
+.poster--ppt .sec__p { font-size: 11.2px; line-height: 1.58; margin-bottom: 6px; }
+.poster--ppt .figure__ph { height: 104px; }
+.poster--ppt .figure__img { max-height: 140px; object-fit: contain; }
+
+/* PDF A4 竖版 */
+.poster--pdf .poster__head { padding: 40px 40px 28px; }
+.poster--pdf .poster__title { font-size: 33px; line-height: 1.2; }
+.poster--pdf .poster__subtitle { font-size: 15px; }
+.poster--pdf .poster__body { grid-template-columns: repeat(2, 1fr); gap: 26px; padding: 30px 40px 10px; }
+.poster--pdf .sec { border-top: 2px solid var(--c-main); padding-top: 10px; margin-bottom: 18px; }
+.poster--pdf .sec__p { font-size: 12.6px; line-height: 1.65; }
+.poster--pdf .figure__ph { height: 150px; }
+
+/* Word A4 竖版：更像文档，单栏 */
+.poster--word .poster__head {
+  background: var(--c-bg); color: var(--c-text);
+  padding: 44px 56px 18px; border-bottom: 1px solid var(--c-line);
+}
+.poster--word .poster__head::after { height: 3px; background: var(--c-accent); }
+.poster--word .poster__kicker { color: var(--c-main); opacity: 1; }
+.poster--word .poster__title { color: var(--c-main); font-size: 30px; line-height: 1.24; }
+.poster--word .poster__subtitle { color: var(--c-muted); }
+.poster--word .poster__byline { color: var(--c-muted); }
+.poster--word .poster__body { grid-template-columns: 1fr; gap: 0; padding: 26px 56px 10px; }
+.poster--word .sec { border-top: 0; padding-top: 0; margin-bottom: 20px; }
+.poster--word .sec__title {
+  border-bottom: 1px solid var(--c-line); padding-bottom: 5px;
+  margin-bottom: 8px; font-size: 12px;
+}
+.poster--word .sec__p { font-size: 13px; line-height: 1.72; }
+.poster--word .figure__ph { height: 170px; }
+.poster--word .poster__foot { padding: 0 56px 24px; }
+
+/* ---------------- 打印 ---------------- */
+@media print {
+  .topbar, .palette-fab, .palette-panel, #status { display: none !important; }
+  body { background: #fff; }
+  .stage-wrap { padding: 0; }
+  .poster-box { display: none !important; box-shadow: none; }
+  .poster-box[data-format="pdf"] { display: block !important; width: auto !important; height: auto !important; }
+  .poster { transform: none !important; }
+  @page { size: A4 portrait; margin: 0; }
+}

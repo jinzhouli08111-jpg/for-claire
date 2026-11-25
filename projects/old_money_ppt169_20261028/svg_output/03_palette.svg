@@ -1,0 +1,48 @@
+﻿<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720" font-family="Arial, Microsoft YaHei" data-pptx-page-role="content">
+  <rect id="bg" data-pptx-role="background" x="0" y="0" width="1280" height="720" fill="#FAF7F1"/>
+
+  <g id="header" data-pptx-bounds="96 72 1084 108">
+    <text x="96" y="104" font-family="Arial, Microsoft YaHei" font-size="14" letter-spacing="5" fill="#A98A57">贰 · PALETTE</text>
+    <text x="96" y="158" font-family="Georgia, SimSun" font-size="46" fill="#1E3527">颜色越少，越难出错</text>
+  </g>
+
+  <rect id="header-rule" data-pptx-role="decoration" x="96" y="196" width="1084" height="1" fill="#D9D2C5"/>
+
+  <g id="lead" data-pptx-bounds="96 222 1084 60">
+    <text x="96" y="256" font-family="Arial, Microsoft YaHei" font-size="18" fill="#7A7268">老钱风的用色几乎只有一条准则：不要让人先看见颜色。低饱和、低对比、天然材料本色。</text>
+  </g>
+
+  <g id="swatch-1" data-pptx-bounds="96 296 240 286">
+    <rect x="96" y="296" width="240" height="150" fill="#FAF7F1" stroke="#D9D2C5" stroke-width="1"/>
+    <text x="96" y="482" font-family="Georgia, SimSun" font-size="20" fill="#23201C">奶油白</text>
+    <text x="96" y="510" font-family="Arial, Microsoft YaHei" font-size="13" letter-spacing="1" fill="#A39A8C">#FAF7F1</text>
+    <text x="96" y="562" font-family="Arial, Microsoft YaHei" font-size="14" fill="#7A7268">羊绒、未漂亚麻、石膏墙</text>
+  </g>
+
+  <g id="swatch-2" data-pptx-bounds="372 296 240 286">
+    <rect x="372" y="296" width="240" height="150" fill="#1E3527"/>
+    <text x="372" y="482" font-family="Georgia, SimSun" font-size="20" fill="#23201C">墨绿</text>
+    <text x="372" y="510" font-family="Arial, Microsoft YaHei" font-size="13" letter-spacing="1" fill="#A39A8C">#1E3527</text>
+    <text x="372" y="562" font-family="Arial, Microsoft YaHei" font-size="14" fill="#7A7268">猎装呢、书房墙纸、皮革</text>
+  </g>
+
+  <g id="swatch-3" data-pptx-bounds="648 296 240 286">
+    <rect x="648" y="296" width="240" height="150" fill="#A98A57"/>
+    <text x="648" y="482" font-family="Georgia, SimSun" font-size="20" fill="#23201C">黄铜</text>
+    <text x="648" y="510" font-family="Arial, Microsoft YaHei" font-size="13" letter-spacing="1" fill="#A39A8C">#A98A57</text>
+    <text x="648" y="562" font-family="Arial, Microsoft YaHei" font-size="14" fill="#7A7268">袖扣、门把手、旧表壳</text>
+  </g>
+
+  <g id="swatch-4" data-pptx-bounds="924 296 240 286">
+    <rect x="924" y="296" width="240" height="150" fill="#23201C"/>
+    <text x="924" y="482" font-family="Georgia, SimSun" font-size="20" fill="#23201C">墨黑</text>
+    <text x="924" y="510" font-family="Arial, Microsoft YaHei" font-size="13" letter-spacing="1" fill="#A39A8C">#23201C</text>
+    <text x="924" y="562" font-family="Arial, Microsoft YaHei" font-size="14" fill="#7A7268">羊毛西装、深色木、墨</text>
+  </g>
+
+  <rect id="takeaway-bg" data-pptx-role="decoration" x="96" y="602" width="1084" height="56" fill="#1E3527" fill-opacity="0.06"/>
+
+  <g id="takeaway" data-pptx-bounds="96 602 1084 56">
+    <text x="126" y="638" font-family="Georgia, SimSun" font-size="20" fill="#1E3527">当颜色退场，材质和剪裁才成为唯一需要被读懂的线索。</text>
+  </g>
+</svg>

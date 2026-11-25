@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>款式 A · 暖纸墨绿</title>
+<style>
+  :root {
+    --paper: #faf7f1;
+    --paper-2: #f3eee3;
+    --ink: #1f2a23;
+    --ink-2: #4a5650;
+    --muted: #6b7a70;
+    --rule: #e6dfd2;
+    --forest: #14532d;
+    --brass: #a98a57;
+    --font-sans: "Manrope", -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
+    --font-serif: Georgia, "Times New Roman", "Songti SC", "SimSun", serif;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; min-height: 100vh;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--font-sans);
+  }
+  .wrap { max-width: 1040px; margin: 0 auto; padding: 72px 32px 96px; }
+
+  .eyebrow {
+    font-size: 11px; letter-spacing: .24em; text-transform: uppercase;
+    color: var(--brass); font-weight: 700; margin: 0 0 24px;
+  }
+  .hero { border-bottom: 1px solid var(--rule); padding-bottom: 40px; margin-bottom: 8px; }
+  .hero .row { display: flex; align-items: flex-end; gap: 24px; flex-wrap: wrap; }
+  h1 {
+    font-family: var(--font-serif);
+    font-size: 76px; line-height: .95; font-weight: 400;
+    letter-spacing: -.02em; margin: 0;
+  }
+  h1 em { font-style: italic; color: var(--forest); }
+  .tag { font-size: 15px; line-height: 26px; color: var(--muted); margin: 14px 0 0; max-width: 46ch; }
+
+  .grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 0 56px;
+    margin-top: 8px;
+  }
+  .item {
+    display: block; text-decoration: none; color: inherit;
+    padding: 28px 0 26px;
+    border-bottom: 1px solid var(--rule);
+    transition: background-color .3s cubic-bezier(.22,1,.36,1), padding-left .3s cubic-bezier(.22,1,.36,1);
+  }
+  .item:hover { background: var(--paper-2); padding-left: 16px; }
+  .item .idx {
+    font-family: var(--font-serif); font-style: italic;
+    font-size: 15px; color: var(--brass); display: block; margin-bottom: 10px;
+  }
+  .item h2 {
+    font-family: var(--font-serif); font-size: 26px; line-height: 32px;
+    font-weight: 400; margin: 0 0 8px; letter-spacing: -.01em;
+  }
+  .item p { font-size: 14px; line-height: 22px; color: var(--muted); margin: 0; max-width: 40ch; }
+  .item .more {
+    display: inline-block; margin-top: 14px; font-size: 13px; letter-spacing: .06em;
+    color: var(--forest); font-weight: 600;
+  }
+  .item:hover .more { text-decoration: underline; text-underline-offset: 4px; }
+  .item.soon { opacity: .48; }
+  .item.soon:hover { background: transparent; padding-left: 0; }
+
+  footer {
+    margin-top: 64px; padding-top: 24px; border-top: 1px solid var(--rule);
+    font-size: 12px; letter-spacing: .1em; color: var(--muted);
+    display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap;
+  }
+  @media (max-width: 760px) {
+    .wrap { padding: 48px 20px 64px; }
+    h1 { font-size: 52px; }
+    .grid { grid-template-columns: 1fr; gap: 0; }
+  }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <p class="eyebrow">Study Desk · For Claire</p>
+    <header class="hero">
+      <div class="row">
+        <h1>For <em>Claire</em></h1>
+      </div>
+      <p class="tag">把论文、查重、模板、幻灯与导图收在一张书桌上。少一点来回切换，多一点专心写字。</p>
+    </header>
+
+    <main class="grid">
+      <a class="item" href="./preview.html"><span class="idx">01</span><h2>论文打磨</h2>
+        <p>先给任务清单，再逐段改：降 AI 痕迹、学术化、语法校对，最后交三份 A 级版本。</p>
+        <span class="more">开始打磨 →</span></a>
+
+      <a class="item" href="./ai-check.html"><span class="idx">02</span><h2>AI 查重</h2>
+        <p>先用在线工具粗筛，再用站内检测看「改前 → 改后」的趋势变化。</p>
+        <span class="more">去查重 →</span></a>
+
+      <a class="item" href="./ai-template.html"><span class="idx">03</span><h2>AI 模板</h2>
+        <p>一句话生成版式，五类模板库随手收藏微调，导出的文字都能直接改。</p>
+        <span class="more">去生成 →</span></a>
+
+      <a class="item" href="./ppt.html"><span class="idx">04</span><h2>智能 PPT</h2>
+        <p>说出想法，边聊边改，导出可编辑的 PPT / Word / PDF。</p>
+        <span class="more">去生成 →</span></a>
+
+      <a class="item" href="./mindmap.html"><span class="idx">05</span><h2>思维导图</h2>
+        <p>拖拽建图，自动排版，一张图理清一篇文章的骨架。</p>
+        <span class="more">去画导图 →</span></a>
+
+      <div class="item soon"><span class="idx">06</span><h2>润色翻译</h2>
+        <p>中英互译与地道润色。还在做，先把位置留出来。</p>
+        <span class="more">敬请期待</span></div>
+    </main>
+
+    <footer><span>For Claire · 专属于你的学习小站</span><span>二〇二六</span></footer>
+  </div>
+</body>
+</html>

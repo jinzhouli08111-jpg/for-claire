@@ -1,0 +1,180 @@
+
+=== 2026-10-28T01:52:23.733Z NOTE id=fc91376a4c01 ===
+Project initialized: profile=default; canvas=ppt169; path=D:\dsworkplace_eassy\projects\old_money_ppt169_20261028
+
+=== 2026-10-28T01:56:22.347Z PYTHON run=7b814451f47f ===
+cwd: D:\dsworkplace_eassy
+argv: ["C:\\Users\\29853\\AppData\\Local\\Programs\\Python312\\python.exe", "C:\\Users\\29853\\.dsh\\skills\\ppt-master\\scripts\\svg_to_pptx.py", "D:\\dsworkplace_eassy\\projects\\old_money_ppt169_20261028", "--no-notes", "--pptx-structure", "flat"]
+stderr:
+  Error: spec_lock.md is required for release SVG export
+=== 2026-10-28T01:56:23.805Z END run=7b814451f47f elapsed_ms=1453 output_lines=1 retained=1 omitted=0 ===
+
+=== 2026-10-28T01:56:37.409Z PYTHON run=a7c940b3a188 ===
+cwd: D:\dsworkplace_eassy
+argv: ["C:\\Users\\29853\\AppData\\Local\\Programs\\Python312\\python.exe", "C:\\Users\\29853\\.dsh\\skills\\ppt-master\\scripts\\project_manager.py", "validate", "D:\\dsworkplace_eassy\\projects\\old_money_ppt169_20261028"]
+stdout:
+  [WARN]
+  [OK] Project structure is valid, with warnings.
+=== 2026-10-28T01:56:38.282Z END run=a7c940b3a188 elapsed_ms=875 output_lines=5 retained=2 omitted=3 ===
+
+=== 2026-10-28T01:56:38.419Z PYTHON run=a8b1bf68e16e ===
+cwd: D:\dsworkplace_eassy
+argv: ["C:\\Users\\29853\\AppData\\Local\\Programs\\Python312\\python.exe", "C:\\Users\\29853\\.dsh\\skills\\ppt-master\\scripts\\svg_quality_checker.py", "D:\\dsworkplace_eassy\\projects\\old_money_ppt169_20261028", "--canonical-authoring", "--stage", "final", "--json"]
+stdout:
+  [ERROR] 01_cover.svg - Failed
+     viewBox: 0 0 1280 720
+     [ERROR] spec_lock typography-size recurrence: undeclared font-size 30 (4 occurrences) exceeds the sparse-display limit of 2 occurrences. Structural text must return to its declared role band; a genuinely recurring display treatment needs a justified named role in the Design Spec and spec_lock.
+     [WARN] Noncanonical compact authoring: Authoring SVG contains noncanonical or redundant inherited style declarations (8 change(s)); examples (group:attr None -> value hoists the shared value onto that group; child:attr value -> None drops the copy the child now inherits): cover-title:font-family None -> 'Georgia, SimSun'; text[7]:font-family 'Georgia, SimSun' -> None; text[8]:font-family 'Georgia, SimSun' -> None (advisory; normalize with `python3 scripts/compact_svg_styles.py <svg_output> --inplace`, re-stamp pages that carry Chart/Table fallbacks, and rerun the final gate, or leave the explicit form)
+  [WARN] 02_definition.svg - Passed (with warnings)
+     viewBox: 0 0 1280 720
+     [WARN] Noncanonical compact authoring: Authoring SVG contains noncanonical or redundant inherited style declarations (15 change(s)); examples (group:attr None -> value hoists the shared value onto that group; child:attr value -> None drops the copy the child now inherits): text[4]:font-family 'Arial, Microsoft YaHei' -> None; text[11]:font-family 'Arial, Microsoft YaHei' -> None; text[12]:font-family 'Arial, Microsoft YaHei' -> None (advisory; normalize with `python3 scripts/compact_svg_styles.py <svg_output> --inplace`, re-stamp pages that carry Chart/Table fallbacks, and rerun the final gate, or leave the explicit form)
+     [WARN] Detected 2 paragraph-like line run(s) split across sibling <text> elements (<g id="lead"> x=96.0, y=266.0..346.0, 3 lines; <g id="lead"> x=96.0, y=416.0..446.0, 2 lines). If each run is one prose paragraph, combine it into one <text>: keep its first line as direct text and use direct <tspan> children with the parent x and positive relative dy values for later lines. An all-<tspan> form may start with dy="0". Keep semantically independent text frames separate.
+  [ERROR] 03_palette.svg - Failed
+     viewBox: 0 0 1280 720
+     [ERROR] <text> (x=96, y=562; text='羊绒、未漂亚麻、石膏墙') exceeds <g id="swatch-1"> data-pptx-bounds on the vertical axis: content (96.0, 550.1)-(259.2, 566.9), container (96.0, 296.0)-(336.0, 530.0), overflow horizontal 0.0%, vertical 15.8% (error above 5%); expand the root module bounds into available non-overlapping space; otherwise reflow the text
+     [ERROR] <text> (x=372, y=562; text='猎装呢、书房墙纸、皮革') exceeds <g id="swatch-2"> data-pptx-bounds on the vertical axis: content (372.0, 550.1)-(535.2, 566.9), container (372.0, 296.0)-(612.0, 530.0), overflow horizontal 0.0%, vertical 15.8% (error above 5%); expand the root module bounds into available non-overlapping space; otherwise reflow the text
+     [ERROR] <text> (x=648, y=562; text='袖扣、门把手、旧表壳') exceeds <g id="swatch-3"> data-pptx-bounds on the vertical axis: content (648.0, 550.1)-(796.4, 566.9), container (648.0, 296.0)-(888.0, 530.0), overflow horizontal 0.0%, vertical 15.8% (error above 5%); expand the root module bounds into available non-overlapping space; otherwise reflow the text
+     [ERROR] <text> (x=924, y=562; text='羊毛西装、深色木、墨') exceeds <g id="swatch-4"> data-pptx-bounds on the vertical axis: content (924.0, 550.1)-(1072.4, 566.9), container (924.0, 296.0)-(1164.0, 530.0), overflow horizontal 0.0%, vertical 15.8% (error above 5%); expand the root module bounds into available non-overlapping space; otherwise reflow the text
+     [WARN] Noncanonical compact authoring: Authoring SVG contains noncanonical or redundant inherited style declarations (10 change(s)); examples (group:attr None -> value hoists the shared value onto that group; child:attr value -> None drops the copy the child now inherits): text[4]:font-family 'Arial, Microsoft YaHei' -> None; text[8]:font-family 'Arial, Microsoft YaHei' -> None; text[12]:font-family 'Arial, Microsoft YaHei' -> None (advisory; normalize with `python3 scripts/compact_svg_styles.py <svg_output> --inplace`, re-stamp pages that carry Chart/Table fallbacks, and rerun the final gate, or leave the explicit form)
+  [ERROR] 04_material.svg - Failed
+     viewBox: 0 0 1280 720
+     [ERROR] spec_lock typography-size recurrence: undeclared font-size 30 (4 occurrences) exceeds the sparse-display limit of 2 occurrences. Structural text must return to its declared role band; a genuinely recurring display treatment needs a justified named role in the Design Spec and spec_lock.
+     [WARN] Noncanonical compact authoring: Authoring SVG contains noncanonical or redundant inherited style declarations (5 change(s)); examples (group:attr None -> value hoists the shared value onto that group; child:attr value -> None drops the copy the child now inherits): text[4]:font-family 'Arial, Microsoft YaHei' -> None; text[8]:font-family 'Arial, Microsoft YaHei' -> None; text[12]:font-family 'Arial, Microsoft YaHei' -> None (advisory; normalize with `python3 scripts/compact_svg_styles.py <svg_output> --inplace`, re-stamp pages that carry Chart/Table fallbacks, and rerun the final gate, or leave the explicit form)
+  [WARN] 05_quote.svg - Passed (with warnings)
+     viewBox: 0 0 1280 720
+     [WARN] Noncanonical compact authoring: Authoring SVG contains noncanonical or redundant inherited style declarations (5 change(s)); examples (group:attr None -> value hoists the shared value onto that group; child:attr value -> None drops the copy the child now inherits): pull-quote:font-family None -> 'Georgia, SimSun'; text[5]:font-family 'Georgia, SimSun' -> None; text[6]:font-family 'Georgia, SimSun' -> None (advisory; normalize with `python3 scripts/compact_svg_styles.py <svg_output> --inplace`, re-stamp pages that carry Chart/Table fallbacks, and rerun the final gate, or leave the explicit form)
+     [WARN] Detected 1 paragraph-like line run(s) split across sibling <text> elements (<g id="pull-quote"> x=96.0, y=268.0..342.0, 2 lines). If each run is one prose paragraph, combine it into one <text>: keep its first line as direct text and use direct <tspan> children with the parent x and positive relative dy values for later lines. An all-<tspan> form may start with dy="0". Keep semantically independent text frames separate.
+  [WARN] 06_contrasts.svg - Passed (with warnings)
+     [WARN] Noncanonical compact authoring: Authoring SVG contains noncanonical or redundant inherited style declarations (28 change(s)); examples (group:attr None -> value hoists the shared value onto that group; child:attr value -> None drops the copy the child now inherits): text[4]:font-family 'Arial, Microsoft YaHei' -> None; text[10]:font-family 'Arial, Microsoft YaHei' -> None; text[12]:font-family 'Arial, Microsoft YaHei' -> None (advisory; normalize with `python3 scripts/compact_svg_styles.py <svg_output> --inplace`, re-stamp pages that carry Chart/Table fallbacks, and rerun the final gate, or leave the explicit form)
+  [ERROR] 07_why_now.svg - Failed
+     viewBox: 0 0 1280 720
+     [ERROR] spec_lock typography-size recurrence: undeclared font-size 54 (3 occurrences) exceeds the sparse-display limit of 2 occurrences. Structural text must return to its declared role band; a genuinely recurring display treatment needs a justified named role in the Design Spec and spec_lock.
+     [WARN] Noncanonical compact authoring: Authoring SVG contains noncanonical or redundant inherited style declarations (13 change(s)); examples (group:attr None -> value hoists the shared value onto that group; child:attr value -> None drops the copy the child now inherits): text[4]:font-family 'Arial, Microsoft YaHei' -> None; text[11]:font-family 'Arial, Microsoft YaHei' -> None; text[12]:font-family 'Arial, Microsoft YaHei' -> None (advisory; normalize with `python3 scripts/compact_svg_styles.py <svg_output> --inplace`, re-stamp pages that carry Chart/Table fallbacks, and rerun the final gate, or leave the explicit form)
+     [WARN] Detected 5 paragraph-like line run(s) split across sibling <text> elements (<g id="reason-1"> x=96.0, y=424.0..450.0, 2 lines; <g id="reason-1"> x=96.0, y=476.0..502.0, 2 lines; <g id="reason-2"> x=472.0, y=424.0..450.0, 2 lines; +2 more). If each run is one prose paragraph, combine it into one <text>: keep its first line as direct text and use direct <tspan> children with the parent x and positive relative dy values for later lines. An all-<tspan> form may start with dy="0". Keep semantically independent text frames separate.
+  [ERROR] 08_ending.svg - Failed
+     viewBox: 0 0 1280 720
+     [ERROR] <g id="closing-seal"> data-pptx-bounds overlaps <g id="footer"> data-pptx-bounds by 280.0px x 16.0px; keep ordinary direct-root module zones disjoint beyond the 1px tolerance
+     [ERROR] <text> (x=96, y=336; text='是安心的样子。') exceeds <g id="closing-title"> data-pptx-bounds on the vertical axis: content (96.0, 274.8)-(660.5, 361.2), container (96.0, 150.0)-(996.0, 350.0), overflow horizontal 0.0%, vertical 5.6% (error above 5%); expand the root module bounds into available non-overlapping space; otherwise reflow the text
+     [WARN] Noncanonical compact authoring: Authoring SVG contains noncanonical or redundant inherited style declarations (18 change(s)); examples (group:attr None -> value hoists the shared value onto that group; child:attr value -> None drops the copy the child now inherits): closing-title:fill None -> '#1E3527'; closing-title:font-family None -> 'Georgia, SimSun'; closing-title:font-size None -> '72' (advisory; normalize with `python3 scripts/compact_svg_styles.py <svg_output> --inplace`, re-stamp pages that carry Chart/Table fallbacks, and rerun the final gate, or leave the explicit form)
+     [WARN] Detected 2 paragraph-like line run(s) split across sibling <text> elements (<g id="closing-title"> x=96.0, y=248.0..336.0, 2 lines; <g id="closing-body"> x=96.0, y=442.0..476.0, 2 lines). If each run is one prose paragraph, combine it into one <text>: keep its first line as direct text and use direct <tspan> children with the parent x and positive relative dy values for later lines. An all-<tspan> form may start with dy="0". Keep semantically independent text frames separate.
+  [SUMMARY] Check Summary
+  Total files: 8
+    [OK] Fully passed: 0 (0%)
+    [WARN] With warnings: 3 (37%)
+    [ERROR] With errors: 5 (62%)
+  Provenance categories:
+    blocking: 9          hard findings; gate also requires exit 0
+    introduced: 13       advisory; new or changed
+    inherited: 0         informational; prototype-identical
+    source-import: 0     informational; source-conversion loss
+  [CARRIERS] Actual-use receipt (informational; not a quota)
+    Pages: 8 | text: 123 | images: 0 | icons: 0
+    Geometry: SVG elements 46 | native presets 0 | page-frame elements 21 | marker uses 0
+    Effects: inline emphasis 0 (pages 0) | gradients 0 (pages 0) | filters 0 (pages 0) | text effects 0 (pages 0)
+    Native objects: charts 0 | tables 0 | formulas 0
+  [REPORT] JSON quality report exported: D:\dsworkplace_eassy\projects\old_money_ppt169_20261028\validation\svg_quality_report.json
+=== 2026-10-28T01:56:40.036Z END run=a8b1bf68e16e elapsed_ms=1609 output_lines=86 retained=52 omitted=34 ===
+
+=== 2026-10-28T01:57:17.424Z PYTHON run=94d52ccd7f86 ===
+cwd: D:\dsworkplace_eassy
+argv: ["C:\\Users\\29853\\AppData\\Local\\Programs\\Python312\\python.exe", "C:\\Users\\29853\\.dsh\\skills\\ppt-master\\scripts\\svg_quality_checker.py", "D:\\dsworkplace_eassy\\projects\\old_money_ppt169_20261028", "--canonical-authoring", "--stage", "final", "--json"]
+stdout:
+  [WARN] 01_cover.svg - Passed (with warnings)
+     [WARN] Noncanonical compact authoring: Authoring SVG contains noncanonical or redundant inherited style declarations (8 change(s)); examples (group:attr None -> value hoists the shared value onto that group; child:attr value -> None drops the copy the child now inherits): cover-title:font-family None -> 'Georgia, SimSun'; text[7]:font-family 'Georgia, SimSun' -> None; text[8]:font-family 'Georgia, SimSun' -> None (advisory; normalize with `python3 scripts/compact_svg_styles.py <svg_output> --inplace`, re-stamp pages that carry Chart/Table fallbacks, and rerun the final gate, or leave the explicit form)
+  [WARN] 02_definition.svg - Passed (with warnings)
+     [WARN] Noncanonical compact authoring: Authoring SVG contains noncanonical or redundant inherited style declarations (15 change(s)); examples (group:attr None -> value hoists the shared value onto that group; child:attr value -> None drops the copy the child now inherits): text[4]:font-family 'Arial, Microsoft YaHei' -> None; text[11]:font-family 'Arial, Microsoft YaHei' -> None; text[12]:font-family 'Arial, Microsoft YaHei' -> None (advisory; normalize with `python3 scripts/compact_svg_styles.py <svg_output> --inplace`, re-stamp pages that carry Chart/Table fallbacks, and rerun the final gate, or leave the explicit form)
+  [ERROR] 08_ending.svg - Failed
+     viewBox: 0 0 1280 720
+     [ERROR] <g id="closing-title"> data-pptx-bounds overlaps <g id="closing-seal"> data-pptx-bounds by 84.0px x 6.0px; keep ordinary direct-root module zones disjoint beyond the 1px tolerance
+     [WARN] Noncanonical compact authoring: Authoring SVG contains noncanonical or redundant inherited style declarations (18 change(s)); examples (group:attr None -> value hoists the shared value onto that group; child:attr value -> None drops the copy the child now inherits): closing-title:fill None -> '#1E3527'; closing-title:font-family None -> 'Georgia, SimSun'; closing-title:font-size None -> '72' (advisory; normalize with `python3 scripts/compact_svg_styles.py <svg_output> --inplace`, re-stamp pages that carry Chart/Table fallbacks, and rerun the final gate, or leave the explicit form)
+     [WARN] Detected 2 paragraph-like line run(s) split across sibling <text> elements (<g id="closing-title"> x=96.0, y=248.0..336.0, 2 lines; <g id="closing-body"> x=96.0, y=442.0..476.0, 2 lines). If each run is one prose paragraph, combine it into one <text>: keep its first line as direct text and use direct <tspan> children with the parent x and positive relative dy values for later lines. An all-<tspan> form may start with dy="0". Keep semantically independent text frames separate.
+  [SUMMARY] Check Summary
+  Total files: 8
+    [OK] Fully passed: 0 (0%)
+    [WARN] With warnings: 7 (87%)
+    [ERROR] With errors: 1 (12%)
+  Provenance categories:
+    blocking: 1          hard findings; gate also requires exit 0
+    introduced: 13       advisory; new or changed
+    inherited: 0         informational; prototype-identical
+    source-import: 0     informational; source-conversion loss
+  [CARRIERS] Actual-use receipt (informational; not a quota)
+    Pages: 8 | text: 123 | images: 0 | icons: 0
+    Geometry: SVG elements 46 | native presets 0 | page-frame elements 21 | marker uses 0
+    Effects: inline emphasis 0 (pages 0) | gradients 0 (pages 0) | filters 0 (pages 0) | text effects 0 (pages 0)
+    Native objects: charts 0 | tables 0 | formulas 0
+  [REPORT] JSON quality report exported: D:\dsworkplace_eassy\projects\old_money_ppt169_20261028\validation\svg_quality_report.json
+=== 2026-10-28T01:57:18.959Z END run=94d52ccd7f86 elapsed_ms=1532 output_lines=72 retained=25 omitted=47 ===
+
+=== 2026-10-28T01:57:27.475Z PYTHON run=384d2bfb6381 ===
+cwd: D:\dsworkplace_eassy
+argv: ["C:\\Users\\29853\\AppData\\Local\\Programs\\Python312\\python.exe", "C:\\Users\\29853\\.dsh\\skills\\ppt-master\\scripts\\svg_quality_checker.py", "D:\\dsworkplace_eassy\\projects\\old_money_ppt169_20261028", "--canonical-authoring", "--stage", "final", "--json"]
+stdout:
+  [WARN] 01_cover.svg - Passed (with warnings)
+     [WARN] Noncanonical compact authoring: Authoring SVG contains noncanonical or redundant inherited style declarations (8 change(s)); examples (group:attr None -> value hoists the shared value onto that group; child:attr value -> None drops the copy the child now inherits): cover-title:font-family None -> 'Georgia, SimSun'; text[7]:font-family 'Georgia, SimSun' -> None; text[8]:font-family 'Georgia, SimSun' -> None (advisory; normalize with `python3 scripts/compact_svg_styles.py <svg_output> --inplace`, re-stamp pages that carry Chart/Table fallbacks, and rerun the final gate, or leave the explicit form)
+  [WARN] 02_definition.svg - Passed (with warnings)
+     [WARN] Noncanonical compact authoring: Authoring SVG contains noncanonical or redundant inherited style declarations (15 change(s)); examples (group:attr None -> value hoists the shared value onto that group; child:attr value -> None drops the copy the child now inherits): text[4]:font-family 'Arial, Microsoft YaHei' -> None; text[11]:font-family 'Arial, Microsoft YaHei' -> None; text[12]:font-family 'Arial, Microsoft YaHei' -> None (advisory; normalize with `python3 scripts/compact_svg_styles.py <svg_output> --inplace`, re-stamp pages that carry Chart/Table fallbacks, and rerun the final gate, or leave the explicit form)
+  [SUMMARY] Check Summary
+  Total files: 8
+    [OK] Fully passed: 0 (0%)
+    [WARN] With warnings: 8 (100%)
+    [ERROR] With errors: 0 (0%)
+  Provenance categories:
+    blocking: 0          hard findings; gate also requires exit 0
+    introduced: 13       advisory; new or changed
+    inherited: 0         informational; prototype-identical
+    source-import: 0     informational; source-conversion loss
+  [CARRIERS] Actual-use receipt (informational; not a quota)
+    Pages: 8 | text: 123 | images: 0 | icons: 0
+    Geometry: SVG elements 46 | native presets 0 | page-frame elements 21 | marker uses 0
+  [REPORT] JSON quality report exported: D:\dsworkplace_eassy\projects\old_money_ppt169_20261028\validation\svg_quality_report.json
+=== 2026-10-28T01:57:29.013Z END run=384d2bfb6381 elapsed_ms=1547 output_lines=69 retained=18 omitted=51 ===
+
+=== 2026-10-28T01:57:33.870Z PYTHON run=74eb928a9c4e ===
+cwd: D:\dsworkplace_eassy
+argv: ["C:\\Users\\29853\\AppData\\Local\\Programs\\Python312\\python.exe", "C:\\Users\\29853\\.dsh\\skills\\ppt-master\\scripts\\svg_to_pptx.py", "D:\\dsworkplace_eassy\\projects\\old_money_ppt169_20261028", "--no-notes", "--pptx-structure", "flat"]
+stderr:
+  Traceback (most recent call last):
+    File "C:\Users\29853\.dsh\skills\ppt-master\scripts\svg_to_pptx.py", line 31, in <module>
+      raise SystemExit(main())
+                       ^^^^^^
+    File "C:\Users\29853\.dsh\skills\ppt-master\scripts\svg_to_pptx\pptx_package\cli.py", line 3862, in main
+      success = create_pptx_with_native_svg(
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    File "C:\Users\29853\.dsh\skills\ppt-master\scripts\svg_to_pptx\pptx_package\builder.py", line 7205, in create_pptx_with_native_svg
+stderr-tail:
+    - D:\dsworkplace_eassy\.pptx-build-20440-e066732d7bac4873bbbbcb5312bddf58: [Errno 13] Permission denied: 'D:\\dsworkplace_eassy\\.pptx-build-20440-e066732d7bac4873bbbbcb5312bddf58\\.write-probe'
+    - C:\Users\29853\AppData\Local\Programs\Python312\tmp\.pptx-build-20440-021b485f90b04be998514e55d1f2dcfd: [WinError 5] 拒绝访问。: 'C:\\Users\\29853\\AppData\\Local\\Programs\\Python312\\tmp\\.pptx-build-20440-021b485f90b04be998514e55d1f2dcfd'
+    - C:\Users\29853\AppData\Local\Programs\Python312\tmp\.pptx-build-20440-bf9f05107031461fb2298e8dc68b62bd: [WinError 5] 拒绝访问。: 'C:\\Users\\29853\\AppData\\Local\\Programs\\Python312\\tmp\\.pptx-build-20440-bf9f05107031461fb2298e8dc68b62bd'
+    - C:\Users\29853\AppData\Local\Programs\Python312\tmp\.pptx-build-20440-6f3d18d4c16f45638a3d7737ed85eeb2: [WinError 5] 拒绝访问。: 'C:\\Users\\29853\\AppData\\Local\\Programs\\Python312\\tmp\\.pptx-build-20440-6f3d18d4c16f45638a3d7737ed85eeb2'
+=== 2026-10-28T01:57:35.424Z END run=74eb928a9c4e elapsed_ms=1562 output_lines=36 retained=12 omitted=24 ===
+
+=== 2026-10-28T01:58:10.302Z PYTHON run=dd75d45faa77 ===
+cwd: D:\dsworkplace_eassy
+argv: ["C:\\Users\\29853\\AppData\\Local\\Programs\\Python312\\python.exe", "C:\\Users\\29853\\.dsh\\skills\\ppt-master\\scripts\\svg_to_pptx.py", "D:\\dsworkplace_eassy\\projects\\old_money_ppt169_20261028", "--no-notes", "--pptx-structure", "flat"]
+stderr:
+  Traceback (most recent call last):
+    File "C:\Users\29853\.dsh\skills\ppt-master\scripts\svg_to_pptx.py", line 31, in <module>
+      raise SystemExit(main())
+                       ^^^^^^
+    File "C:\Users\29853\.dsh\skills\ppt-master\scripts\svg_to_pptx\pptx_package\cli.py", line 3862, in main
+      success = create_pptx_with_native_svg(
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    File "C:\Users\29853\.dsh\skills\ppt-master\scripts\svg_to_pptx\pptx_package\builder.py", line 7205, in create_pptx_with_native_svg
+stderr-tail:
+    - D:\dsworkplace_eassy\.pptx-build-41636-5b397572f8f4440bb6dc65491f4b12d6: [Errno 13] Permission denied: 'D:\\dsworkplace_eassy\\.pptx-build-41636-5b397572f8f4440bb6dc65491f4b12d6\\.write-probe'
+    - D:\dsworkplace_eassy\_pytmp\.pptx-build-41636-42459469360f479f8d15d2d0ab417043: [Errno 13] Permission denied: 'D:\\dsworkplace_eassy\\_pytmp\\.pptx-build-41636-42459469360f479f8d15d2d0ab417043\\.write-probe'
+    - D:\dsworkplace_eassy\_pytmp\.pptx-build-41636-f9c9fa4b1bc34bba83ad7707dbb1e7b7: [Errno 13] Permission denied: 'D:\\dsworkplace_eassy\\_pytmp\\.pptx-build-41636-f9c9fa4b1bc34bba83ad7707dbb1e7b7\\.write-probe'
+    - D:\dsworkplace_eassy\_pytmp\.pptx-build-41636-7887d8e3e3f549f7abbc784a9b23db4a: [Errno 13] Permission denied: 'D:\\dsworkplace_eassy\\_pytmp\\.pptx-build-41636-7887d8e3e3f549f7abbc784a9b23db4a\\.write-probe'
+=== 2026-10-28T01:58:11.873Z END run=dd75d45faa77 elapsed_ms=1578 output_lines=36 retained=12 omitted=24 ===
+
+=== 2026-10-28T01:58:24.323Z PYTHON run=397aa4e62774 ===
+cwd: D:\dsworkplace_eassy
+argv: ["C:\\Users\\29853\\AppData\\Local\\Programs\\Python312\\python.exe", "C:\\Users\\29853\\.dsh\\skills\\ppt-master\\scripts\\svg_to_pptx.py", "D:\\dsworkplace_eassy\\projects\\old_money_ppt169_20261028", "--no-notes", "--pptx-structure", "flat"]
+stdout:
+  [Done] Saved: D:\dsworkplace_eassy\projects\old_money_ppt169_20261028\exports\old_money_20261028_095825.pptx
+    [POSTFLIGHT] status=passed-with-warnings quality_gate=passed slides=8 warning_categories=1
+    [POSTFLIGHT][WARNING] quality_introduced_warnings=13
+    [PPTX] D:\dsworkplace_eassy\projects\old_money_ppt169_20261028\exports\old_money_20261028_095825.pptx
+    [REPORT] D:\dsworkplace_eassy\projects\old_money_ppt169_20261028\validation\old_money_20261028_095825.report.json
+=== 2026-10-28T01:58:26.539Z END run=397aa4e62774 elapsed_ms=2218 output_lines=40 retained=5 omitted=35 ===

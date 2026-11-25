@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720" font-family="Arial, Microsoft YaHei" data-pptx-page-role="content">
+  <rect id="bg" data-pptx-role="background" x="0" y="0" width="1280" height="720" fill="#FAF7F1"/>
+
+  <g id="header" data-pptx-bounds="96 72 1084 108">
+    <text x="96" y="104" font-family="Arial, Microsoft YaHei" font-size="14" letter-spacing="5" fill="#A98A57">叁 · MATERIAL</text>
+    <text x="96" y="158" font-family="Georgia, SimSun" font-size="46" fill="#1E3527">把钱花在看不见的地方</text>
+  </g>
+
+  <rect id="header-rule" data-pptx-role="decoration" x="96" y="196" width="1084" height="1" fill="#D9D2C5"/>
+
+  <g id="lead" data-pptx-bounds="96 222 1084 60">
+    <text x="96" y="256" font-family="Arial, Microsoft YaHei" font-size="18" fill="#7A7268">判断一件东西是否“老钱”，看它愿不愿意在别人注意不到的位置依然讲究。</text>
+  </g>
+
+  <g id="row-1" data-pptx-bounds="96 302 1084 96">
+    <text x="96" y="330" font-family="Georgia, SimSun" font-size="30" fill="#A98A57">01</text>
+    <text x="176" y="330" font-family="Georgia, SimSun" font-size="26" fill="#23201C">材质先于款式</text>
+    <text x="176" y="368" font-family="Arial, Microsoft YaHei" font-size="16" fill="#7A7268">羊毛支数、亚麻产地、皮革鞣制方式——这些不出现在logo上的信息，才是真正的成本所在。</text>
+    <rect x="96" y="392" width="1084" height="1" fill="#E3DCCF"/>
+  </g>
+
+  <g id="row-2" data-pptx-bounds="96 412 1084 96">
+    <text x="96" y="440" font-family="Georgia, SimSun" font-size="30" fill="#A98A57">02</text>
+    <text x="176" y="440" font-family="Georgia, SimSun" font-size="26" fill="#23201C">剪裁替代装饰</text>
+    <text x="176" y="478" font-family="Arial, Microsoft YaHei" font-size="16" fill="#7A7268">肩线、袖山、裤口宽度，全部收在恰到好处的位置，合身到看不出是刻意合身。</text>
+    <rect x="96" y="502" width="1084" height="1" fill="#E3DCCF"/>
+  </g>
+
+  <g id="row-3" data-pptx-bounds="96 522 1084 96">
+    <text x="96" y="550" font-family="Georgia, SimSun" font-size="30" fill="#A98A57">03</text>
+    <text x="176" y="550" font-family="Georgia, SimSun" font-size="26" fill="#23201C">修补优于更换</text>
+    <text x="176" y="588" font-family="Arial, Microsoft YaHei" font-size="16" fill="#7A7268">一双穿了十五年的鞋，鞋底换过三次，皮面留着细密折痕——这是被认可的时间痕迹。</text>
+    <rect x="96" y="612" width="1084" height="1" fill="#E3DCCF"/>
+  </g>
+
+  <g id="footer-note" data-pptx-bounds="96 632 1084 44">
+    <text x="96" y="664" font-family="Georgia, SimSun" font-size="19" font-style="italic" fill="#7A7268">昂贵不是因为标价，而是因为它本可以不这样。</text>
+  </g>
+</svg>

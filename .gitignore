@@ -1,0 +1,38 @@
+# —— 密钥与本地状态：绝对不要提交 ——
+claire-essay-helper-web/key.txt
+claire-essay-helper-web/.wrangler/
+claire-essay-helper-web/_backup/
+**/key.txt
+**/.dev.vars
+**/.env
+**/.env.*
+
+# —— 依赖 ——
+node_modules/
+**/node_modules/
+
+# —— 独立仓库，不嵌入这里 ——
+ppt-service/
+
+# —— 隔离环境的临时产物 ——
+.pptx-build-*/
+_bskh/
+_tools/
+_pytmp/
+_verify/
+_shots/
+_quicktest/
+src/
+*.zip
+
+# —— 根目录的临时脚本（子目录里的 _lint.js 等要保留）——
+/_*.js
+/_*.mjs
+/_*.txt
+/_*.woff2
+
+# —— 猫图的过程文件，只留最终版本 ——
+cats/_*.png
+
+# ���� DSH ���������뼼�� ����
+.dsh/

@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720" font-family="Arial, Microsoft YaHei" data-pptx-page-role="content">
+  <rect id="bg" data-pptx-role="background" x="0" y="0" width="1280" height="720" fill="#FAF7F1"/>
+
+  <g id="header" data-pptx-bounds="96 72 1084 108">
+    <text x="96" y="104" font-family="Arial, Microsoft YaHei" font-size="14" letter-spacing="5" fill="#A98A57">伍 · WHY NOW</text>
+    <text x="96" y="158" font-family="Georgia, SimSun" font-size="46" fill="#1E3527">它在这一刻被重新需要</text>
+  </g>
+
+  <rect id="header-rule" data-pptx-role="decoration" x="96" y="196" width="1084" height="1" fill="#D9D2C5"/>
+
+  <g id="reason-1" data-pptx-bounds="96 234 336 340">
+    <text x="96" y="300" font-family="Georgia, SimSun" font-size="54" fill="#A98A57">Ⅰ</text>
+    <rect x="96" y="322" width="44" height="1" fill="#A98A57"/>
+    <text x="96" y="378" font-family="Georgia, SimSun" font-size="26" fill="#23201C">潮流的疲劳</text>
+    <text x="96" y="424" font-family="Arial, Microsoft YaHei" font-size="16" fill="#7A7268">快速迭代的款式让人</text>
+    <text x="96" y="450" font-family="Arial, Microsoft YaHei" font-size="16" fill="#7A7268">持续花费却持续不满。</text>
+    <text x="96" y="476" font-family="Arial, Microsoft YaHei" font-size="16" fill="#7A7268">人们开始寻找能穿</text>
+    <text x="96" y="502" font-family="Arial, Microsoft YaHei" font-size="16" fill="#7A7268">更久的东西。</text>
+  </g>
+
+  <g id="reason-2" data-pptx-bounds="472 234 336 340">
+    <text x="472" y="300" font-family="Georgia, SimSun" font-size="54" fill="#A98A57">Ⅱ</text>
+    <rect x="472" y="322" width="44" height="1" fill="#A98A57"/>
+    <text x="472" y="378" font-family="Georgia, SimSun" font-size="26" fill="#23201C">炫耀的贬值</text>
+    <text x="472" y="424" font-family="Arial, Microsoft YaHei" font-size="16" fill="#7A7268">社交媒体让符号唾手</text>
+    <text x="472" y="450" font-family="Arial, Microsoft YaHei" font-size="16" fill="#7A7268">可得，logo 不再稀缺。</text>
+    <text x="472" y="476" font-family="Arial, Microsoft YaHei" font-size="16" fill="#7A7268">稀缺性转向了眼光</text>
+    <text x="472" y="502" font-family="Arial, Microsoft YaHei" font-size="16" fill="#7A7268">与克制本身。</text>
+  </g>
+
+  <g id="reason-3" data-pptx-bounds="848 234 336 340">
+    <text x="848" y="300" font-family="Georgia, SimSun" font-size="54" fill="#A98A57">Ⅲ</text>
+    <rect x="848" y="322" width="44" height="1" fill="#A98A57"/>
+    <text x="848" y="378" font-family="Georgia, SimSun" font-size="26" fill="#23201C">时间的新贵</text>
+    <text x="848" y="424" font-family="Arial, Microsoft YaHei" font-size="16" fill="#7A7268">在加速的环境里，</text>
+    <text x="848" y="450" font-family="Arial, Microsoft YaHei" font-size="16" fill="#7A7268">“用了十年”比</text>
+    <text x="848" y="476" font-family="Arial, Microsoft YaHei" font-size="16" fill="#7A7268">“刚买的”更值得</text>
+    <text x="848" y="502" font-family="Arial, Microsoft YaHei" font-size="16" fill="#7A7268">被谈论。</text>
+  </g>
+
+  <rect id="takeaway-bg" data-pptx-role="decoration" x="96" y="600" width="1084" height="60" fill="#1E3527"/>
+
+  <g id="takeaway" data-pptx-bounds="96 600 1084 60">
+    <text x="128" y="638" font-family="Georgia, SimSun" font-size="21" fill="#FAF7F1">老钱风的流行，本质是“反炫耀”成为了一种新的炫耀。</text>
+  </g>
+</svg>

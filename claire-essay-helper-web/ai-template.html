@@ -1,0 +1,3305 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="theme-color" content="#16a34a" />
+<meta name="description" content="一句话生成图文模板，5 类模板库，收藏后微调，导出可编辑的 PPT、Word 与 PDF。" />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="作图模板 · For Claire" />
+<meta property="og:description" content="一句话生成图文模板，5 类模板库，收藏后微调，导出可编辑的 PPT、Word 与 PDF。" />
+<meta property="og:locale" content="zh_CN" />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cpath d='M14 22 L18 4 L32 15 Z' fill='%2316a34a'/%3E%3Cpath d='M50 22 L46 4 L32 15 Z' fill='%2316a34a'/%3E%3Ccircle cx='32' cy='37' r='21' fill='%2322c55e'/%3E%3Ccircle cx='25' cy='35' r='3' fill='%231f2a23'/%3E%3Ccircle cx='39' cy='35' r='3' fill='%231f2a23'/%3E%3C/svg%3E" />
+<link rel="stylesheet" href="/ds.css" />
+<title>作图模板 · For Claire</title>
+<style>
+  :root {
+    --bg: #f5f9f6;
+    --panel: #ffffff;
+    --ink: #1f2a23;
+    --muted: #6b7a70;
+    --line: #e3ebe5;
+    --brand: #16a34a;
+    --brand-dark: #15803d;
+    --brand-soft: #e9f7ee;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    min-height: 100vh;
+    background:
+      radial-gradient(circle at 12% 8%, #e4f6ea 0%, transparent 42%),
+      radial-gradient(circle at 88% 4%, #e2f6f2 0%, transparent 40%),
+      var(--bg);
+    color: var(--ink);
+    font-family: var(--font);
+  }
+  .page { width: 100%; max-width: 1080px; margin: 0 auto; padding: var(--s-400) var(--s-300) var(--s-700); }
+
+  .topbar {
+    position: sticky; top: 0; z-index: 30; width: 100%;
+    display: flex; align-items: center; gap: var(--s-100);
+    height: 64px; padding: 0 var(--s-300);
+    background: rgba(255, 255, 255, .82);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--line);
+  }
+  .topbar .brand { margin-left: auto; }
+  .back {
+    color: var(--brand-dark); text-decoration: none;
+    font-size: 14px; line-height: 20px; font-weight: 600;
+    padding: var(--s-75) var(--s-100); border-radius: var(--r-lg);
+    border: 1px solid var(--line); background: #fff;
+    white-space: nowrap;
+    transition: border-color var(--dur) var(--ease), background-color var(--dur) var(--ease);
+  }
+  .back:hover { border-color: var(--brand); background: var(--brand-soft); text-decoration: none; }
+  .back:hover { text-decoration: underline; }
+  .brand { font-family: Georgia, "Times New Roman", serif; font-style: italic; font-weight: 700; font-size: 18px; color: var(--brand); opacity: .75; }
+  .spacer { flex: 1; }
+  .fav-toggle {
+    display: inline-flex; align-items: center; gap: 4px;
+    border: 1px solid var(--line); background: #fff; color: var(--ink);
+    border-radius: 999px; padding: 8px 12px; font-size: 14px; cursor: pointer;
+    transition: border-color var(--dur) var(--ease), color var(--dur) var(--ease); font-family: inherit;
+  }
+  .fav-toggle:hover { border-color: var(--brand); color: var(--brand-dark); }
+  .fav-toggle .cnt {
+    background: var(--brand-soft); color: var(--brand-dark);
+    border-radius: 999px; padding: 0px 8px; font-size: 12px; font-weight: 700;
+  }
+
+  .hero { text-align: center; margin: 4px 0 24px; }
+  .hero .cat-icon { display: block; margin: 0 auto 4px; }
+  .hero h1 { font-size: 30px; margin: 2px 0 4px; }
+  .hero p { margin: 0; color: var(--muted); font-size: 14px; }
+
+  .ext-links {
+    background: var(--panel); border: 1px solid var(--line); border-radius: 16px;
+    padding: 16px 16px; margin-bottom: 16px;
+  }
+  .ext-links h2 { font-size: 14px; margin: 0 0 8px; display: flex; align-items: center; gap: 8px; }
+  .ext-links h2::before { content: ''; width: 4px; height: 15px; border-radius: 2px; background: var(--brand); }
+  .ext-links .tools { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; }
+  @media (max-width: 640px) { .ext-links .tools { grid-template-columns: 1fr; } }
+  .ext-links .tool {
+    display: flex; flex-direction: column; gap: 2px; text-decoration: none; color: inherit;
+    border: 1px solid var(--line); border-radius: 12px; padding: 12px 12px; background: #fbfdfb;
+    transition: border-color var(--dur) var(--ease), box-shadow var(--dur) var(--ease), transform var(--dur) var(--ease);
+  }
+  .ext-links .tool:hover { border-color: var(--brand); box-shadow: 0 6px 16px rgba(22,163,74,.1); transform: translateY(-1px); }
+  .ext-links .tool strong { font-size: 14px; }
+  .ext-links .tool strong::after { content: ' ↗'; color: var(--brand); font-size: 12px; }
+  .ext-links .tool span { font-size: 12px; color: var(--muted); }
+
+  .layout { display: flex; flex-direction: column; gap: 16px; }
+
+  .panel { background: var(--panel); border: 1px solid var(--line); border-radius: 16px; padding: 16px; }
+  .panel h2 { font-size: 14px; margin: 0 0 12px; display: flex; align-items: center; gap: 8px; }
+  .panel h2::before { content: ''; width: 4px; height: 15px; border-radius: 2px; background: var(--brand); }
+
+  .gen-row { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+  .gen-row input[type=text] {
+    flex: 1; min-width: 180px; border: 1px solid var(--line); border-radius: 12px; padding: 8px 12px;
+    font-size: 14px; outline: none; font-family: inherit; color: var(--ink); background: #fbfdfb;
+  }
+  .gen-row input[type=text]:focus { border-color: var(--brand); background: #fff; }
+  select {
+    border: 1px solid var(--line); border-radius: 12px; padding: 8px 8px;
+    font-size: 14px; background: #fff; color: var(--ink); outline: none; font-family: inherit;
+  }
+  .btn {
+    border: none; border-radius: 12px; padding: 8px 16px; font-size: 14px; font-weight: 600;
+    background: var(--brand); color: #fff; cursor: pointer; font-family: inherit; white-space: nowrap;
+  }
+  .btn:hover { background: var(--brand-dark); }
+  .btn.ghost { background: #fff; color: var(--ink); border: 1px solid var(--line); }
+  .btn.ghost:hover { border-color: var(--brand); color: var(--brand-dark); }
+  .btn:disabled { opacity: .55; cursor: default; }
+
+  .gen-result { margin-top: 12px; }
+  .gen-result:empty { display: none; }
+
+  .lib-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
+  .lib-head h2 { margin: 0; }
+  .lib-head .btn { padding: 8px 12px; font-size: 12px; }
+
+  .tabs { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }
+  .tab {
+    border: 1px solid var(--line); background: #fff; color: var(--muted);
+    border-radius: 999px; padding: 4px 12px; font-size: 12px; cursor: pointer;
+    font-family: inherit; transition: all var(--dur) var(--ease);
+  }
+  .tab:hover { border-color: var(--brand); color: var(--brand-dark); }
+  .tab.on { background: var(--brand-soft); border-color: #bfe6cd; color: var(--brand-dark); font-weight: 600; }
+
+  .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+  .lib-grid { grid-template-columns: repeat(3, 1fr); }
+  @media (max-width: 980px) { .lib-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 560px) { .grid, .lib-grid { grid-template-columns: 1fr; } }
+
+  /* —— 模板卡：与编辑器同一份画布，只是缩放 —— */
+  .tpl { position: relative; }
+  .tpl-visual {
+    position: relative; overflow: hidden; border-radius: 12px;
+    aspect-ratio: 520 / 735; border: 1px solid rgba(0,0,0,.08);
+    background: #fff; cursor: pointer;
+    transition: box-shadow var(--dur) var(--ease), transform var(--dur) var(--ease);
+  }
+  .tpl-visual:hover { box-shadow: 0 10px 26px rgba(22,163,74,.18); transform: translateY(-2px); }
+  .cvwrap { position: absolute; inset: 0; overflow: hidden; }
+  .cvwrap .cv { position: absolute; top: 0; left: 0; transform-origin: top left; }
+
+  /* —— 画布与区块（卡片 / 预览 / 编辑器 / 导出 共用同一套规则） —— */
+  .cv { position: relative; overflow: hidden; }
+  .blk { position: absolute; }
+  .blk-img {
+    display: flex; align-items: center; justify-content: center;
+    background: rgba(0,0,0,.045); border: 1px dashed rgba(0,0,0,.28);
+    color: rgba(0,0,0,.38); font-size: 12px; letter-spacing: 1px;
+  }
+  .cv-deco { position: absolute; inset: 0; pointer-events: none; }
+
+  .tpl-heart {
+    position: absolute; right: 8px; bottom: 8px; z-index: 3;
+    width: 32px; height: 32px; border-radius: 50%;
+    border: none; background: rgba(255,255,255,.94); color: #9aa79f;
+    font-size: 16px; cursor: pointer; line-height: 1;
+    box-shadow: 0 2px 8px rgba(0,0,0,.14); transition: transform var(--dur) var(--ease), color var(--dur) var(--ease);
+  }
+  .tpl-heart:hover { transform: scale(1.12); }
+  .tpl-heart.on { color: #e11d48; }
+
+  .mini-tools {
+    display: flex; align-items: center; gap: 8px; margin-top: 8px;
+    font-size: 12px; color: var(--muted);
+  }
+  .mini-tools input[type=color] {
+    width: 26px; height: 22px; border: 1px solid var(--line); border-radius: 6px; padding: 0; cursor: pointer;
+  }
+  .mini-tools .mini-btn {
+    border: 1px solid var(--line); background: #fff; border-radius: 8px; padding: 2px 8px;
+    font-size: 12px; cursor: pointer; font-family: inherit; color: var(--ink);
+  }
+  .mini-tools .mini-btn:hover { border-color: var(--brand); color: var(--brand-dark); }
+
+  .empty { text-align: center; color: #9aa79f; font-size: 14px; padding: 24px 0; }
+  .cat-cap { font-size: 12px; color: var(--muted); margin: 0 0 4px 2px; }
+
+  /* —— 弹层 —— */
+  .modal {
+    position: fixed; inset: 0; background: rgba(15,23,18,.45);
+    display: none; align-items: flex-start; justify-content: center; z-index: 60; padding: 32px 16px;
+    overflow-y: auto;
+  }
+  .modal.open { display: flex; }
+  .modal-box {
+    background: var(--panel); border-radius: 16px; width: 100%; max-width: 760px;
+    padding: 16px; box-shadow: 0 20px 60px rgba(0,0,0,.25);
+  }
+  .preview-box { max-width: 460px; }
+  .modal-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
+  .modal-head h2 { margin: 0; font-size: 16px; }
+  .modal-close {
+    border: none; background: #f1f5f2; border-radius: 8px; width: 32px; height: 32px;
+    font-size: 18px; cursor: pointer; color: var(--muted);
+  }
+  .modal-close:hover { background: #e4ebe6; }
+
+  .big-preview { position: relative; overflow: hidden; border-radius: 12px; border: 1px solid var(--line); aspect-ratio: 520 / 735; background: #fff; }
+  .big-preview .cvwrap { position: absolute; inset: 0; overflow: hidden; }
+  .big-preview .cv { position: absolute; top: 0; left: 0; transform-origin: top left; }
+
+  .export-row { display: flex; align-items: center; gap: 8px; margin-top: 12px; font-size: 12px; color: var(--muted); flex-wrap: wrap; }
+  .export-row .btn { padding: 8px 12px; font-size: 12px; }
+  .export-status { font-size: 12px; color: var(--brand-dark); min-height: 16px; }
+  .hint-line { font-size: 12px; color: #9aa79f; margin: 8px 0 0; line-height: 1.6; }
+
+  /* —— 全屏编辑器 —— */
+  .editor { position: fixed; inset: 0; z-index: 200; display: flex; flex-direction: column; background: #eef4f0; }
+  .editor[hidden] { display: none; }
+  .ed-top { display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 8px 16px; background: #fff; border-bottom: 1px solid var(--line); flex-wrap: wrap; }
+  .ed-back { border: 1px solid var(--line); background: #fff; border-radius: 8px; padding: 4px 12px; font-size: 14px; cursor: pointer; font-family: inherit; }
+  .ed-back:hover { border-color: var(--brand); color: var(--brand-dark); }
+  .ed-name { font-weight: 700; font-size: 14px; }
+  .ed-export { display: flex; gap: 8px; align-items: center; }
+  .ed-body { flex: 1; display: grid; grid-template-columns: 1fr 340px; overflow: hidden; }
+  @media (max-width: 820px) { .ed-body { grid-template-columns: 1fr; grid-template-rows: 1fr auto; } .ed-panel { border-left: none; border-top: 1px solid var(--line); max-height: 46vh; } }
+  .ed-stage { overflow: auto; display: flex; align-items: flex-start; justify-content: center; padding: 24px; }
+  .ed-fit { position: relative; flex: none; }
+  .ed-fit .cv { position: absolute; top: 0; left: 0; transform-origin: top left; box-shadow: 0 14px 40px rgba(0,0,0,.16); border-radius: 2px; }
+  .ed-panel { overflow-y: auto; background: #fff; border-left: 1px solid var(--line); padding: 12px 16px 40px; }
+  .ed-group { margin-bottom: 16px; }
+  .ed-group h3 { font-size: 12px; margin: 0 0 8px; color: var(--brand-dark); display: flex; align-items: center; gap: 4px; }
+  .ed-group h3::before { content: ''; width: 3px; height: 12px; border-radius: 2px; background: var(--brand); }
+  .row { display: flex; align-items: center; justify-content: space-between; gap: 8px; font-size: 12px; margin-bottom: 8px; color: var(--ink); }
+  .row .rlabel { flex: none; }
+  .row input[type=color] { width: 34px; height: 26px; border: 1px solid var(--line); border-radius: 8px; padding: 0; cursor: pointer; }
+  .row input[type=range] { flex: 1; min-width: 90px; accent-color: var(--brand); }
+  .row input[type=text] { width: 150px; border: 1px solid var(--line); border-radius: 8px; padding: 4px 8px; font-size: 12px; font-family: inherit; outline: none; }
+  .row select { width: 120px; }
+  .row .rval { width: 44px; text-align: right; font-size: 12px; color: var(--muted); font-variant-numeric: tabular-nums; }
+  .blk-list { display: flex; flex-direction: column; gap: 4px; margin-bottom: 8px; max-height: 180px; overflow-y: auto; }
+  .blk-item {
+    display: flex; align-items: center; justify-content: space-between; gap: 4px;
+    border: 1px solid var(--line); border-radius: 8px; padding: 4px 8px; font-size: 12px; cursor: pointer;
+    background: #fff;
+  }
+  .blk-item:hover { border-color: var(--brand); }
+  .blk-item.on { border-color: var(--brand); background: var(--brand-soft); font-weight: 600; }
+  .blk-item.dragging { border-color: var(--brand); background: #e6f6ec; box-shadow: 0 6px 16px rgba(22,163,74,.2); opacity: .95; }
+  .blk-item .grip { flex: none; color: #b9c6bd; font-size: 14px; cursor: grab; letter-spacing: -1px; }
+  .blk-item.dragging .grip { cursor: grabbing; }
+  .blk-item .btype { flex: none; }
+  .blk-item .btext { opacity: .55; font-size: 12px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .blk-item .blk-del {
+    flex: none; border: none; background: transparent; color: #b3c0b8;
+    font-size: 16px; line-height: 1; padding: 0 2px; cursor: pointer;
+    border-radius: 4px; font-family: inherit;
+  }
+  .blk-item .blk-del:hover { color: #dc2626; background: #fdeaea; }
+  .add-row { display: flex; gap: 8px; }
+  .add-row .btn { flex: 1; padding: 8px 0; font-size: 12px; }
+  .ed-field { margin-bottom: 8px; }
+  .ed-field .rlabel { display: block; font-size: 12px; margin-bottom: 4px; }
+  .ed-field textarea {
+    width: 100%; border: 1px solid var(--line); border-radius: 8px; padding: 4px 8px;
+    font-size: 12px; font-family: inherit; outline: none; resize: vertical; line-height: 1.6;
+  }
+  .ed-field textarea:focus { border-color: var(--brand); }
+  .ed-empty { font-size: 12px; color: #9aa79f; margin: 0; }
+  .ed-full { width: 100%; }
+  .ed-sel-title { font-size: 12px; color: var(--muted); margin: 0 0 8px; }
+  .align-row { display: flex; gap: 4px; margin-bottom: 8px; }
+  .align-row button {
+    flex: 1; border: 1px solid var(--line); background: #fff; border-radius: 8px;
+    padding: 4px 0; font-size: 12px; cursor: pointer; font-family: inherit; color: var(--ink);
+  }
+  .align-row button:hover { border-color: var(--brand); color: var(--brand-dark); }
+  .align-row button:active { background: var(--brand-soft); }
+  .ed-top-tools { display: flex; gap: 4px; align-items: center; }
+  .ed-top-tools button {
+    border: 1px solid var(--line); background: #fff; border-radius: 8px; padding: 4px 12px;
+    font-size: 12px; cursor: pointer; font-family: inherit; color: var(--ink);
+  }
+  .ed-top-tools button:hover:not(:disabled) { border-color: var(--brand); color: var(--brand-dark); }
+  .ed-top-tools button:disabled { opacity: .38; cursor: default; }
+
+  /* 画布内区块的选择态 */
+  .row.img-only { display: none; }
+  .row.img-only.show { display: flex; }
+  .row.txt-only { display: flex; }
+  .row.txt-only.hide { display: none; }
+  .row.deco-only { display: none; }
+  .row.deco-only.show { display: flex; }
+  .cv.editing .blk { cursor: move; }
+  .cv.editing .blk:hover { outline: 1px dashed rgba(22,163,74,.55); outline-offset: 2px; }
+  .cv.editing .blk.selected { outline: 2px solid #16a34a; outline-offset: 2px; }
+
+  /* 选中区块的八个缩放手柄 */
+  .ed-handles { position: absolute; inset: 0; pointer-events: none; }
+  .ed-handles i {
+    position: absolute; width: 11px; height: 11px; margin: -4px 0 0 -4px;
+    background: #fff; border: 1.5px solid #16a34a; border-radius: 4px;
+    pointer-events: auto; box-shadow: 0 1px 3px rgba(0,0,0,.25);
+  }
+  .ed-handles i[data-dir="nw"], .ed-handles i[data-dir="se"] { cursor: nwse-resize; }
+  .ed-handles i[data-dir="ne"], .ed-handles i[data-dir="sw"] { cursor: nesw-resize; }
+  .ed-handles i[data-dir="n"], .ed-handles i[data-dir="s"] { cursor: ns-resize; }
+  .ed-handles i[data-dir="e"], .ed-handles i[data-dir="w"] { cursor: ew-resize; }
+
+  /* 自检输出 */
+  #selftest { white-space: pre-wrap; font-size: 12px; background: #fff; border: 1px solid var(--line); border-radius: 12px; padding: 12px; }
+
+  /* __responsive__ */
+  @media (max-width: 640px) {
+    .topbar { padding: 0 var(--s-200); }
+    .page { padding: var(--s-400) var(--s-200) var(--s-600); }
+  }
+</style>
+</head>
+<body>
+  <a class="skip-link" href="#main">跳到主要内容</a>
+    <div class="topbar">
+      <a class="back" href="./home.html">← 返回首页</a>
+      <div class="brand">For Claire</div>
+      <div class="spacer"></div>
+      <button class="fav-toggle" id="openFav">♡ 我的收藏 <span class="cnt" id="favCount">0</span></button>
+    </div>
+<div id="main" role="main" class="page">
+
+    <header class="hero">
+      <svg class="cat-icon" width="72" height="72" viewBox="0 0 64 64" aria-hidden="true">
+        <path d="M14 22 L18 4 L32 15 Z" fill="#16a34a"/>
+        <path d="M50 22 L46 4 L32 15 Z" fill="#16a34a"/>
+        <circle cx="32" cy="37" r="21" fill="#22c55e"/>
+        <path d="M19 19 L21 10 L27 16 Z" fill="#f9c6c9"/>
+        <path d="M45 19 L43 10 L37 16 Z" fill="#f9c6c9"/>
+        <circle cx="25" cy="35" r="3" fill="#1f2a23"/>
+        <circle cx="39" cy="35" r="3" fill="#1f2a23"/>
+        <path d="M32 40 L28.8 45 L35.2 45 Z" fill="#f9c6c9"/>
+        <path d="M28.8 45 Q32 48.5 35.2 45" stroke="#1f2a23" stroke-width="2" fill="none" stroke-linecap="round"/>
+        <path d="M13 40 L3 38 M13 46 L3 47 M51 40 L61 38 M51 46 L61 47" stroke="#1f2a23" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+      <h1>作图模板</h1>
+      <p>一句话生成模板，或从模板库里挑一个</p>
+    </header>
+
+    <section class="ext-links">
+      <h2>免费海报模板网站</h2>
+      <div class="tools">
+        <a class="tool" href="https://www.canva.cn/" target="_blank" rel="noopener noreferrer">
+          <strong>Canva 可画</strong>
+          <span>中文 · 免费模板多 · 可导出 PDF</span>
+        </a>
+        <a class="tool" href="https://www.gaoding.com/" target="_blank" rel="noopener noreferrer">
+          <strong>稿定设计</strong>
+          <span>中文 · 海报/简历模板 · 可导出 PDF</span>
+        </a>
+        <a class="tool" href="https://www.chuangkit.com/" target="_blank" rel="noopener noreferrer">
+          <strong>创客贴</strong>
+          <span>中文 · 免费模板 · 可导出 PDF</span>
+        </a>
+        <a class="tool" href="https://818ps.com/" target="_blank" rel="noopener noreferrer">
+          <strong>图怪兽</strong>
+          <span>中文 · 免费海报模板</span>
+        </a>
+        <a class="tool" href="https://create.vista.com/templates/poster/" target="_blank" rel="noopener noreferrer">
+          <strong>VistaCreate</strong>
+          <span>国际 · 免费海报模板 · 可下载</span>
+        </a>
+        <a class="tool" href="https://www.postermywall.com/" target="_blank" rel="noopener noreferrer">
+          <strong>PosterMyWall</strong>
+          <span>国际 · 免费海报模板</span>
+        </a>
+        <a class="tool" href="https://www.freepik.com/" target="_blank" rel="noopener noreferrer">
+          <strong>Freepik</strong>
+          <span>国际 · 免费模板素材</span>
+        </a>
+        <a class="tool" href="https://www.adobe.com/express/" target="_blank" rel="noopener noreferrer">
+          <strong>Adobe Express</strong>
+          <span>国际 · 免费模板 · 可导出 PDF</span>
+        </a>
+      </div>
+    </section>
+
+    <div class="layout">
+      <!-- AI 指令生成 -->
+      <section class="panel">
+        <h2>AI 指令生成</h2>
+        <div class="gen-row">
+          <input type="text" id="prompt" placeholder="描述你想要的海报，例如：校园歌手大赛海报，青春活力风" />
+          <select id="genCategory"></select>
+          <button class="btn" id="genBtn">生成模板</button>
+        </div>
+        <div class="gen-result" id="genResult"></div>
+      </section>
+
+      <!-- 模板库 -->
+      <section class="panel">
+        <div class="lib-head">
+          <h2>模板库</h2>
+          <button class="btn ghost" id="refreshBtn">换一批 ⟳</button>
+        </div>
+        <div class="tabs" id="catTabs"></div>
+        <div class="grid lib-grid" id="libGrid"></div>
+      </section>
+    </div>
+  </div>
+
+  <!-- 我的收藏 -->
+  <div class="modal" id="favModal">
+    <div class="modal-box">
+      <div class="modal-head">
+        <h2>我的收藏</h2>
+        <button class="modal-close" id="closeFav">×</button>
+      </div>
+      <div class="grid" id="favGrid"></div>
+      <p class="hint-line">收藏保存在本机浏览器，刷新不会丢。点卡片可预览，双击或点「微调」进入编辑器。</p>
+    </div>
+  </div>
+
+  <!-- 模板预览 -->
+  <div class="modal" id="previewModal">
+    <div class="modal-box preview-box">
+      <div class="modal-head">
+        <h2>模板预览</h2>
+        <button class="modal-close" id="closePreview">×</button>
+      </div>
+      <div class="big-preview" id="previewVisual">
+        <div class="cvwrap" id="previewBody"></div>
+      </div>
+      <div class="export-row">
+        <span>导出为：</span>
+        <button class="btn ghost" data-export="pptx">PPT</button>
+        <button class="btn ghost" data-export="pdf">PDF</button>
+        <button class="btn ghost" data-export="docx">Word</button>
+        <button class="btn" id="previewEdit">微调</button>
+      </div>
+      <div class="export-status" id="previewStatus"></div>
+      <p class="hint-line">导出的是当前预览这张图的完整画面（PDF / Word / PPT 都会带这张图）。双击图片也能进入微调。</p>
+    </div>
+  </div>
+
+  <!-- 全屏编辑器 -->
+  <div class="editor" id="editor" hidden>
+    <div class="ed-top">
+      <button class="ed-back" id="edBack">← 返回</button>
+      <div class="ed-name">微调 · 拖动区块可移动</div>
+      <div class="ed-top-tools">
+        <button id="edUndo" disabled title="撤销（Ctrl+Z）">↶ 撤销</button>
+        <button id="edRedo" disabled title="取消撤销（Ctrl+Y）">↷ 取消撤销</button>
+      </div>
+      <div class="ed-export">
+        <button class="btn ghost" data-export="pptx">PPT</button>
+        <button class="btn ghost" data-export="pdf">PDF</button>
+        <button class="btn ghost" data-export="docx">Word</button>
+      </div>
+    </div>
+    <div class="ed-body">
+      <div class="ed-stage" id="edStage">
+        <div class="ed-fit" id="edFit"></div>
+      </div>
+      <aside class="ed-panel">
+        <div class="ed-group">
+          <h3>画布</h3>
+          <div class="row"><span class="rlabel">主色</span><input id="edMain" type="color" /></div>
+          <div class="row"><span class="rlabel">点缀色</span><input id="edAccent" type="color" /></div>
+          <div class="row"><span class="rlabel">背景</span><input id="edBg" type="color" /></div>
+        </div>
+
+        <div class="ed-group">
+          <h3>图层 / 区块（上下拖动可调层级）</h3>
+          <div class="blk-list" id="edBlocks"></div>
+          <div class="add-row">
+            <button class="btn ghost" id="edAddText">＋文字段落</button>
+            <button class="btn ghost" id="edAddImg">＋插图区域</button>
+          </div>
+          <div class="add-row" style="margin-top:8px">
+            <button class="btn ghost" id="edAddDeco">＋花边装饰</button>
+          </div>
+          <p class="hint-line">列表越靠上 = 图层越靠前（盖住下面的）</p>
+        </div>
+
+        <div class="ed-group">
+          <h3>选中区块</h3>
+          <p class="ed-sel-title" id="edSelTitle">未选中</p>
+          <div id="edProps" hidden>
+            <div class="ed-field" id="edTextField">
+              <span class="rlabel">内容</span>
+              <textarea id="edText" rows="3"></textarea>
+            </div>
+            <div class="row txt-only"><span class="rlabel">字号</span><input id="edSize" type="range" min="8" max="72" step="1" /><span class="rval" id="edSizeVal">32px</span></div>
+            <div class="row txt-only"><span class="rlabel">字体</span>
+              <select id="edFont">
+                <option value="sans">无衬线</option>
+                <option value="serif">衬线</option>
+                <option value="hand">手写</option>
+                <option value="mono">等宽</option>
+              </select>
+            </div>
+            <div class="ed-field txt-only">
+              <span class="rlabel">对齐</span>
+              <div class="align-row" id="edAlignRow">
+                <button data-align="left" title="左对齐">左对齐</button>
+                <button data-align="center" title="居中对齐">居中</button>
+                <button data-align="right" title="右对齐">右对齐</button>
+              </div>
+            </div>
+            <div class="row"><span class="rlabel">颜色</span><input id="edColor" type="color" /></div>
+            <div class="row deco-only"><span class="rlabel">花边样式</span>
+              <select id="edDecoStyle"></select>
+            </div>
+            <div class="row deco-only"><span class="rlabel">线宽</span><input id="edThick" type="range" min="5" max="60" step="1" /><span class="rval" id="edThickVal">1.4</span></div>
+            <div class="row"><span class="rlabel">不透明度</span><input id="edAlpha" type="range" min="10" max="100" step="1" /><span class="rval" id="edAlphaVal">100%</span></div>
+            <div class="row"><span class="rlabel">宽</span><input id="edW" type="range" min="40" max="520" step="2" /><span class="rval" id="edWVal">432</span></div>
+            <div class="row"><span class="rlabel">高</span><input id="edH" type="range" min="20" max="800" step="2" /><span class="rval" id="edHVal">130</span></div>
+            <button class="btn ghost ed-full" id="edDel">删除该区块</button>
+          </div>
+        </div>
+
+        <button class="btn ed-full" id="edSaveFav">保存到收藏</button>
+        <div class="export-status" id="exportStatus"></div>
+      </aside>
+    </div>
+  </div>
+
+<script>
+(function () {
+  'use strict';
+
+  var CW = 520, CH = 735;
+
+  /* ================= 数据 ================= */
+  var CATS = ['学术', '活动宣传', '节日祝福', '个人展示', '比赛招募'];
+  var STYLES = ['简约', '学术', '商务', '科技', '复古', '手绘', '国潮', '可爱', '极简', '渐变'];
+  var COLORS = ['#1B3A5C', '#1F4D3A', '#6B1F2A', '#2B2B2B', '#4A3B5C', '#7A4B2A',
+                '#16a34a', '#0d9488', '#d97706', '#7c3aed', '#dc2626', '#2563eb'];
+
+  var TITLES = {
+    '学术': ['ACADEMIC POSTER', 'RESEARCH SYNOPSIS', 'LITERATURE REVIEW', 'DEFENSE BRIEF'],
+    '活动宣传': ['CAMPUS EVENT', 'LECTURE SERIES', 'CLUB RECRUITMENT', 'OPEN DAY'],
+    '节日祝福': ['SEASON GREETINGS', 'HAPPY NEW YEAR', 'ANNIVERSARY WISHES', 'BIRTHDAY WISHES'],
+    '个人展示': ['PORTFOLIO', 'ABOUT ME', 'PERSONAL PROFILE', 'WORK SHOWCASE'],
+    '比赛招募': ['CALL FOR ENTRIES', 'COMPETITION BRIEF', 'OPEN RECRUITMENT', 'REGISTRATION OPEN']
+  };
+
+  var SUBS = [
+    'A structured overview of the key themes, evidence and conclusions',
+    'From a rough first draft to a clean, readable visual summary',
+    'Designed for clarity, depth and impact at a glance',
+    'A compact brief that keeps every detail readable from a distance',
+    'One page, one argument, supported by clear evidence and structure',
+    'Readings, method and findings arranged for a ten minute pitch'
+  ];
+
+  var BODY_POOL = [
+    'This panel introduces the central topic and sets out the main argument in a few concise sentences. The layout keeps each idea on its own line so the poster stays readable from a distance.',
+    'Supporting evidence is grouped into short paragraphs. Numbers, dates and proper nouns stay exactly as written; only the spacing and the column width change.',
+    'Use this area for method notes, key figures or a short quotation. Place a chart or a photo beside the text when the message benefits from a visual.',
+    'Concluding remarks summarise the takeaway in one or two sentences and point to the next step for the reader, so the poster ends with a clear action.',
+    'Background context is kept deliberately short: two or three sentences that explain why the question matters now, without repeating the abstract.',
+    'Findings are stated first and supported afterwards. Each claim is followed by the single strongest piece of evidence available at this stage.',
+    'Limitations are acknowledged in a quieter voice at the end of the panel, because a poster that admits its scope reads as more credible.',
+    'Acknowledgements and references sit in a smaller, lighter style so the main message keeps priority over the supporting material.'
+  ];
+
+  var FOOTERS = ['FOR CLAIRE', 'DESIGNED WITH CARE', 'PAPER SERIES · 01', 'STUDIO EDITION', 'ACADEMIC EDITION', 'SERIES A · VOL 02'];
+
+  var DESIGNS = ['banner', 'sidebar', 'minimal', 'magazine', 'bold', 'academic'];
+
+  /* 六种花边装饰（画布上用 SVG path 画，导出用同一段 path 画到 canvas 上，保证一模一样） */
+  var DECO_STYLES = [
+    { id: 'frame', name: '双线框' },
+    { id: 'rounded', name: '圆角框' },
+    { id: 'corner', name: '角花' },
+    { id: 'wave', name: '波浪边' },
+    { id: 'dots', name: '点线框' },
+    { id: 'band', name: '上下边条' }
+  ];
+
+  /* 和谐配色：每套两色（主色 + 点缀色），都是同族 / 类比 / 低对比搭配，怎么配都不打架 */
+  var PALETTES = [
+    { main: '#1B3A5C', ac: '#E07A3F' },
+    { main: '#1F4D3A', ac: '#C9A227' },
+    { main: '#6B1F2A', ac: '#C08457' },
+    { main: '#4A3B5C', ac: '#B48EAE' },
+    { main: '#0D9488', ac: '#F4A261' },
+    { main: '#2B2B2B', ac: '#C9A227' },
+    { main: '#7A4B2A', ac: '#D4A373' },
+    { main: '#2563EB', ac: '#F59E0B' },
+    { main: '#B3261E', ac: '#E9C46A' },
+    { main: '#334155', ac: '#94A3B8' }
+  ];
+
+  /* 每个分类有自己的「设计语言」：版式池 + 配色池 + 页眉小标 + 分节小标 + 花边池。
+     学术保持原样；其余四类按主题各有偏重。
+     这套设计只在「生成」时决定，不进微调面板。 */
+  var CAT_THEME = {
+    '学术': {
+      designs: ['banner', 'sidebar', 'minimal', 'magazine', 'bold', 'academic'],
+      pals: [0, 1, 2, 3, 5, 9, 4, 6],
+      kicker: 'POSTER',
+      labels: ['01 · OVERVIEW', '02 · METHOD'],
+      decos: ['frame', 'rounded', 'corner', 'dots']
+    },
+    '活动宣传': {
+      designs: ['bold', 'banner', 'bold', 'magazine', 'bold', 'banner'],
+      pals: [8, 4, 7, 3, 0],
+      kicker: 'EVENT',
+      labels: ['01 · HIGHLIGHTS', '02 · SCHEDULE'],
+      decos: ['band', 'corner', 'frame']
+    },
+    '节日祝福': {
+      designs: ['minimal', 'banner', 'minimal', 'magazine', 'minimal', 'banner'],
+      pals: [8, 1, 5, 2, 6],
+      kicker: 'GREETINGS',
+      labels: ['01 · MESSAGE', '02 · DETAILS'],
+      decos: ['rounded', 'band', 'frame', 'wave']
+    },
+    '个人展示': {
+      designs: ['sidebar', 'minimal', 'magazine', 'sidebar', 'minimal', 'sidebar'],
+      pals: [0, 9, 3, 6, 1],
+      kicker: 'PORTFOLIO',
+      labels: ['01 · PROFILE', '02 · SELECTED WORK'],
+      decos: ['corner', 'frame', 'rounded']
+    },
+    '比赛招募': {
+      designs: ['academic', 'bold', 'magazine', 'academic', 'bold', 'magazine'],
+      pals: [2, 7, 0, 1, 8],
+      kicker: 'ENTRY',
+      labels: ['01 · THE BRIEF', '02 · HOW TO ENTER'],
+      decos: ['frame', 'dots', 'band']
+    }
+  };
+
+  var KEYWORDS = {
+    '学术': ['学术', '论文', '答辩', '研究', '综述', '科研'],
+    '活动宣传': ['活动', '讲座', '招新', '社团', '校园', '歌手', '演唱会', '演出', '派对'],
+    '节日祝福': ['节日', '春节', '新年', '生日', '纪念', '圣诞', '中秋', '祝福', '快乐'],
+    '个人展示': ['简历', '个人', '作品集', '自我介绍', '求职', '面试', '展示'],
+    '比赛招募': ['比赛', '招募', '报名', '大赛', '竞赛', '征稿']
+  };
+
+  /* ================= 小工具 ================= */
+  function randInt(n) { return Math.floor(Math.random() * n); }
+  function pick(a) { return a[randInt(a.length)]; }
+
+  function parseHex(hex) {
+    var h = String(hex || '#000').replace('#', '');
+    if (h.length === 3) h = h.charAt(0) + h.charAt(0) + h.charAt(1) + h.charAt(1) + h.charAt(2) + h.charAt(2);
+    return { r: parseInt(h.slice(0, 2), 16) || 0, g: parseInt(h.slice(2, 4), 16) || 0, b: parseInt(h.slice(4, 6), 16) || 0 };
+  }
+  function toHex2(n) {
+    n = Math.max(0, Math.min(255, Math.round(n)));
+    var s = n.toString(16);
+    return s.length < 2 ? '0' + s : s;
+  }
+  function mix(h1, h2, t) {
+    var a = parseHex(h1), b = parseHex(h2);
+    return '#' + toHex2(a.r + (b.r - a.r) * t) + toHex2(a.g + (b.g - a.g) * t) + toHex2(a.b + (b.b - a.b) * t);
+  }
+  function rgba(hex, a) {
+    if (a == null || a >= 0.999) return String(hex).charAt(0) === '#' ? hex : hex;
+    if (String(hex).indexOf('rgb') === 0) return hex;
+    var c = parseHex(hex);
+    return 'rgba(' + c.r + ',' + c.g + ',' + c.b + ',' + (Math.round(a * 100) / 100) + ')';
+  }
+  function esc(s) {
+    return String(s == null ? '' : s).replace(/[&<>"]/g, function (m) {
+      return m === '&' ? '&amp;' : m === '<' ? '&lt;' : m === '>' ? '&gt;' : '&quot;';
+    });
+  }
+  function fontFamily(f) {
+    // 注意：这里的字体名必须用单引号，避免把 style 属性的双引号截断
+    if (f === 'serif') return "Georgia, 'Times New Roman', 'Songti SC', serif";
+    if (f === 'hand') return "'Segoe Script', 'Bradley Hand', 'STXingkai', cursive";
+    if (f === 'mono') return "Consolas, 'Courier New', monospace";
+    return "-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif";
+  }
+  function safeName(s) {
+    var out = String(s || 'poster').replace(/[\\/:*?"<>|]/g, '_').replace(/\s+/g, ' ').trim();
+    return (out || 'poster').slice(0, 40);
+  }
+
+  /* ================= 区块模型 ================= */
+  var seq = 0;
+  function blk(o) {
+    var b = {
+      id: 'b' + (++seq) + Math.random().toString(36).slice(2, 6),
+      type: 'text',
+      x: 44, y: 44, w: 432, h: 0,
+      text: '',
+      size: 13, font: 'sans', weight: 400,
+      color: '#1f2a23', alpha: 1,
+      align: 'left', letters: 0, italic: false,
+      bg: '', radius: 0,
+      role: '', roleKind: 'color',
+      style: 'frame', thick: 1.4
+    };
+    for (var k in o) { if (Object.prototype.hasOwnProperty.call(o, k)) b[k] = o[k]; }
+    return b;
+  }
+  function cloneBlocks(list) {
+    var out = [];
+    for (var i = 0; i < list.length; i++) {
+      var s = list[i], d = {};
+      for (var k in s) { if (Object.prototype.hasOwnProperty.call(s, k)) d[k] = s[k]; }
+      out.push(d);
+    }
+    return out;
+  }
+
+  /* 六种结构完全不同的版式（都是区块数据）
+     d.main = 主色，d.ac = 点缀色；role 标记哪些块跟随「主色/点缀色」变化 */
+  function designBlocks(design, d) {
+    var c = d.main, ac = d.ac;
+    var ink = '#1f2a23', mute = '#78857d', white = '#ffffff';
+    var kicker = d.kicker || 'POSTER';
+    var lab = d.labels || ['01 · OVERVIEW', '02 · METHOD'];
+    var b = [];
+    if (design === 'banner') {
+      b.push(blk({ type: 'shape', x: 0, y: 0, w: CW, h: 244, bg: c, role: 'main', roleKind: 'bg' }));
+      b.push(blk({ x: 44, y: 28, w: 432, text: d.cat + ' · ' + kicker, size: 10, weight: 700, color: white, alpha: 0.82, letters: 2 }));
+      b.push(blk({ type: 'title', x: 44, y: 54, w: 432, text: d.title, size: 34, font: 'serif', weight: 800, color: white }));
+      b.push(blk({ x: 44, y: 182, w: 432, text: d.sub, size: 13, color: white, alpha: 0.86 }));
+      b.push(blk({ type: 'shape', x: 44, y: 246, w: 64, h: 3, bg: ac, role: 'accent', roleKind: 'bg' }));
+      b.push(blk({ x: 44, y: 282, w: 432, text: d.p1, size: 13, font: 'sans', color: ink }));
+      b.push(blk({ x: 44, y: 404, w: 432, text: d.p2, size: 13, font: 'sans', color: ink }));
+      b.push(blk({ type: 'image', x: 44, y: 540, w: 432, h: 128 }));
+      b.push(blk({ type: 'footer', x: 44, y: 700, w: 432, text: d.foot, size: 9, color: ac, letters: 2, align: 'center', role: 'accent', roleKind: 'color' }));
+    } else if (design === 'sidebar') {
+      b.push(blk({ type: 'shape', x: 0, y: 0, w: 176, h: CH, bg: c, role: 'main', roleKind: 'bg' }));
+      b.push(blk({ x: 24, y: 52, w: 128, text: d.cat, size: 11, weight: 700, color: white, alpha: 0.85, letters: 1 }));
+      b.push(blk({ type: 'title', x: 24, y: 84, w: 128, text: d.title, size: 24, font: 'serif', weight: 800, color: white }));
+      b.push(blk({ type: 'shape', x: 24, y: 86, w: 26, h: 3, bg: ac, role: 'accent', roleKind: 'bg' }));
+      b.push(blk({ x: 204, y: 56, w: 272, text: d.sub, size: 14, font: 'serif', weight: 700, color: ac, role: 'accent', roleKind: 'color' }));
+      b.push(blk({ x: 204, y: 118, w: 272, text: d.p1, size: 12.5, font: 'sans', color: ink }));
+      b.push(blk({ x: 204, y: 250, w: 272, text: d.p2, size: 12.5, font: 'sans', color: ink }));
+      b.push(blk({ type: 'image', x: 204, y: 408, w: 272, h: 178 }));
+      b.push(blk({ type: 'footer', x: 204, y: 690, w: 272, text: d.foot, size: 9, color: mute, align: 'left' }));
+    } else if (design === 'minimal') {
+      b.push(blk({ type: 'shape', x: 214, y: 120, w: 92, h: 3, bg: ac, role: 'accent', roleKind: 'bg' }));
+      b.push(blk({ type: 'title', x: 56, y: 142, w: 408, text: d.title, size: 30, font: 'serif', weight: 700, color: c, align: 'center', role: 'main', roleKind: 'color' }));
+      b.push(blk({ x: 56, y: 214, w: 408, text: d.sub, size: 12, color: mute, align: 'center' }));
+      b.push(blk({ type: 'shape', x: 214, y: 258, w: 92, h: 3, bg: ac, role: 'accent', roleKind: 'bg' }));
+      b.push(blk({ x: 56, y: 290, w: 408, text: d.p1, size: 12.5, font: 'sans', color: ink, align: 'center' }));
+      b.push(blk({ x: 56, y: 400, w: 408, text: d.p2, size: 12.5, font: 'sans', color: ink, align: 'center' }));
+      b.push(blk({ type: 'image', x: 130, y: 540, w: 260, h: 110 }));
+      b.push(blk({ type: 'footer', x: 56, y: 700, w: 408, text: d.foot, size: 9, color: c, letters: 2, align: 'center', role: 'main', roleKind: 'color' }));
+    } else if (design === 'magazine') {
+      b.push(blk({ type: 'image', x: 0, y: 0, w: CW, h: 250 }));
+      b.push(blk({ x: 44, y: 278, w: 432, text: d.cat + ' / ' + kicker, size: 10, weight: 700, color: ac, letters: 2, role: 'accent', roleKind: 'color' }));
+      b.push(blk({ type: 'title', x: 44, y: 300, w: 432, text: d.title, size: 32, font: 'serif', weight: 800, color: ink }));
+      b.push(blk({ x: 44, y: 382, w: 432, text: d.sub, size: 12.5, color: mute }));
+      b.push(blk({ type: 'text', x: 44, y: 418, w: 432, text: d.p1, size: 13, font: 'sans', color: ink }));
+      b.push(blk({ x: 44, y: 545, w: 432, text: d.p2, size: 13, font: 'sans', color: ink }));
+      b.push(blk({ type: 'shape', x: 44, y: 700, w: 120, h: 3, bg: ac, role: 'accent', roleKind: 'bg' }));
+      b.push(blk({ type: 'footer', x: 44, y: 706, w: 432, text: d.foot, size: 9, color: ac, letters: 2, align: 'center', role: 'accent', roleKind: 'color' }));
+    } else if (design === 'bold') {
+      b.push(blk({ x: 44, y: 62, w: 432, text: d.cat, size: 11, weight: 700, color: white, alpha: 0.78, letters: 3 }));
+      b.push(blk({ type: 'title', x: 44, y: 92, w: 432, text: d.title, size: 40, font: 'sans', weight: 800, color: white }));
+      b.push(blk({ x: 44, y: 214, w: 432, text: d.sub, size: 14, color: white, alpha: 0.86 }));
+      b.push(blk({ type: 'shape', x: 44, y: 264, w: 56, h: 4, bg: ac, role: 'accent', roleKind: 'bg' }));
+      b.push(blk({ x: 44, y: 296, w: 432, text: d.p1, size: 13.5, font: 'sans', color: white, alpha: 0.92 }));
+      b.push(blk({ x: 44, y: 424, w: 432, text: d.p2, size: 13.5, font: 'sans', color: white, alpha: 0.92 }));
+      b.push(blk({ type: 'image', x: 44, y: 552, w: 432, h: 118 }));
+      b.push(blk({ type: 'footer', x: 44, y: 700, w: 432, text: d.foot, size: 9, color: white, alpha: 0.7, letters: 2, align: 'center' }));
+    } else {
+      b.push(blk({ type: 'shape', x: 44, y: 48, w: 432, h: 4, bg: c, role: 'main', roleKind: 'bg' }));
+      b.push(blk({ type: 'title', x: 44, y: 66, w: 432, text: d.title, size: 30, font: 'serif', weight: 800, color: ink }));
+      b.push(blk({ x: 44, y: 142, w: 432, text: d.sub, size: 12, color: mute }));
+      b.push(blk({ x: 44, y: 178, w: 260, text: lab[0], size: 10, weight: 700, color: ac, letters: 1, role: 'accent', roleKind: 'color' }));
+      b.push(blk({ x: 44, y: 198, w: 432, text: d.p1, size: 12.5, font: 'sans', color: ink }));
+      b.push(blk({ x: 44, y: 322, w: 260, text: lab[1], size: 10, weight: 700, color: ac, letters: 1, role: 'accent', roleKind: 'color' }));
+      b.push(blk({ x: 44, y: 342, w: 432, text: d.p2, size: 12.5, font: 'sans', color: ink }));
+      b.push(blk({ type: 'image', x: 44, y: 468, w: 432, h: 156 }));
+      b.push(blk({ type: 'footer', x: 44, y: 700, w: 432, text: d.foot, size: 9, color: ac, letters: 2, align: 'center', role: 'accent', roleKind: 'color' }));
+    }
+    return b;
+  }
+
+  /* 花边区块 */
+  function decoBlock(style, color, role) {
+    var pad = style === 'band' ? 0 : 8;
+    return blk({
+      type: 'deco', x: pad, y: pad, w: CW - pad * 2, h: CH - pad * 2,
+      style: style, color: color, role: role || 'accent', roleKind: 'color',
+      thick: 1.4, alpha: 1, radius: 22
+    });
+  }
+
+  function makeTemplate(cat, forcedStyle, forcedDesign) {
+    var theme = CAT_THEME[cat] || CAT_THEME['学术'];
+    var pal = PALETTES[pick(theme.pals)];
+    var c = pal.main, ac = pal.ac;
+    var design = forcedDesign || pick(theme.designs);
+    var title = pick(TITLES[cat] || TITLES['学术']);
+    var sub = pick(SUBS);
+    var p1 = pick(BODY_POOL), p2 = pick(BODY_POOL);
+    if (p2 === p1) p2 = BODY_POOL[(BODY_POOL.indexOf(p1) + 3) % BODY_POOL.length];
+    var foot = pick(FOOTERS);
+
+    var t = {
+      id: 't' + Date.now().toString(36) + Math.random().toString(36).slice(2, 7),
+      category: cat,
+      style: forcedStyle || pick(STYLES),
+      design: design,
+      color: c,
+      accent: ac,
+      bgMode: design === 'bold' ? 'main' : 'tint',
+      bg: design === 'bold' ? c : mix(c, '#ffffff', 0.92),
+      blocks: []
+    };
+    t.blocks = designBlocks(design, {
+      main: c, ac: ac, cat: cat, title: title, sub: sub, p1: p1, p2: p2, foot: foot,
+      kicker: theme.kicker, labels: theme.labels
+    });
+    // 花边：六成概率加一条，个别再加一条角花，整体不乱
+    if (Math.random() < 0.62) {
+      var st = pick(theme.decos);
+      t.blocks.push(decoBlock(st, Math.random() < 0.72 ? ac : c, Math.random() < 0.72 ? 'accent' : 'main'));
+      if (Math.random() < 0.18) t.blocks.push(decoBlock('corner', ac, 'accent'));
+    }
+    t.blocks = sortLayers(t.blocks);
+    return t;
+  }
+
+  /* 图层默认顺序：标题 → 文字 → 插图 → 页脚 → 花边（前面的盖住后面的）
+     数组里越靠后画得越靠上，所以按优先级倒序排进数组 */
+  var LAYER_RANK = { title: 0, footer: 1, image: 2, text: 3, shape: 4, deco: 5 };
+  function sortLayers(list) {
+    var out = list.slice();
+    out.sort(function (a, b) {
+      var ra = LAYER_RANK[a.type] == null ? 3 : LAYER_RANK[a.type];
+      var rb = LAYER_RANK[b.type] == null ? 3 : LAYER_RANK[b.type];
+      return rb - ra;   // 优先级低的先进数组（在底层）
+    });
+    return out;
+  }
+
+  /* 每批 9 个（3×3，横竖都对称） */
+  var BATCH_SIZE = 9;
+  function genBatch(cat) {
+    var out = [];
+    for (var i = 0; i < BATCH_SIZE; i++) out.push(makeTemplate(cat));
+    return out;
+  }
+
+  /* ================= 渲染（卡片 / 预览 / 编辑器共用） ================= */
+  function n2(v) { return Math.round(v * 100) / 100; }
+  function rrectD(x, y, w, h, r) {
+    var rr = Math.max(0, Math.min(r || 0, Math.min(w, h) / 2));
+    return 'M' + n2(x + rr) + ' ' + n2(y) +
+      'H' + n2(x + w - rr) + 'A' + n2(rr) + ' ' + n2(rr) + ' 0 0 1 ' + n2(x + w) + ' ' + n2(y + rr) +
+      'V' + n2(y + h - rr) + 'A' + n2(rr) + ' ' + n2(rr) + ' 0 0 1 ' + n2(x + w - rr) + ' ' + n2(y + h) +
+      'H' + n2(x + rr) + 'A' + n2(rr) + ' ' + n2(rr) + ' 0 0 1 ' + n2(x) + ' ' + n2(y + h - rr) +
+      'V' + n2(y + rr) + 'A' + n2(rr) + ' ' + n2(rr) + ' 0 0 1 ' + n2(x + rr) + ' ' + n2(y) + 'Z';
+  }
+  function waveD(w, y, amp, step) {
+    var d = 'M0 ' + n2(y);
+    for (var x = 0; x < w; x += step) {
+      d += 'Q' + n2(x + step / 2) + ' ' + n2(y - amp) + ' ' + n2(x + step) + ' ' + n2(y);
+    }
+    return d;
+  }
+
+  /* 一套花边的绘制指令：SVG 与 Canvas 共用同一段 path，所以预览和导出一模一样 */
+  function decoItems(style, w, h, opt) {
+    var t = (opt && opt.thick) || 1.4;
+    var R = (opt && opt.radius) || 22;
+    var out = [];
+    if (style === 'frame') {
+      out.push({ d: rrectD(7, 7, w - 14, h - 14, 2), sw: t * 2.4 });
+      out.push({ d: rrectD(15, 15, w - 30, h - 30, 2), sw: t, op: 0.7 });
+    } else if (style === 'rounded') {
+      out.push({ d: rrectD(11, 11, w - 22, h - 22, R), sw: t * 1.7 });
+      out.push({ d: rrectD(19, 19, w - 38, h - 38, Math.max(4, R - 8)), sw: t * 0.8, op: 0.55 });
+    } else if (style === 'corner') {
+      var L = Math.min(w, h) * 0.1, m = 16;
+      var pts = [
+        [m, m, 1, 1], [w - m, m, -1, 1], [m, h - m, 1, -1], [w - m, h - m, -1, -1]
+      ];
+      for (var i = 0; i < pts.length; i++) {
+        var px = pts[i][0], py = pts[i][1], sx = pts[i][2], sy = pts[i][3];
+        out.push({ d: 'M' + n2(px) + ' ' + n2(py) + 'h' + n2(L * sx), sw: t * 2.2, cap: 'square' });
+        out.push({ d: 'M' + n2(px) + ' ' + n2(py) + 'v' + n2(L * sy), sw: t * 2.2, cap: 'square' });
+      }
+    } else if (style === 'wave') {
+      out.push({ d: waveD(w - 24, 20, 5, 26), sw: t * 1.5 });
+      out.push({ d: waveD(w - 24, h - 20, 5, 26), sw: t * 1.5 });
+    } else if (style === 'dots') {
+      out.push({ d: rrectD(12, 12, w - 24, h - 24, 3), sw: t * 2.6, dash: [0.1, 9], cap: 'round' });
+    } else {
+      // band：上下两条实心边条
+      var bh = Math.max(5, 7 * t);
+      out.push({ d: 'M0 0H' + n2(w) + 'V' + n2(bh) + 'H0Z', kind: 'fill', op: 0.9 });
+      out.push({ d: 'M0 ' + n2(h - bh) + 'H' + n2(w) + 'V' + n2(h) + 'H0Z', kind: 'fill', op: 0.9 });
+      out.push({ d: 'M0 ' + n2(bh) + 'H' + n2(w), sw: t * 0.7, op: 0.35 });
+      out.push({ d: 'M0 ' + n2(h - bh) + 'H' + n2(w), sw: t * 0.7, op: 0.35 });
+    }
+    return out;
+  }
+
+  function decoSVG(b) {
+    var items = decoItems(b.style, b.w, b.h, b);
+    var col = rgba(b.color, b.alpha == null ? 1 : b.alpha);
+    var s = '<svg viewBox="0 0 ' + b.w + ' ' + b.h + '" width="100%" height="100%" preserveAspectRatio="none">';
+    for (var i = 0; i < items.length; i++) {
+      var it = items[i];
+      var op = it.op == null ? 1 : it.op;
+      if (it.kind === 'fill') {
+        s += '<path d="' + it.d + '" fill="' + col + '" fill-opacity="' + op + '" stroke="none"/>';
+      } else {
+        s += '<path d="' + it.d + '" fill="none" stroke="' + col + '" stroke-width="' + it.sw +
+          '" stroke-linecap="' + (it.cap || 'butt') + '"' +
+          (it.dash ? ' stroke-dasharray="' + it.dash.join(' ') + '"' : '') +
+          ' stroke-opacity="' + op + '"/>';
+      }
+    }
+    return s + '</svg>';
+  }
+
+  function blockStyle(b) {
+    var st = 'left:' + b.x + 'px;top:' + b.y + 'px;width:' + b.w + 'px;';
+    if (b.h > 0) st += 'height:' + b.h + 'px;';
+    if (b.bg) st += 'background:' + b.bg + ';';
+    if (b.radius) st += 'border-radius:' + b.radius + 'px;';
+    if (b.type === 'image') return st;
+    if (b.type === 'deco') return st;
+    st += 'font-family:' + fontFamily(b.font) + ';';
+    st += 'font-size:' + b.size + 'px;';
+    st += 'font-weight:' + (b.weight || 400) + ';';
+    st += 'color:' + rgba(b.color, b.alpha) + ';';
+    st += 'text-align:' + (b.align || 'left') + ';';
+    st += 'line-height:' + (b.type === 'title' ? 1.16 : b.type === 'footer' ? 1.5 : 1.62) + ';';
+    if (b.h > 0) st += 'overflow:hidden;';   // 手动拉过高度之后就按框裁剪
+    if (b.letters) st += 'letter-spacing:' + b.letters + 'px;';
+    if (b.italic) st += 'font-style:italic;';
+    return st;
+  }
+
+  function blockHTML(b, selId) {
+    var cls = 'blk' + (selId && selId === b.id ? ' selected' : '');
+    var st = blockStyle(b);
+    if (b.type === 'image') {
+      return '<div class="' + cls + ' blk-img" data-id="' + b.id + '" style="' + st + '"><span>插图区域</span></div>';
+    }
+    if (b.type === 'deco') {
+      return '<div class="' + cls + ' blk-deco" data-id="' + b.id + '" style="' + st + '">' + decoSVG(b) + '</div>';
+    }
+    return '<div class="' + cls + '" data-id="' + b.id + '" style="' + st + '">' + esc(b.text) + '</div>';
+  }
+
+  function canvasHTML(t, selId, editing) {
+    var s = '<div class="cv' + (editing ? ' editing' : '') + '" style="width:' + CW + 'px;height:' + CH + 'px;background:' + t.bg + ';">';
+    // 约定：blocks 数组「后面的」画在上面，所以列表显示时倒序（列表第一条 = 最上层）
+    for (var i = 0; i < t.blocks.length; i++) s += blockHTML(t.blocks[i], selId);
+    return s + '</div>';
+  }
+
+  function cardHTML(t, withTools) {
+    var s = '<div class="tpl" data-id="' + t.id + '">';
+    s += '<div class="tpl-visual"><div class="cvwrap">' + canvasHTML(t) + '</div></div>';
+    s += '<button class="tpl-heart' + (isFav(t.id) ? ' on' : '') + '" data-id="' + t.id + '" title="收藏">' + (isFav(t.id) ? '♥' : '♡') + '</button>';
+    if (withTools) {
+      s += '<div class="mini-tools"><span>主色</span><input type="color" class="mini-color" data-id="' + t.id + '" value="' + t.color + '" />';
+      s += '<button class="mini-btn" data-edit="' + t.id + '">微调</button></div>';
+    }
+    return s + '</div>';
+  }
+
+  function fitCards(root) {
+    if (!root) return;
+    var visuals = root.querySelectorAll('.tpl-visual');
+    for (var i = 0; i < visuals.length; i++) {
+      var w = visuals[i].clientWidth;
+      var cv = visuals[i].querySelector('.cv');
+      if (w > 0 && cv) cv.style.transform = 'scale(' + (w / CW) + ')';
+    }
+  }
+
+  /* ================= 状态 ================= */
+  var currentCat = '学术';
+  var batch = {};
+  var favorites = loadFav();
+  var currentPreview = null;
+  var edit = null;
+  var selectedId = null;
+  var edScale = 1;
+
+  /* ================= 撤销 / 取消撤销 ================= */
+  var hist = [], histPos = -1;
+
+  function snapState() {
+    if (!edit) return null;
+    return JSON.stringify({
+      color: edit.color, accent: edit.accent, bgMode: edit.bgMode, bg: edit.bg, bgAuto: edit.bgAuto,
+      blocks: edit.blocks
+    });
+  }
+
+  function pushHistory() {
+    var s = snapState();
+    if (!s) return;
+    if (histPos >= 0 && hist[histPos] === s) return;
+    hist = hist.slice(0, histPos + 1);
+    hist.push(s);
+    if (hist.length > 60) { hist.shift(); }
+    histPos = hist.length - 1;
+    syncHistoryBtns();
+  }
+
+  function syncHistoryBtns() {
+    var u = document.getElementById('edUndo');
+    var r = document.getElementById('edRedo');
+    if (u) u.disabled = histPos <= 0;
+    if (r) r.disabled = histPos >= hist.length - 1;
+  }
+
+  function applyState(s) {
+    if (!edit || !s) return;
+    var o = JSON.parse(s);
+    edit.color = o.color;
+    edit.accent = o.accent;
+    edit.bgMode = o.bgMode;
+    edit.bg = o.bg;
+    edit.bgAuto = o.bgAuto;
+    edit.blocks = cloneBlocks(o.blocks);
+    if (!findBlock(selectedId)) selectedId = edit.blocks.length ? edit.blocks[edit.blocks.length - 1].id : null;
+    setVal('edMain', edit.color);
+    setVal('edAccent', edit.accent);
+    setVal('edBg', edit.bg);
+    renderEditor();
+    renderList();
+    renderProps();
+  }
+
+  function undo() {
+    if (histPos <= 0) return;
+    histPos--;
+    applyState(hist[histPos]);
+    syncHistoryBtns();
+    setStatus('exportStatus', '已撤销');
+  }
+
+  function redo() {
+    if (histPos >= hist.length - 1) return;
+    histPos++;
+    applyState(hist[histPos]);
+    syncHistoryBtns();
+    setStatus('exportStatus', '已恢复');
+  }
+
+  function resetHistory() {
+    hist = [];
+    histPos = -1;
+    pushHistory();
+  }
+
+  function loadFav() {
+    try {
+      var raw = JSON.parse(localStorage.getItem('fc_ai_templates_fav') || '[]');
+      if (!Array.isArray(raw)) return [];
+      var out = [];
+      for (var i = 0; i < raw.length; i++) {
+        var t = raw[i];
+        if (!t || !t.id || !Array.isArray(t.blocks) || !t.blocks.length) continue;   // 丢弃旧格式
+        if (!/^#[0-9a-fA-F]{6}$/.test(String(t.color))) t.color = '#1B3A5C';
+        if (!/^#[0-9a-fA-F]{6}$/.test(String(t.accent))) t.accent = t.color;
+        if (!t.bg) t.bg = mix(t.color, '#ffffff', 0.92);
+        if (!t.bgMode) t.bgMode = 'tint';
+        out.push(t);
+      }
+      return out;
+    } catch (e) { return []; }
+  }
+  function saveFav() {
+    try { localStorage.setItem('fc_ai_templates_fav', JSON.stringify(favorites)); } catch (e) {}
+    var c = document.getElementById('favCount');
+    if (c) c.textContent = String(favorites.length);
+  }
+  function isFav(id) {
+    for (var i = 0; i < favorites.length; i++) if (favorites[i].id === id) return true;
+    return false;
+  }
+  function findTemplate(id) {
+    for (var cat in batch) {
+      var list = batch[cat] || [];
+      for (var i = 0; i < list.length; i++) if (list[i].id === id) return list[i];
+    }
+    for (var j = 0; j < favorites.length; j++) if (favorites[j].id === id) return favorites[j];
+    return null;
+  }
+  function toggleFav(id) {
+    var idx = -1;
+    for (var i = 0; i < favorites.length; i++) if (favorites[i].id === id) { idx = i; break; }
+    if (idx >= 0) {
+      favorites.splice(idx, 1);
+    } else {
+      var t = findTemplate(id);
+      if (t) favorites.push(JSON.parse(JSON.stringify(t)));
+    }
+    saveFav();
+    renderLibrary();
+    renderFavGrid();
+  }
+
+  /* ================= 模板库 ================= */
+  function renderTabs() {
+    var wrap = document.getElementById('catTabs');
+    var html = '';
+    for (var i = 0; i < CATS.length; i++) {
+      var c = CATS[i];
+      html += '<button class="tab ' + (c === currentCat ? 'on' : '') + '" data-cat="' + c + '">' + c + '</button>';
+    }
+    wrap.innerHTML = html;
+  }
+
+  function renderLibrary() {
+    var grid = document.getElementById('libGrid');
+    var list = batch[currentCat] || [];
+    if (!list.length) { grid.innerHTML = '<div class="empty">点「换一批」生成模板</div>'; return; }
+    var html = '';
+    for (var i = 0; i < list.length; i++) html += cardHTML(list[i], false);
+    grid.innerHTML = html;
+    fitCards(grid);
+  }
+
+  function switchCat(cat) {
+    currentCat = cat;
+    if (!batch[cat]) batch[cat] = genBatch(cat);
+    renderTabs();
+    renderLibrary();
+  }
+
+  function refreshBatch() {
+    batch[currentCat] = genBatch(currentCat);
+    renderLibrary();
+  }
+
+  function renderFavGrid() {
+    var grid = document.getElementById('favGrid');
+    if (!favorites.length) {
+      grid.innerHTML = '<div class="empty">还没有收藏，点模板右下角的 ♡ 收藏</div>';
+      return;
+    }
+    var html = '';
+    for (var i = 0; i < favorites.length; i++) html += cardHTML(favorites[i], true);
+    grid.innerHTML = html;
+    fitCards(grid);
+  }
+
+  /* ================= 预览 ================= */
+  function openPreview(id) {
+    var t = findTemplate(id);
+    if (!t) return;
+    currentPreview = t;
+    var modal = document.getElementById('previewModal');
+    modal.classList.add('open');
+    var body = document.getElementById('previewBody');
+    body.innerHTML = canvasHTML(t);
+    var box = document.getElementById('previewVisual');
+    var w = box.clientWidth;
+    var cv = body.querySelector('.cv');
+    if (cv && w > 0) cv.style.transform = 'scale(' + (w / CW) + ')';
+    setStatus('previewStatus', '');
+  }
+
+  /* ================= 编辑器 ================= */
+  function openEditor(t) {
+    if (!t) return;
+    edit = {
+      color: t.color,
+      accent: t.accent || t.color,
+      bgMode: t.bgMode || 'tint',
+      bg: t.bg || mix(t.color, '#ffffff', 0.92),
+      bgAuto: true,
+      blocks: cloneBlocks(t.blocks)
+    };
+    selectedId = edit.blocks.length ? edit.blocks[edit.blocks.length - 1].id : null;
+    document.getElementById('previewModal').classList.remove('open');
+    document.getElementById('editor').hidden = false;
+    setVal('edMain', edit.color);
+    setVal('edAccent', edit.accent);
+    setVal('edBg', edit.bg);
+    setStatus('exportStatus', '');
+    renderEditor();
+    renderList();
+    renderProps();
+    resetHistory();
+  }
+
+  function findBlock(id) {
+    if (!edit) return null;
+    for (var i = 0; i < edit.blocks.length; i++) if (edit.blocks[i].id === id) return edit.blocks[i];
+    return null;
+  }
+
+  function renderEditor() {
+    if (!edit) return;
+    var fit = document.getElementById('edFit');
+    var stage = document.getElementById('edStage');
+    fit.innerHTML = canvasHTML({ bg: edit.bg, color: edit.color, blocks: edit.blocks }, selectedId, true);
+    var avail = stage.clientWidth - 44;
+    var k = Math.max(0.58, Math.min(1, avail / CW));
+    edScale = k;
+    fit.style.width = Math.round(CW * k) + 'px';
+    fit.style.height = Math.round(CH * k) + 'px';
+    var cv = fit.querySelector('.cv');
+    if (cv) cv.style.transform = 'scale(' + k + ')';
+    bindCanvas();
+    renderHandles();
+  }
+
+  /* 列表顺序 = 图层顺序（第 1 条在最上层）；数组里越靠后画得越靠上，所以这里倒序输出 */
+  function renderList() {
+    var wrap = document.getElementById('edBlocks');
+    if (!wrap || !edit) return;
+    var html = '';
+    for (var i = edit.blocks.length - 1; i >= 0; i--) {
+      var b = edit.blocks[i];
+      var label = typeName(b.type);
+      var prev = b.type === 'image' ? (b.w + '×' + b.h)
+        : b.type === 'deco' ? (decoName(b.style) + ' · ' + b.w + '×' + b.h)
+        : (b.text || '').slice(0, 16);
+      html += '<div class="blk-item' + (b.id === selectedId ? ' on' : '') + '" data-id="' + b.id + '" draggable="true">'
+        + '<span class="grip">⋮⋮</span>'
+        + '<span class="btype">' + label + '</span><span class="btext">' + esc(prev) + '</span>'
+        + '<button class="blk-del" data-del="' + b.id + '" title="删除这个区块">×</button></div>';
+    }
+    wrap.innerHTML = html;
+    bindListDrag();
+  }
+
+  /* 上下拖动列表项，调整图层优先级 */
+  function bindListDrag() {
+    var wrap = document.getElementById('edBlocks');
+    if (!wrap) return;
+    var dragId = null;
+    var items = wrap.querySelectorAll('.blk-item');
+    for (var i = 0; i < items.length; i++) {
+      (function (item) {
+        item.addEventListener('dragstart', function (e) {
+          dragId = item.getAttribute('data-id');
+          item.classList.add('dragging');
+          if (e.dataTransfer) {
+            e.dataTransfer.effectAllowed = 'move';
+            try { e.dataTransfer.setData('text/plain', dragId); } catch (err) {}
+          }
+        });
+        item.addEventListener('dragend', function () {
+          item.classList.remove('dragging');
+          dragId = null;
+          var all = wrap.querySelectorAll('.blk-item');
+          for (var k = 0; k < all.length; k++) all[k].classList.remove('dragging');
+        });
+        item.addEventListener('dragover', function (e) {
+          if (!dragId) return;
+          e.preventDefault();
+          if (e.dataTransfer) e.dataTransfer.dropEffect = 'move';
+        });
+        item.addEventListener('drop', function (e) {
+          e.preventDefault();
+          e.stopPropagation();
+          var targetId = item.getAttribute('data-id');
+          if (!dragId || dragId === targetId) return;
+          moveLayer(dragId, targetId);
+          dragId = null;
+        });
+      })(items[i]);
+    }
+  }
+
+  /* 把 id 挪到 targetId 的位置（列表视觉顺序） */
+  function moveLayer(id, targetId) {
+    if (!edit) return;
+    var from = -1, to = -1, i;
+    for (i = 0; i < edit.blocks.length; i++) {
+      if (edit.blocks[i].id === id) from = i;
+      if (edit.blocks[i].id === targetId) to = i;
+    }
+    if (from < 0 || to < 0 || from === to) return;
+    pushHistory();
+    var moved = edit.blocks.splice(from, 1)[0];
+    // 数组是「后画的在上面」，而列表是倒序显示；把 moved 插到目标块之后（数组里 = 目标上面一层）
+    var idx = -1;
+    for (i = 0; i < edit.blocks.length; i++) if (edit.blocks[i].id === targetId) { idx = i; break; }
+    if (idx < 0) idx = edit.blocks.length - 1;
+    edit.blocks.splice(from < to ? idx + 1 : idx, 0, moved);
+    renderEditor();
+    renderList();
+    renderProps();
+    setStatus('exportStatus', '已调整图层顺序');
+  }
+
+  /* 删除区块：文字框、插图框、色块、标题都适用 */
+  function deleteBlock(id) {
+    if (!edit || !id) return;
+    var out = [];
+    for (var i = 0; i < edit.blocks.length; i++) {
+      if (edit.blocks[i].id !== id) out.push(edit.blocks[i]);
+    }
+    if (out.length === edit.blocks.length) return;
+    pushHistory();
+    edit.blocks = out;
+    if (selectedId === id) selectedId = out.length ? out[out.length - 1].id : null;
+    renderEditor();
+    renderList();
+    renderProps();
+    setStatus('exportStatus', '已删除该区块');
+  }
+
+  function setVal(id, v) {
+    var el = document.getElementById(id);
+    if (el) el.value = v;
+  }
+  function setText(id, v) {
+    var el = document.getElementById(id);
+    if (el) el.textContent = v;
+  }
+  function setStatus(id, msg) {
+    var el = document.getElementById(id);
+    if (el) el.textContent = msg || '';
+  }
+
+  function typeName(t) {
+    return t === 'title' ? '标题' : t === 'footer' ? '页脚' : t === 'image' ? '插图区域' : t === 'shape' ? '色块' : t === 'deco' ? '花边' : '文字段落';
+  }
+
+  function decoName(id) {
+    for (var i = 0; i < DECO_STYLES.length; i++) if (DECO_STYLES[i].id === id) return DECO_STYLES[i].name;
+    return '花边';
+  }
+
+  function selLabel(b) {
+    var tname = typeName(b.type);
+    var tail = (b.type === 'image' || b.type === 'shape' || b.type === 'deco') ? '' : ' · ' + b.size + 'px';
+    return '已选中：' + tname + tail + ' · ' + b.w + '×' + (b.h > 0 ? b.h : '自动');
+  }
+
+  function renderProps() {
+    var b = findBlock(selectedId);
+    var props = document.getElementById('edProps');
+    var title = document.getElementById('edSelTitle');
+    var field = document.getElementById('edTextField');
+    var txtRows = document.querySelectorAll('.txt-only');
+    var decoRows = document.querySelectorAll('.deco-only');
+    var i;
+    if (!b) {
+      props.hidden = true;
+      title.textContent = '未选中：点画布上的区块，或点上面列表里的一项';
+      for (i = 0; i < txtRows.length; i++) txtRows[i].classList.remove('hide');
+      for (i = 0; i < decoRows.length; i++) decoRows[i].classList.remove('show');
+      return;
+    }
+    props.hidden = false;
+    title.textContent = selLabel(b);
+    var noText = b.type === 'image' || b.type === 'shape' || b.type === 'deco';
+    var isDeco = b.type === 'deco';
+
+    field.hidden = noText;
+    if (!noText) setVal('edText', b.text || '');
+
+    setVal('edSize', b.size || 14);
+    setVal('edFont', b.font || 'sans');
+    var alignBtns = document.querySelectorAll('#edAlignRow button');
+    for (i = 0; i < alignBtns.length; i++) {
+      var on = alignBtns[i].getAttribute('data-align') === (b.align || 'left');
+      alignBtns[i].style.background = on ? 'var(--brand-soft)' : '#fff';
+      alignBtns[i].style.borderColor = on ? 'var(--brand)' : 'var(--line)';
+      alignBtns[i].style.color = on ? 'var(--brand-dark)' : 'var(--ink)';
+      alignBtns[i].style.fontWeight = on ? '600' : '400';
+    }
+    setVal('edColor', /^#[0-9a-fA-F]{6}$/.test(String(b.color)) ? b.color : (isDeco ? '#16a34a' : '#1f2a23'));
+    setVal('edAlpha', Math.round((b.alpha == null ? 1 : b.alpha) * 100));
+    setVal('edW', b.w || 200);
+    setVal('edH', b.h || 100);
+    setVal('edDecoStyle', b.style || 'frame');
+    setVal('edThick', Math.round((b.thick || 1.4) * 10));
+    setText('edSizeVal', (b.size || 14) + 'px');
+    setText('edAlphaVal', Math.round((b.alpha == null ? 1 : b.alpha) * 100) + '%');
+    setText('edWVal', String(b.w || 200));
+    setText('edHVal', String(b.h || 100));
+    setText('edThickVal', String(b.thick || 1.4));
+
+    for (i = 0; i < txtRows.length; i++) txtRows[i].classList.toggle('hide', noText);
+    for (i = 0; i < decoRows.length; i++) decoRows[i].classList.toggle('show', isDeco);
+  }
+
+  function selectBlock(id) {
+    selectedId = id;
+    var cv = document.querySelector('#edFit .cv');
+    if (cv) {
+      var els = cv.querySelectorAll('.blk');
+      for (var i = 0; i < els.length; i++) {
+        els[i].classList.toggle('selected', els[i].getAttribute('data-id') === id);
+      }
+    }
+    renderList();
+    renderProps();
+    renderHandles();
+  }
+
+  /* ---------- 选中区块的八个缩放手柄（鼠标拉角改大小） ---------- */
+  var HANDLE_DIRS = ['nw', 'n', 'ne', 'e', 'se', 's', 'sw', 'w'];
+
+  function handlePos(b, effH, dir) {
+    var hx = dir.indexOf('w') >= 0 ? 0 : (dir.indexOf('e') >= 0 ? b.w : b.w / 2);
+    var hy = dir.indexOf('n') >= 0 ? 0 : (dir.indexOf('s') >= 0 ? effH : effH / 2);
+    return { x: b.x + hx, y: b.y + hy };
+  }
+
+  function renderHandles() {
+    var fit = document.getElementById('edFit');
+    if (!fit) return;
+    var old = fit.querySelector('.ed-handles');
+    if (old) old.parentNode.removeChild(old);
+    var b = findBlock(selectedId);
+    if (!b) return;
+    var el = fit.querySelector('.blk[data-id="' + b.id + '"]');
+    var effH = b.h > 0 ? b.h : (el ? el.offsetHeight : 40);
+    var layer = document.createElement('div');
+    layer.className = 'ed-handles';
+    for (var i = 0; i < HANDLE_DIRS.length; i++) {
+      var d = HANDLE_DIRS[i];
+      var p = handlePos(b, effH, d);
+      var h = document.createElement('i');
+      h.setAttribute('data-dir', d);
+      h.style.left = Math.round(p.x * edScale) + 'px';
+      h.style.top = Math.round(p.y * edScale) + 'px';
+      bindHandle(h, b, effH);
+      layer.appendChild(h);
+    }
+    fit.appendChild(layer);
+  }
+
+  function bindHandle(h, b, effH) {
+    h.addEventListener('pointerdown', function (ev) {
+      ev.preventDefault();
+      ev.stopPropagation();
+      var dir = h.getAttribute('data-dir');
+      var x0 = b.x, y0 = b.y, w0 = b.w, h0 = b.h > 0 ? b.h : effH;
+      var sx = ev.clientX, sy = ev.clientY, moved = false;
+      var el = document.getElementById('edFit').querySelector('.blk[data-id="' + b.id + '"]');
+      function paint() {
+        if (!el) return;
+        el.style.left = b.x + 'px';
+        el.style.top = b.y + 'px';
+        el.style.width = b.w + 'px';
+        if (b.h > 0) { el.style.height = b.h + 'px'; el.style.overflow = 'hidden'; }
+        var handles = document.querySelectorAll('#edFit .ed-handles i');
+        for (var i = 0; i < handles.length; i++) {
+          var p = handlePos(b, b.h > 0 ? b.h : effH, handles[i].getAttribute('data-dir'));
+          handles[i].style.left = Math.round(p.x * edScale) + 'px';
+          handles[i].style.top = Math.round(p.y * edScale) + 'px';
+        }
+      }
+      function mv(e2) {
+        var dx = (e2.clientX - sx) / edScale, dy = (e2.clientY - sy) / edScale;
+        var nx = x0, ny = y0, nw = w0, nh = h0;
+        if (dir.indexOf('e') >= 0) nw = Math.max(40, w0 + dx);
+        if (dir.indexOf('w') >= 0) { nw = Math.max(40, w0 - dx); nx = x0 + (w0 - nw); }
+        if (dir.indexOf('s') >= 0) nh = Math.max(20, h0 + dy);
+        if (dir.indexOf('n') >= 0) { nh = Math.max(20, h0 - dy); ny = y0 + (h0 - nh); }
+        b.x = Math.round(nx); b.y = Math.round(ny);
+        b.w = Math.round(nw); b.h = Math.round(nh);
+        moved = true;
+        paint();
+      }
+      function up() {
+        document.removeEventListener('pointermove', mv);
+        document.removeEventListener('pointerup', up);
+        if (!moved) return;
+        renderEditor();
+        renderList();
+        renderProps();
+        pushHistory();
+        setStatus('exportStatus', '已调整大小：' + b.w + '×' + b.h);
+      }
+      document.addEventListener('pointermove', mv);
+      document.addEventListener('pointerup', up);
+    });
+  }
+
+  function bindCanvas() {
+    var fit = document.getElementById('edFit');
+    var cv = fit.querySelector('.cv');
+    if (!cv) return;
+    var els = cv.querySelectorAll('.blk');
+    for (var i = 0; i < els.length; i++) {
+      (function (el) {
+        el.addEventListener('pointerdown', function (ev) {
+          ev.preventDefault();
+          ev.stopPropagation();
+          var id = el.getAttribute('data-id');
+          selectBlock(id);
+          var b = findBlock(id);
+          if (!b) return;
+          var sx = ev.clientX, sy = ev.clientY, ox = b.x, oy = b.y;
+          function mv(e2) {
+            b.x = Math.round(Math.max(-60, Math.min(CW - 40, ox + (e2.clientX - sx) / edScale)));
+            b.y = Math.round(Math.max(-40, Math.min(CH - 20, oy + (e2.clientY - sy) / edScale)));
+            el.style.left = b.x + 'px';
+            el.style.top = b.y + 'px';
+          }
+          function up() {
+            document.removeEventListener('pointermove', mv);
+            document.removeEventListener('pointerup', up);
+            pushHistory();
+          }
+          document.addEventListener('pointermove', mv);
+          document.addEventListener('pointerup', up);
+        });
+      })(els[i]);
+    }
+    cv.addEventListener('pointerdown', function (ev) {
+      if (ev.target === cv) {
+        selectBlock(null);
+      }
+    });
+  }
+
+  /* 主色 / 点缀色 联动：只改标记了对应角色的区块，保持配色不打架 */
+  function recolorRole(role, color) {
+    var i, b;
+    if (!edit) return;
+    for (i = 0; i < edit.blocks.length; i++) {
+      b = edit.blocks[i];
+      if (b.role !== role) continue;
+      if (b.roleKind === 'bg') b.bg = color;
+      else b.color = color;
+    }
+  }
+
+  /* 每次改动后统一收尾：记历史 + 重绘 */
+  function commit(msg) {
+    renderEditor();
+    renderList();
+    renderProps();
+    pushHistory();
+    if (msg) setStatus('exportStatus', msg);
+  }
+
+  function bindEditor() {
+    var main = document.getElementById('edMain');
+    if (main) main.addEventListener('input', function () {
+      if (!edit) return;
+      edit.color = this.value;
+      recolorRole('main', this.value);
+      if (edit.bgAuto) {
+        edit.bg = edit.bgMode === 'main' ? this.value : mix(this.value, '#ffffff', 0.92);
+        setVal('edBg', edit.bg);
+      }
+      renderEditor();
+    });
+
+    var accent = document.getElementById('edAccent');
+    if (accent) accent.addEventListener('input', function () {
+      if (!edit) return;
+      edit.accent = this.value;
+      recolorRole('accent', this.value);
+      renderEditor();
+      pushHistory();
+    });
+
+    var bg = document.getElementById('edBg');
+    if (bg) bg.addEventListener('input', function () {
+      if (!edit) return;
+      edit.bgAuto = false;
+      edit.bg = this.value;
+      renderEditor();
+      pushHistory();
+    });
+
+    var decoStyle = document.getElementById('edDecoStyle');
+    if (decoStyle) decoStyle.addEventListener('change', function () {
+      var b = findBlock(selectedId);
+      if (!b || b.type !== 'deco') return;
+      b.style = this.value;
+      renderEditor(); renderList(); renderProps();
+      pushHistory();
+    });
+
+    var thick = document.getElementById('edThick');
+    if (thick) thick.addEventListener('input', function () {
+      var b = findBlock(selectedId);
+      if (!b || b.type !== 'deco') return;
+      b.thick = Number(this.value) / 10;
+      setText('edThickVal', String(b.thick));
+      renderEditor();
+      pushHistory();
+    });
+
+    var text = document.getElementById('edText');
+    if (text) text.addEventListener('input', function () {
+      var b = findBlock(selectedId);
+      if (!b) return;
+      b.text = this.value;
+      renderEditor();
+      renderList();
+      pushHistory();
+    });
+
+    var size = document.getElementById('edSize');
+    if (size) size.addEventListener('input', function () {
+      var b = findBlock(selectedId);
+      if (!b) return;
+      b.size = Number(this.value);
+      setText('edSizeVal', b.size + 'px');
+      renderEditor();
+      setText('edSelTitle', selLabel(b));
+      pushHistory();
+    });
+
+    var font = document.getElementById('edFont');
+    if (font) font.addEventListener('change', function () {
+      var b = findBlock(selectedId);
+      if (!b) return;
+      b.font = this.value;
+      renderEditor();
+      pushHistory();
+    });
+
+    /* 对齐：左 / 居中 / 右 三个按钮 */
+    var alignRow = document.getElementById('edAlignRow');
+    if (alignRow) alignRow.addEventListener('click', function (e) {
+      var btn = e.target.closest ? e.target.closest('button[data-align]') : null;
+      if (!btn) return;
+      var b = findBlock(selectedId);
+      if (!b) return;
+      b.align = btn.getAttribute('data-align');
+      renderEditor();
+      renderProps();
+      pushHistory();
+      setStatus('exportStatus', '对齐：' + (b.align === 'center' ? '居中' : b.align === 'right' ? '右对齐' : '左对齐'));
+    });
+
+    var color = document.getElementById('edColor');
+    if (color) color.addEventListener('input', function () {
+      var b = findBlock(selectedId);
+      if (!b) return;
+      b.color = this.value;
+      renderEditor();
+      pushHistory();
+    });
+
+    var alpha = document.getElementById('edAlpha');
+    if (alpha) alpha.addEventListener('input', function () {
+      var b = findBlock(selectedId);
+      if (!b) return;
+      b.alpha = Number(this.value) / 100;
+      setText('edAlphaVal', this.value + '%');
+      renderEditor();
+      pushHistory();
+    });
+
+    var w = document.getElementById('edW');
+    if (w) w.addEventListener('input', function () {
+      var b = findBlock(selectedId);
+      if (!b) return;
+      b.w = Number(this.value);
+      setText('edWVal', this.value);
+      renderEditor();
+      pushHistory();
+    });
+
+    var h = document.getElementById('edH');
+    if (h) h.addEventListener('input', function () {
+      var b = findBlock(selectedId);
+      if (!b) return;
+      b.h = Number(this.value);
+      setText('edHVal', this.value);
+      renderEditor();
+      pushHistory();
+    });
+
+    var del = document.getElementById('edDel');
+    if (del) del.addEventListener('click', function () {
+      deleteBlock(selectedId);
+    });
+
+    var addT = document.getElementById('edAddText');
+    if (addT) addT.addEventListener('click', function () {
+      if (!edit) return;
+      var b = blk({ x: 44, y: 180, w: 432, text: 'New paragraph — double click here to edit the text.', size: 13, font: 'sans' });
+      edit.blocks.push(b);
+      selectedId = b.id;
+      commit('已添加文字段落');
+    });
+    var addI = document.getElementById('edAddImg');
+    if (addI) addI.addEventListener('click', function () {
+      if (!edit) return;
+      var b = blk({ type: 'image', x: 44, y: 300, w: 432, h: 130 });
+      edit.blocks.push(b);
+      selectedId = b.id;
+      commit('已添加插图区域');
+    });
+
+    var addD = document.getElementById('edAddDeco');
+    if (addD) addD.addEventListener('click', function () {
+      if (!edit) return;
+      var b = decoBlock('frame', edit.accent || edit.color, 'accent');
+      edit.blocks.push(b);
+      selectedId = b.id;
+      commit('已添加花边，可在右侧换样式');
+    });
+
+    var undoBtn = document.getElementById('edUndo');
+    if (undoBtn) undoBtn.addEventListener('click', undo);
+    var redoBtn = document.getElementById('edRedo');
+    if (redoBtn) redoBtn.addEventListener('click', redo);
+
+    document.addEventListener('keydown', function (e) {
+      var ed = document.getElementById('editor');
+      if (!ed || ed.hidden) return;
+      var k = e.key;
+      if ((e.ctrlKey || e.metaKey) && (k === 'z' || k === 'Z')) { e.preventDefault(); undo(); }
+      else if ((e.ctrlKey || e.metaKey) && (k === 'y' || k === 'Y')) { e.preventDefault(); redo(); }
+    });
+
+    var list = document.getElementById('edBlocks');
+    if (list) list.addEventListener('click', function (e) {
+      var delBtn = e.target.closest ? e.target.closest('.blk-del') : null;
+      if (delBtn) {
+        e.stopPropagation();
+        deleteBlock(delBtn.getAttribute('data-del'));
+        return;
+      }
+      var item = e.target.closest ? e.target.closest('.blk-item') : null;
+      if (item) selectBlock(item.getAttribute('data-id'));
+    });
+
+    var back = document.getElementById('edBack');
+    if (back) back.addEventListener('click', function () {
+      document.getElementById('editor').hidden = true;
+      edit = null;
+      selectedId = null;
+    });
+
+    var save = document.getElementById('edSaveFav');
+    if (save) save.addEventListener('click', function () {
+      if (!edit) return;
+      var t = {
+        id: 'e' + Date.now().toString(36) + Math.random().toString(36).slice(2, 7),
+        category: '自定义',
+        style: '自定义',
+        design: 'custom',
+        color: edit.color,
+        accent: edit.accent,
+        bgMode: edit.bgMode,
+        bg: edit.bg,
+        blocks: cloneBlocks(edit.blocks)
+      };
+      favorites.push(t);
+      saveFav();
+      renderFavGrid();
+      setStatus('exportStatus', '已保存到收藏');
+    });
+
+    var exportBtns = document.querySelectorAll('[data-export]');
+    for (var i = 0; i < exportBtns.length; i++) {
+      (function (btn) {
+        btn.addEventListener('click', function () {
+          doExport(btn.getAttribute('data-export'), btn);
+        });
+      })(exportBtns[i]);
+    }
+  }
+
+  /* ================= 导出（零依赖） =================
+     说明：下面这段标记区间里的函数是纯函数（不碰 DOM），
+     本地测试脚本会把这段代码抽出来在 Node 里跑，确保真的能用。 */
+  /*<<EXPORT-LIB-START>>*/
+
+  function crc32(u8) {
+    var table = crc32.table;
+    if (!table) {
+      table = new Int32Array(256);
+      for (var n = 0; n < 256; n++) {
+        var c = n;
+        for (var k = 0; k < 8; k++) c = (c & 1) ? (0xEDB88320 ^ (c >>> 1)) : (c >>> 1);
+        table[n] = c;
+      }
+      crc32.table = table;
+    }
+    var crc = -1;
+    for (var i = 0; i < u8.length; i++) crc = (crc >>> 8) ^ table[(crc ^ u8[i]) & 0xFF];
+    return (crc ^ -1) >>> 0;
+  }
+
+  function utf8(str) {
+    if (typeof TextEncoder !== 'undefined') return new TextEncoder().encode(str);
+    var out = [], i, c;
+    for (i = 0; i < str.length; i++) {
+      c = str.charCodeAt(i);
+      if (c < 128) out.push(c);
+      else if (c < 2048) out.push(192 | (c >> 6), 128 | (c & 63));
+      else out.push(224 | (c >> 12), 128 | ((c >> 6) & 63), 128 | (c & 63));
+    }
+    return new Uint8Array(out);
+  }
+
+  function concatBytes(list) {
+    var len = 0, i;
+    for (i = 0; i < list.length; i++) len += list[i].length;
+    var out = new Uint8Array(len), off = 0;
+    for (i = 0; i < list.length; i++) { out.set(list[i], off); off += list[i].length; }
+    return out;
+  }
+
+  /* ZIP（store，无压缩） */
+  function zipStore(files) {
+    var parts = [], central = [], offset = 0, i;
+    var now = new Date();
+    var dosTime = ((now.getHours() & 31) << 11) | ((now.getMinutes() & 63) << 5) | ((now.getSeconds() >> 1) & 31);
+    var dosDate = (((now.getFullYear() - 1980) & 127) << 9) | (((now.getMonth() + 1) & 15) << 5) | (now.getDate() & 31);
+
+    for (i = 0; i < files.length; i++) {
+      var f = files[i];
+      var name = utf8(f.name);
+      var data = f.data;
+      var crc = crc32(data);
+      var lh = new Uint8Array(30 + name.length);
+      var dv = new DataView(lh.buffer);
+      dv.setUint32(0, 0x04034b50, true);
+      dv.setUint16(4, 20, true);
+      dv.setUint16(6, 0x0800, true);
+      dv.setUint16(8, 0, true);
+      dv.setUint16(10, dosTime, true);
+      dv.setUint16(12, dosDate, true);
+      dv.setUint32(14, crc, true);
+      dv.setUint32(18, data.length, true);
+      dv.setUint32(22, data.length, true);
+      dv.setUint16(26, name.length, true);
+      dv.setUint16(28, 0, true);
+      lh.set(name, 30);
+      parts.push(lh);
+      parts.push(data);
+      central.push({ name: name, crc: crc, size: data.length, offset: offset });
+      offset += lh.length + data.length;
+    }
+
+    var cdParts = [], cdSize = 0;
+    for (i = 0; i < central.length; i++) {
+      var c = central[i];
+      var ch = new Uint8Array(46 + c.name.length);
+      var dv2 = new DataView(ch.buffer);
+      dv2.setUint32(0, 0x02014b50, true);
+      dv2.setUint16(4, 20, true);
+      dv2.setUint16(6, 20, true);
+      dv2.setUint16(8, 0x0800, true);
+      dv2.setUint16(10, 0, true);
+      dv2.setUint16(12, dosTime, true);
+      dv2.setUint16(14, dosDate, true);
+      dv2.setUint32(16, c.crc, true);
+      dv2.setUint32(20, c.size, true);
+      dv2.setUint32(24, c.size, true);
+      dv2.setUint16(28, c.name.length, true);
+      dv2.setUint16(30, 0, true);
+      dv2.setUint16(32, 0, true);
+      dv2.setUint16(34, 0, true);
+      dv2.setUint16(36, 0, true);
+      dv2.setUint32(38, 0, true);
+      dv2.setUint32(42, c.offset, true);
+      ch.set(c.name, 46);
+      cdParts.push(ch);
+      cdSize += ch.length;
+    }
+
+    var eocd = new Uint8Array(22);
+    var dv3 = new DataView(eocd.buffer);
+    dv3.setUint32(0, 0x06054b50, true);
+    dv3.setUint16(4, 0, true);
+    dv3.setUint16(6, 0, true);
+    dv3.setUint16(8, central.length, true);
+    dv3.setUint16(10, central.length, true);
+    dv3.setUint32(12, cdSize, true);
+    dv3.setUint32(16, offset, true);
+    dv3.setUint16(20, 0, true);
+
+    return concatBytes(parts.concat(cdParts, [eocd]));
+  }
+
+  /* 旧版：整页压成一张图的导出（保留，作为备用/参考，不再被 doExport 调用） */
+  function makePdfImage(jpeg, wPx, hPx) {
+    var wPt = Math.round(wPx * 0.75), hPt = Math.round(hPx * 0.75);
+    var parts = [], offsets = [], total = 0, i;
+
+    function pushStr(s) {
+      var b = utf8(s);
+      parts.push(b);
+      total += b.length;
+      return b.length;
+    }
+    function obj(num, body) {
+      offsets[num] = total;
+      pushStr(num + ' 0 obj\n' + body + '\nendobj\n');
+    }
+
+    pushStr('%PDF-1.4\n');
+    obj(1, '<< /Type /Catalog /Pages 2 0 R >>');
+    obj(2, '<< /Type /Pages /Kids [3 0 R] /Count 1 >>');
+    obj(3, '<< /Type /Page /Parent 2 0 R /MediaBox [0 0 ' + wPt + ' ' + hPt + '] /Resources << /XObject << /Im0 4 0 R >> >> /Contents 5 0 R >>');
+
+    offsets[4] = total;
+    pushStr('4 0 obj\n<< /Type /XObject /Subtype /Image /Width ' + wPx + ' /Height ' + hPx +
+      ' /ColorSpace /DeviceRGB /BitsPerComponent 8 /Filter /DCTDecode /Length ' + jpeg.length + ' >>\nstream\n');
+    parts.push(jpeg);
+    total += jpeg.length;
+    pushStr('\nendstream\nendobj\n');
+
+    var content = 'q\n' + wPt + ' 0 0 ' + hPt + ' 0 0 cm\n/Im0 Do\nQ\n';
+    var clen = utf8(content).length;
+    offsets[5] = total;
+    pushStr('5 0 obj\n<< /Length ' + clen + ' >>\nstream\n' + content + 'endstream\nendobj\n');
+
+    var xrefPos = total;
+    var xref = 'xref\n0 6\n0000000000 65535 f \n';
+    for (i = 1; i <= 5; i++) {
+      var off = String(offsets[i]);
+      while (off.length < 10) off = '0' + off;
+      xref += off + ' 00000 n \n';
+    }
+    pushStr(xref);
+    pushStr('trailer\n<< /Size 6 /Root 1 0 R >>\nstartxref\n' + xrefPos + '\n%%EOF\n');
+    return concatBytes(parts);
+  }
+
+  /* DOCX（一个段落，内嵌一张图） */
+  function makeDocxImage(jpeg, wPx, hPx) {
+    var emuW = Math.round(wPx * 9525), emuH = Math.round(hPx * 9525);
+    var ct = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>'
+      + '<Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types">'
+      + '<Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/>'
+      + '<Default Extension="xml" ContentType="application/xml"/>'
+      + '<Default Extension="jpeg" ContentType="image/jpeg"/>'
+      + '<Override PartName="/word/document.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.document.main+xml"/>'
+      + '</Types>';
+    var rels = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>'
+      + '<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">'
+      + '<Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="word/document.xml"/>'
+      + '</Relationships>';
+    var docRels = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>'
+      + '<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">'
+      + '<Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/image" Target="media/image1.jpeg"/>'
+      + '</Relationships>';
+    var doc = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>'
+      + '<w:document xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main"'
+      + ' xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"'
+      + ' xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing"'
+      + ' xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main"'
+      + ' xmlns:pic="http://schemas.openxmlformats.org/drawingml/2006/picture">'
+      + '<w:body><w:p><w:pPr><w:jc w:val="center"/></w:pPr><w:r><w:drawing>'
+      + '<wp:inline distT="0" distB="0" distL="0" distR="0">'
+      + '<wp:extent cx="' + emuW + '" cy="' + emuH + '"/>'
+      + '<wp:effectExtent l="0" t="0" r="0" b="0"/>'
+      + '<wp:docPr id="1" name="Poster"/>'
+      + '<wp:cNvGraphicFramePr><a:graphicFrameLocks noChangeAspect="1"/></wp:cNvGraphicFramePr>'
+      + '<a:graphic><a:graphicData uri="http://schemas.openxmlformats.org/drawingml/2006/picture">'
+      + '<pic:pic><pic:nvPicPr><pic:cNvPr id="1" name="Poster"/><pic:cNvPicPr/></pic:nvPicPr>'
+      + '<pic:blipFill><a:blip r:embed="rId1"/><a:stretch><a:fillRect/></a:stretch></pic:blipFill>'
+      + '<pic:spPr><a:xfrm><a:off x="0" y="0"/><a:ext cx="' + emuW + '" cy="' + emuH + '"/></a:xfrm>'
+      + '<a:prstGeom prst="rect"><a:avLst/></a:prstGeom></pic:spPr></pic:pic>'
+      + '</a:graphicData></a:graphic></wp:inline></w:drawing></w:r></w:p>'
+      + '<w:sectPr><w:pgSz w:w="11906" w:h="16838"/><w:pgMar w:top="720" w:right="720" w:bottom="720" w:left="720" w:header="0" w:footer="0" w:gutter="0"/></w:sectPr>'
+      + '</w:body></w:document>';
+
+    return zipStore([
+      { name: '[Content_Types].xml', data: utf8(ct) },
+      { name: '_rels/.rels', data: utf8(rels) },
+      { name: 'word/document.xml', data: utf8(doc) },
+      { name: 'word/_rels/document.xml.rels', data: utf8(docRels) },
+      { name: 'word/media/image1.jpeg', data: jpeg }
+    ]);
+  }
+
+  /* PPTX（单页，整页一张图） */
+  function makePptxImage(jpeg, wPx, hPx) {
+    var emuW = Math.round(wPx * 9525), emuH = Math.round(hPx * 9525);
+    var ns = ' xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main"'
+      + ' xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"'
+      + ' xmlns:p="http://schemas.openxmlformats.org/presentationml/2006/main"';
+    var spTree = '<p:nvGrpSpPr><p:cNvPr id="1" name=""/><p:cNvGrpSpPr/><p:nvPr/></p:nvGrpSpPr>'
+      + '<p:grpSpPr><a:xfrm><a:off x="0" y="0"/><a:ext cx="0" cy="0"/><a:chOff x="0" y="0"/><a:chExt cx="0" cy="0"/></a:xfrm></p:grpSpPr>';
+
+    var ct = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>'
+      + '<Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types">'
+      + '<Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/>'
+      + '<Default Extension="xml" ContentType="application/xml"/>'
+      + '<Default Extension="jpeg" ContentType="image/jpeg"/>'
+      + '<Override PartName="/ppt/presentation.xml" ContentType="application/vnd.openxmlformats-officedocument.presentationml.presentation.main+xml"/>'
+      + '<Override PartName="/ppt/slides/slide1.xml" ContentType="application/vnd.openxmlformats-officedocument.presentationml.slide+xml"/>'
+      + '<Override PartName="/ppt/slideMasters/slideMaster1.xml" ContentType="application/vnd.openxmlformats-officedocument.presentationml.slideMaster+xml"/>'
+      + '<Override PartName="/ppt/slideLayouts/slideLayout1.xml" ContentType="application/vnd.openxmlformats-officedocument.presentationml.slideLayout+xml"/>'
+      + '<Override PartName="/ppt/theme/theme1.xml" ContentType="application/vnd.openxmlformats-officedocument.theme+xml"/>'
+      + '</Types>';
+
+    var rels = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>'
+      + '<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">'
+      + '<Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="ppt/presentation.xml"/>'
+      + '</Relationships>';
+
+    var pres = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>'
+      + '<p:presentation' + ns + '>'
+      + '<p:sldMasterIdLst><p:sldMasterId id="2147483648" r:id="rId1"/></p:sldMasterIdLst>'
+      + '<p:sldIdLst><p:sldId id="256" r:id="rId2"/></p:sldIdLst>'
+      + '<p:sldSz cx="' + emuW + '" cy="' + emuH + '" type="custom"/>'
+      + '<p:notesSz cx="6858000" cy="9144000"/>'
+      + '</p:presentation>';
+
+    var presRels = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>'
+      + '<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">'
+      + '<Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/slideMaster" Target="slideMasters/slideMaster1.xml"/>'
+      + '<Relationship Id="rId2" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/slide" Target="slides/slide1.xml"/>'
+      + '</Relationships>';
+
+    var master = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>'
+      + '<p:sldMaster' + ns + '>'
+      + '<p:cSld><p:bg><p:bgRef idx="1001"><a:schemeClr val="bg1"/></p:bgRef></p:bg>'
+      + '<p:spTree>' + spTree + '</p:spTree></p:cSld>'
+      + '<p:clrMap bg1="lt1" tx1="dk1" bg2="lt2" tx2="dk2" accent1="accent1" accent2="accent2" accent3="accent3" accent4="accent4" accent5="accent5" accent6="accent6" hlink="hlink" folHlink="folHlink"/>'
+      + '<p:sldLayoutIdLst><p:sldLayoutId id="2147483649" r:id="rId1"/></p:sldLayoutIdLst>'
+      + '<p:txStyles><p:titleStyle><a:lvl1pPr><a:defRPr sz="4400"/></a:lvl1pPr></p:titleStyle>'
+      + '<p:bodyStyle><a:lvl1pPr><a:defRPr sz="1800"/></a:lvl1pPr></p:bodyStyle>'
+      + '<p:otherStyle><a:lvl1pPr><a:defRPr sz="1800"/></a:lvl1pPr></p:otherStyle></p:txStyles>'
+      + '</p:sldMaster>';
+
+    var masterRels = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>'
+      + '<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">'
+      + '<Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/slideLayout" Target="../slideLayouts/slideLayout1.xml"/>'
+      + '<Relationship Id="rId2" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/theme" Target="../theme/theme1.xml"/>'
+      + '</Relationships>';
+
+    var layout = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>'
+      + '<p:sldLayout' + ns + ' type="blank" preserve="1">'
+      + '<p:cSld name="Blank"><p:spTree>' + spTree + '</p:spTree></p:cSld>'
+      + '<p:clrMapOvr><a:masterClrMapping/></p:clrMapOvr>'
+      + '</p:sldLayout>';
+
+    var layoutRels = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>'
+      + '<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">'
+      + '<Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/slideMaster" Target="../slideMasters/slideMaster1.xml"/>'
+      + '</Relationships>';
+
+    var slide = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>'
+      + '<p:sld' + ns + '>'
+      + '<p:cSld><p:spTree>' + spTree
+      + '<p:pic><p:nvPicPr><p:cNvPr id="2" name="Poster"/><p:cNvPicPr><a:picLocks noChangeAspect="1"/></p:cNvPicPr><p:nvPr/></p:nvPicPr>'
+      + '<p:blipFill><a:blip r:embed="rId2"/><a:stretch><a:fillRect/></a:stretch></p:blipFill>'
+      + '<p:spPr><a:xfrm><a:off x="0" y="0"/><a:ext cx="' + emuW + '" cy="' + emuH + '"/></a:xfrm>'
+      + '<a:prstGeom prst="rect"><a:avLst/></a:prstGeom></p:spPr></p:pic>'
+      + '</p:spTree></p:cSld>'
+      + '<p:clrMapOvr><a:masterClrMapping/></p:clrMapOvr>'
+      + '</p:sld>';
+
+    /* 幻灯片必须同时挂住「版式」和「图片」两个 relationship，否则 PowerPoint 判为损坏 */
+    var slideRels = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>'
+      + '<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">'
+      + '<Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/slideLayout" Target="../slideLayouts/slideLayout1.xml"/>'
+      + '<Relationship Id="rId2" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/image" Target="../media/image1.jpeg"/>'
+      + '</Relationships>';
+
+    var theme = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>'
+      + '<a:theme xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main" name="For Claire">'
+      + '<a:themeElements><a:clrScheme name="ForClaire">'
+      + '<a:dk1><a:sysClr val="windowText" lastClr="000000"/></a:dk1><a:lt1><a:sysClr val="window" lastClr="FFFFFF"/></a:lt1>'
+      + '<a:dk2><a:srgbClr val="1F2A23"/></a:dk2><a:lt2><a:srgbClr val="E7E6E6"/></a:lt2>'
+      + '<a:accent1><a:srgbClr val="16A34A"/></a:accent1><a:accent2><a:srgbClr val="0D9488"/></a:accent2>'
+      + '<a:accent3><a:srgbClr val="A5A5A5"/></a:accent3><a:accent4><a:srgbClr val="FFC000"/></a:accent4>'
+      + '<a:accent5><a:srgbClr val="5B9BD5"/></a:accent5><a:accent6><a:srgbClr val="70AD47"/></a:accent6>'
+      + '<a:hlink><a:srgbClr val="0563C1"/></a:hlink><a:folHlink><a:srgbClr val="954F72"/></a:folHlink>'
+      + '</a:clrScheme>'
+      + '<a:fontScheme name="ForClaire">'
+      + '<a:majorFont><a:latin typeface="Calibri Light"/><a:ea typeface=""/><a:cs typeface=""/></a:majorFont>'
+      + '<a:minorFont><a:latin typeface="Calibri"/><a:ea typeface=""/><a:cs typeface=""/></a:minorFont>'
+      + '</a:fontScheme>'
+      + '<a:fmtScheme name="ForClaire">'
+      + '<a:fillStyleLst><a:solidFill><a:schemeClr val="phClr"/></a:solidFill>'
+      + '<a:solidFill><a:schemeClr val="phClr"/></a:solidFill>'
+      + '<a:solidFill><a:schemeClr val="phClr"/></a:solidFill></a:fillStyleLst>'
+      + '<a:lnStyleLst><a:ln w="6350"><a:solidFill><a:schemeClr val="phClr"/></a:solidFill><a:prstDash val="solid"/></a:ln>'
+      + '<a:ln w="12700"><a:solidFill><a:schemeClr val="phClr"/></a:solidFill><a:prstDash val="solid"/></a:ln>'
+      + '<a:ln w="19050"><a:solidFill><a:schemeClr val="phClr"/></a:solidFill><a:prstDash val="solid"/></a:ln></a:lnStyleLst>'
+      + '<a:effectStyleLst><a:effectStyle><a:effectLst/></a:effectStyle>'
+      + '<a:effectStyle><a:effectLst/></a:effectStyle><a:effectStyle><a:effectLst/></a:effectStyle></a:effectStyleLst>'
+      + '<a:bgFillStyleLst><a:solidFill><a:schemeClr val="phClr"/></a:solidFill>'
+      + '<a:solidFill><a:schemeClr val="phClr"/></a:solidFill>'
+      + '<a:solidFill><a:schemeClr val="phClr"/></a:solidFill></a:bgFillStyleLst>'
+      + '</a:fmtScheme></a:themeElements>'
+      + '<a:objectDefaults/><a:extraClrSchemeLst/>'
+      + '</a:theme>';
+
+    return zipStore([
+      { name: '[Content_Types].xml', data: utf8(ct) },
+      { name: '_rels/.rels', data: utf8(rels) },
+      { name: 'ppt/presentation.xml', data: utf8(pres) },
+      { name: 'ppt/_rels/presentation.xml.rels', data: utf8(presRels) },
+      { name: 'ppt/slideMasters/slideMaster1.xml', data: utf8(master) },
+      { name: 'ppt/slideMasters/_rels/slideMaster1.xml.rels', data: utf8(masterRels) },
+      { name: 'ppt/slideLayouts/slideLayout1.xml', data: utf8(layout) },
+      { name: 'ppt/slideLayouts/_rels/slideLayout1.xml.rels', data: utf8(layoutRels) },
+      { name: 'ppt/slides/slide1.xml', data: utf8(slide) },
+      { name: 'ppt/slides/_rels/slide1.xml.rels', data: utf8(slideRels) },
+      { name: 'ppt/theme/theme1.xml', data: utf8(theme) },
+      { name: 'ppt/media/image1.jpeg', data: jpeg }
+    ]);
+  }
+
+  /* ============================================================
+     元素级导出：PPTX / DOCX / PDF
+     plan = { w, h, bg, items[], decoPng, bgJpeg, border }
+     items 按「从底到顶」顺序：shape / placeholder / text
+     导出的是真正的文本框与段落，进 Office 里可以直接改字、改对齐
+     ============================================================ */
+  function xm(s) {
+    return String(s == null ? '' : s).replace(/[&<>"']/g, function (m) {
+      return m === '&' ? '&amp;' : m === '<' ? '&lt;' : m === '>' ? '&gt;' : m === '"' ? '&quot;' : '&apos;';
+    });
+  }
+  /* 颜色解析：既接受 #RGB / #RRGGBB，也接受 rgba(r,g,b,a) 这类写法。
+     之前只认 #RRGGBB，rgba 全被当成黑色，导出的色块就变全黑。 */
+  function parseColor(c) {
+    var s = String(c == null ? '' : c).trim();
+    var m = s.match(/^rgba?\(([^)]+)\)$/i);
+    if (m) {
+      var ps = m[1].split(',');
+      var r = parseFloat(ps[0]) || 0, g = parseFloat(ps[1]) || 0, b = parseFloat(ps[2]) || 0;
+      var a = ps.length > 3 ? parseFloat(ps[3]) : 1;
+      if (isNaN(a)) a = 1;
+      return {
+        hex: ('0' + Math.max(0, Math.min(255, Math.round(r))).toString(16)).slice(-2)
+          + ('0' + Math.max(0, Math.min(255, Math.round(g))).toString(16)).slice(-2)
+          + ('0' + Math.max(0, Math.min(255, Math.round(b))).toString(16)).slice(-2),
+        alpha: Math.max(0, Math.min(1, a))
+      };
+    }
+    var h = s.replace('#', '');
+    if (h.length === 3) h = h.charAt(0) + h.charAt(0) + h.charAt(1) + h.charAt(1) + h.charAt(2) + h.charAt(2);
+    if (!/^[0-9a-fA-F]{6}$/.test(h)) h = '000000';
+    return { hex: h.toUpperCase(), alpha: 1 };
+  }
+  function hx(c) { return parseColor(c).hex; }
+  function alphaOf(c, fallback) {
+    var a = parseColor(c).alpha;
+    return a == null ? (fallback == null ? 1 : fallback) : a;
+  }
+  function emuOf(px) { return Math.round(px * 9525); }
+  function twOf(px) { return Math.round(px * 15); }
+  function rgbOf(c) {
+    var s = hx(c);
+    return [parseInt(s.slice(0, 2), 16) / 255, parseInt(s.slice(2, 4), 16) / 255, parseInt(s.slice(4, 6), 16) / 255];
+  }
+  function famOf(f) {
+    if (f === 'serif') return 'Georgia';
+    if (f === 'mono') return 'Consolas';
+    if (f === 'hand') return 'Segoe Script';
+    return 'Calibri';
+  }
+
+  /* ---------- PPTX ---------- */
+  function pptFill(color, alpha) {
+    var a = alpha == null ? 1 : alpha;
+    return '<a:solidFill><a:srgbClr val="' + hx(color) + '">' +
+      (a < 0.999 ? '<a:alpha val="' + Math.round(a * 100000) + '"/>' : '') +
+      '</a:srgbClr></a:solidFill>';
+  }
+
+  function pptTextSp(id, it) {
+    var lh = it.lh > 0 ? it.lh : it.size * 1.5;
+    var lines = (it.lines && it.lines.length) ? it.lines : [{ t: it.text || '' }];
+    // 高度给足余量，并允许随文字自动撑开，避免「文字被裁掉」
+    var hh = it.h > 0 ? it.h : Math.max(lh * lines.length, lh);
+    hh = Math.max(hh * 1.35, lh * (lines.length + 0.6), 24);
+    var algn = it.align === 'center' ? 'ctr' : it.align === 'right' ? 'r' : 'l';
+    var sz = Math.max(100, Math.round(it.size * 75));
+    var pct = Math.round((lh / Math.max(1, it.size)) * 100000);
+    var ps = '';
+    for (var i = 0; i < lines.length; i++) {
+      var t = lines[i].t == null ? '' : lines[i].t;
+      ps += '<a:p><a:pPr algn="' + algn + '"><a:lnSpc><a:spcPct val="' + pct + '"/></a:lnSpc>' +
+        '<a:spcBef><a:spcPts val="0"/></a:spcBef><a:spcAft><a:spcPts val="0"/></a:spcAft></a:pPr>' +
+        '<a:r><a:rPr lang="en-US" altLang="zh-CN" sz="' + sz + '" dirty="0"' +
+        (it.bold ? ' b="1"' : '') + (it.italic ? ' i="1"' : '') +
+        (it.letters ? ' spc="' + Math.round(it.letters * 75) + '"' : '') + '>' +
+        pptFill(it.color, it.alpha) +
+        '<a:latin typeface="' + famOf(it.family) + '"/><a:ea typeface="Microsoft YaHei"/><a:cs typeface="Microsoft YaHei"/>' +
+        '</a:rPr><a:t>' + xm(t) + '</a:t></a:r></a:p>';
+    }
+    return '<p:sp><p:nvSpPr><p:cNvPr id="' + id + '" name="文字 ' + id + '"/><p:cNvSpPr txBox="1"/><p:nvPr/></p:nvSpPr>' +
+      '<p:spPr><a:xfrm><a:off x="' + emuOf(it.x) + '" y="' + emuOf(it.y) + '"/>' +
+      '<a:ext cx="' + emuOf(it.w) + '" cy="' + emuOf(Math.max(hh, 1)) + '"/></a:xfrm>' +
+      '<a:prstGeom prst="rect"><a:avLst/></a:prstGeom><a:noFill/></p:spPr>' +
+      '<p:txBody><a:bodyPr wrap="square" lIns="0" tIns="0" rIns="0" bIns="0" anchor="t" rtlCol="0"><a:spAutoFit/></a:bodyPr>' +
+      '<a:lstStyle/>' + ps + '</p:txBody></p:sp>';
+  }
+
+  function pptShapeSp(id, it) {
+    var isRound = it.radius > 0;
+    var mn = Math.max(1, Math.min(it.w, it.h));
+    var av = isRound
+      ? '<a:avLst><a:gd name="adj" fmla="val ' + Math.round(Math.min(50000, (it.radius / mn) * 100000)) + '"/></a:avLst>'
+      : '<a:avLst/>';
+    return '<p:sp><p:nvSpPr><p:cNvPr id="' + id + '" name="色块 ' + id + '"/><p:cNvSpPr/><p:nvPr/></p:nvSpPr>' +
+      '<p:spPr><a:xfrm><a:off x="' + emuOf(it.x) + '" y="' + emuOf(it.y) + '"/>' +
+      '<a:ext cx="' + emuOf(it.w) + '" cy="' + emuOf(Math.max(it.h, 1)) + '"/></a:xfrm>' +
+      '<a:prstGeom prst="' + (isRound ? 'roundRect' : 'rect') + '">' + av + '</a:prstGeom>' +
+      pptFill(it.fill || '#FFFFFF', it.alpha) + '<a:ln><a:noFill/></a:ln></p:spPr>' +
+      '<p:txBody><a:bodyPr rtlCol="0" anchor="ctr"/><a:lstStyle/><a:p><a:endParaRPr lang="en-US"/></a:p></p:txBody></p:sp>';
+  }
+
+  function pptPhSp(id, it) {
+    return '<p:sp><p:nvSpPr><p:cNvPr id="' + id + '" name="插图框 ' + id + '"/><p:cNvSpPr/><p:nvPr/></p:nvSpPr>' +
+      '<p:spPr><a:xfrm><a:off x="' + emuOf(it.x) + '" y="' + emuOf(it.y) + '"/>' +
+      '<a:ext cx="' + emuOf(it.w) + '" cy="' + emuOf(Math.max(it.h, 1)) + '"/></a:xfrm>' +
+      '<a:prstGeom prst="rect"><a:avLst/></a:prstGeom>' +
+      '<a:solidFill><a:srgbClr val="F3F3F3"/></a:solidFill>' +
+      '<a:ln w="12700"><a:solidFill><a:srgbClr val="BFBFBF"/></a:solidFill><a:prstDash val="dash"/></a:ln></p:spPr>' +
+      '<p:txBody><a:bodyPr rtlCol="0" anchor="ctr"/><a:lstStyle/><a:p><a:pPr algn="ctr"/>' +
+      '<a:r><a:rPr lang="zh-CN" sz="900" dirty="0"><a:solidFill><a:srgbClr val="8C8C8C"/></a:solidFill>' +
+      '<a:latin typeface="Microsoft YaHei"/><a:ea typeface="Microsoft YaHei"/></a:rPr><a:t>插图区域</a:t></a:r></a:p></p:txBody></p:sp>';
+  }
+
+  function makePptx(plan) {
+    var W = plan.w, H = plan.h;
+    var emuW = emuOf(W), emuH = emuOf(H);
+    var sid = 1;
+    var tree = '';
+    if (plan.decoPng && plan.decoPng.length) {
+      tree += '<p:pic><p:nvPicPr><p:cNvPr id="' + (++sid) + '" name="花边"/><p:cNvPicPr><a:picLocks noChangeAspect="1"/></p:cNvPicPr><p:nvPr/></p:nvPicPr>' +
+        '<p:blipFill><a:blip r:embed="rId2"/><a:stretch><a:fillRect/></a:stretch></p:blipFill>' +
+        '<p:spPr><a:xfrm><a:off x="0" y="0"/><a:ext cx="' + emuW + '" cy="' + emuH + '"/></a:xfrm>' +
+        '<a:prstGeom prst="rect"><a:avLst/></a:prstGeom></p:spPr></p:pic>';
+    }
+    for (var i = 0; i < plan.items.length; i++) {
+      var it = plan.items[i];
+      sid++;
+      if (it.kind === 'shape') tree += pptShapeSp(sid, it);
+      else if (it.kind === 'placeholder') tree += pptPhSp(sid, it);
+      else tree += pptTextSp(sid, it);
+    }
+
+    var ns = ' xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main"'
+      + ' xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"'
+      + ' xmlns:p="http://schemas.openxmlformats.org/presentationml/2006/main"';
+    var spTreeHead = '<p:nvGrpSpPr><p:cNvPr id="1" name=""/><p:cNvGrpSpPr/><p:nvPr/></p:nvGrpSpPr>'
+      + '<p:grpSpPr><a:xfrm><a:off x="0" y="0"/><a:ext cx="0" cy="0"/><a:chOff x="0" y="0"/><a:chExt cx="0" cy="0"/></a:xfrm></p:grpSpPr>';
+
+    var hasPic = !!(plan.decoPng && plan.decoPng.length);
+    var ct = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>'
+      + '<Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types">'
+      + '<Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/>'
+      + '<Default Extension="xml" ContentType="application/xml"/>'
+      + (hasPic ? '<Default Extension="png" ContentType="image/png"/>' : '')
+      + '<Override PartName="/ppt/presentation.xml" ContentType="application/vnd.openxmlformats-officedocument.presentationml.presentation.main+xml"/>'
+      + '<Override PartName="/ppt/slides/slide1.xml" ContentType="application/vnd.openxmlformats-officedocument.presentationml.slide+xml"/>'
+      + '<Override PartName="/ppt/slideMasters/slideMaster1.xml" ContentType="application/vnd.openxmlformats-officedocument.presentationml.slideMaster+xml"/>'
+      + '<Override PartName="/ppt/slideLayouts/slideLayout1.xml" ContentType="application/vnd.openxmlformats-officedocument.presentationml.slideLayout+xml"/>'
+      + '<Override PartName="/ppt/theme/theme1.xml" ContentType="application/vnd.openxmlformats-officedocument.theme+xml"/>'
+      + '</Types>';
+
+    var rels = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>'
+      + '<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">'
+      + '<Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="ppt/presentation.xml"/>'
+      + '</Relationships>';
+
+    var pres = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>'
+      + '<p:presentation' + ns + '>'
+      + '<p:sldMasterIdLst><p:sldMasterId id="2147483648" r:id="rId1"/></p:sldMasterIdLst>'
+      + '<p:sldIdLst><p:sldId id="256" r:id="rId2"/></p:sldIdLst>'
+      + '<p:sldSz cx="' + emuW + '" cy="' + emuH + '" type="custom"/>'
+      + '<p:notesSz cx="6858000" cy="9144000"/>'
+      + '</p:presentation>';
+
+    var presRels = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>'
+      + '<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">'
+      + '<Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/slideMaster" Target="slideMasters/slideMaster1.xml"/>'
+      + '<Relationship Id="rId2" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/slide" Target="slides/slide1.xml"/>'
+      + '</Relationships>';
+
+    var master = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>'
+      + '<p:sldMaster' + ns + '>'
+      + '<p:cSld><p:bg><p:bgRef idx="1001"><a:schemeClr val="bg1"/></p:bgRef></p:bg>'
+      + '<p:spTree>' + spTreeHead + '</p:spTree></p:cSld>'
+      + '<p:clrMap bg1="lt1" tx1="dk1" bg2="lt2" tx2="dk2" accent1="accent1" accent2="accent2" accent3="accent3" accent4="accent4" accent5="accent5" accent6="accent6" hlink="hlink" folHlink="folHlink"/>'
+      + '<p:sldLayoutIdLst><p:sldLayoutId id="2147483649" r:id="rId1"/></p:sldLayoutIdLst>'
+      + '<p:txStyles><p:titleStyle><a:lvl1pPr><a:defRPr sz="4400"/></a:lvl1pPr></p:titleStyle>'
+      + '<p:bodyStyle><a:lvl1pPr><a:defRPr sz="1800"/></a:lvl1pPr></p:bodyStyle>'
+      + '<p:otherStyle><a:lvl1pPr><a:defRPr sz="1800"/></a:lvl1pPr></p:otherStyle></p:txStyles>'
+      + '</p:sldMaster>';
+
+    var masterRels = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>'
+      + '<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">'
+      + '<Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/slideLayout" Target="../slideLayouts/slideLayout1.xml"/>'
+      + '<Relationship Id="rId2" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/theme" Target="../theme/theme1.xml"/>'
+      + '</Relationships>';
+
+    var layout = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>'
+      + '<p:sldLayout' + ns + ' type="blank" preserve="1">'
+      + '<p:cSld name="空白"><p:spTree>' + spTreeHead + '</p:spTree></p:cSld>'
+      + '<p:clrMapOvr><a:masterClrMapping/></p:clrMapOvr></p:sldLayout>';
+
+    var layoutRels = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>'
+      + '<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">'
+      + '<Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/slideMaster" Target="../slideMasters/slideMaster1.xml"/>'
+      + '</Relationships>';
+
+    var bg = '<p:bg><p:bgPr>' + pptFill(plan.bg, 1) + '<a:effectLst/></p:bgPr></p:bg>';
+    var slide = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>'
+      + '<p:sld' + ns + '><p:cSld>' + bg + '<p:spTree>' + spTreeHead + tree + '</p:spTree></p:cSld>'
+      + '<p:clrMapOvr><a:masterClrMapping/></p:clrMapOvr></p:sld>';
+
+    var slideRels = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>'
+      + '<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">'
+      + '<Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/slideLayout" Target="../slideLayouts/slideLayout1.xml"/>'
+      + (hasPic ? '<Relationship Id="rId2" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/image" Target="../media/deco.png"/>' : '')
+      + '</Relationships>';
+
+    var theme = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>'
+      + '<a:theme xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main" name="For Claire">'
+      + '<a:themeElements><a:clrScheme name="ForClaire">'
+      + '<a:dk1><a:sysClr val="windowText" lastClr="000000"/></a:dk1><a:lt1><a:sysClr val="window" lastClr="FFFFFF"/></a:lt1>'
+      + '<a:dk2><a:srgbClr val="1F2A23"/></a:dk2><a:lt2><a:srgbClr val="E7E6E6"/></a:lt2>'
+      + '<a:accent1><a:srgbClr val="16A34A"/></a:accent1><a:accent2><a:srgbClr val="0D9488"/></a:accent2>'
+      + '<a:accent3><a:srgbClr val="A5A5A5"/></a:accent3><a:accent4><a:srgbClr val="FFC000"/></a:accent4>'
+      + '<a:accent5><a:srgbClr val="5B9BD5"/></a:accent5><a:accent6><a:srgbClr val="70AD47"/></a:accent6>'
+      + '<a:hlink><a:srgbClr val="0563C1"/></a:hlink><a:folHlink><a:srgbClr val="954F72"/></a:folHlink>'
+      + '</a:clrScheme>'
+      + '<a:fontScheme name="ForClaire">'
+      + '<a:majorFont><a:latin typeface="Calibri Light"/><a:ea typeface="Microsoft YaHei"/><a:cs typeface=""/></a:majorFont>'
+      + '<a:minorFont><a:latin typeface="Calibri"/><a:ea typeface="Microsoft YaHei"/><a:cs typeface=""/></a:minorFont>'
+      + '</a:fontScheme>'
+      + '<a:fmtScheme name="ForClaire">'
+      + '<a:fillStyleLst><a:solidFill><a:schemeClr val="phClr"/></a:solidFill>'
+      + '<a:solidFill><a:schemeClr val="phClr"/></a:solidFill>'
+      + '<a:solidFill><a:schemeClr val="phClr"/></a:solidFill></a:fillStyleLst>'
+      + '<a:lnStyleLst><a:ln w="6350"><a:solidFill><a:schemeClr val="phClr"/></a:solidFill><a:prstDash val="solid"/></a:ln>'
+      + '<a:ln w="12700"><a:solidFill><a:schemeClr val="phClr"/></a:solidFill><a:prstDash val="solid"/></a:ln>'
+      + '<a:ln w="19050"><a:solidFill><a:schemeClr val="phClr"/></a:solidFill><a:prstDash val="solid"/></a:ln></a:lnStyleLst>'
+      + '<a:effectStyleLst><a:effectStyle><a:effectLst/></a:effectStyle>'
+      + '<a:effectStyle><a:effectLst/></a:effectStyle><a:effectStyle><a:effectLst/></a:effectStyle></a:effectStyleLst>'
+      + '<a:bgFillStyleLst><a:solidFill><a:schemeClr val="phClr"/></a:solidFill>'
+      + '<a:solidFill><a:schemeClr val="phClr"/></a:solidFill>'
+      + '<a:solidFill><a:schemeClr val="phClr"/></a:solidFill></a:bgFillStyleLst>'
+      + '</a:fmtScheme></a:themeElements>'
+      + '<a:objectDefaults/><a:extraClrSchemeLst/></a:theme>';
+
+    var files = [
+      { name: '[Content_Types].xml', data: utf8(ct) },
+      { name: '_rels/.rels', data: utf8(rels) },
+      { name: 'ppt/presentation.xml', data: utf8(pres) },
+      { name: 'ppt/_rels/presentation.xml.rels', data: utf8(presRels) },
+      { name: 'ppt/slideMasters/slideMaster1.xml', data: utf8(master) },
+      { name: 'ppt/slideMasters/_rels/slideMaster1.xml.rels', data: utf8(masterRels) },
+      { name: 'ppt/slideLayouts/slideLayout1.xml', data: utf8(layout) },
+      { name: 'ppt/slideLayouts/_rels/slideLayout1.xml.rels', data: utf8(layoutRels) },
+      { name: 'ppt/slides/slide1.xml', data: utf8(slide) },
+      { name: 'ppt/slides/_rels/slide1.xml.rels', data: utf8(slideRels) },
+      { name: 'ppt/theme/theme1.xml', data: utf8(theme) }
+    ];
+    if (hasPic) files.push({ name: 'ppt/media/deco.png', data: plan.decoPng });
+    return zipStore(files);
+  }
+
+  /* ---------- DOCX ---------- */
+  function docxRpr(it, sz) {
+    return '<w:rFonts w:ascii="' + famOf(it.family) + '" w:hAnsi="' + famOf(it.family) +
+      '" w:eastAsia="Microsoft YaHei" w:cs="Microsoft YaHei"/>' +
+      (it.bold ? '<w:b/><w:bCs/>' : '') +
+      (it.italic ? '<w:i/><w:iCs/>' : '') +
+      '<w:color w:val="' + hx(it.color) + '"/>' +
+      (it.letters ? '<w:spacing w:val="' + Math.max(1, Math.round(it.letters * 15)) + '"/>' : '') +
+      '<w:sz w:val="' + sz + '"/><w:szCs w:val="' + sz + '"/>';
+  }
+
+  /* Word 用「绝对定位」还原画布：文字用 w:framePr（文本框），色块和插图框用浮动表格。
+     这样就不会像流式排版那样互相挤压、串位。 */
+  function makeDocx(plan) {
+    var MARGIN = 600;                    // 40px
+    var body = '';
+    var items = plan.items.slice().sort(function (a, b) { return (a.y - b.y) || (a.x - b.x); });
+
+    function floatingBox(it) {
+      var x = Math.max(0, twOf(it.x)) + MARGIN;
+      var y = Math.max(0, twOf(it.y)) + MARGIN - 790;
+      var w = Math.max(120, twOf(it.w));
+      var h = Math.max(8, twOf(it.h));
+      var isPh = it.kind === 'placeholder';
+      var fill = isPh ? 'F4F4F4' : hx(it.fill || '#FFFFFF');
+      var bdr = isPh
+        ? '<w:tblBorders>'
+          + '<w:top w:val="dashed" w:sz="6" w:space="0" w:color="BFBFBF"/>'
+          + '<w:left w:val="dashed" w:sz="6" w:space="0" w:color="BFBFBF"/>'
+          + '<w:bottom w:val="dashed" w:sz="6" w:space="0" w:color="BFBFBF"/>'
+          + '<w:right w:val="dashed" w:sz="6" w:space="0" w:color="BFBFBF"/>'
+          + '</w:tblBorders>'
+        : '<w:tblBorders>'
+          + '<w:top w:val="none" w:sz="0" w:space="0" w:color="auto"/>'
+          + '<w:left w:val="none" w:sz="0" w:space="0" w:color="auto"/>'
+          + '<w:bottom w:val="none" w:sz="0" w:space="0" w:color="auto"/>'
+          + '<w:right w:val="none" w:sz="0" w:space="0" w:color="auto"/>'
+          + '</w:tblBorders>';
+
+      var inner = isPh
+        ? '<w:p><w:pPr><w:spacing w:before="0" w:after="0"/><w:jc w:val="center"/></w:pPr>'
+          + '<w:r><w:rPr><w:rFonts w:eastAsia="Microsoft YaHei"/><w:color w:val="8C8C8C"/><w:sz w:val="18"/></w:rPr>'
+          + '<w:t>插图区域</w:t></w:r></w:p>'
+        : '<w:p><w:pPr><w:spacing w:before="0" w:after="0" w:line="1" w:lineRule="exact"/></w:pPr>'
+          + '<w:r><w:rPr><w:sz w:val="2"/></w:rPr><w:t xml:space="preserve"> </w:t></w:r></w:p>';
+
+      return '<w:tbl><w:tblPr>'
+        + '<w:tblpPr w:leftFromText="0" w:rightFromText="0" w:topFromText="0" w:bottomFromText="0"'
+        + ' w:vertAnchor="page" w:horzAnchor="page" w:tblpX="' + x + '" w:tblpY="' + y + '"/>'
+        + '<w:tblOverlap w:val="overlap"/>'
+        + '<w:tblW w:w="' + w + '" w:type="dxa"/><w:tblLayout w:type="fixed"/>'
+        + bdr
+        + '<w:tblCellMar><w:top w:w="0" w:type="dxa"/><w:left w:w="0" w:type="dxa"/>'
+        + '<w:bottom w:w="0" w:type="dxa"/><w:right w:w="0" w:type="dxa"/></w:tblCellMar>'
+        + '</w:tblPr>'
+        + '<w:tblGrid><w:gridCol w:w="' + w + '"/></w:tblGrid>'
+        + '<w:tr><w:trPr><w:trHeight w:val="' + h + '" w:hRule="exact"/></w:trPr>'
+        + '<w:tc><w:tcPr><w:tcW w:w="' + w + '" w:type="dxa"/>'
+        + '<w:shd w:val="clear" w:color="auto" w:fill="' + fill + '"/>'
+        + (isPh ? '<w:vAlign w:val="center"/>' : '')
+        + '</w:tcPr>' + inner + '</w:tc></w:tr></w:tbl>';
+    }
+
+    function framedText(it) {
+      var sizePx = it.size > 0 ? it.size : 13;
+      var szHalf = Math.max(2, Math.round(sizePx * 1.5));
+      var lhPx = it.lh > 0 ? it.lh : sizePx * 1.6;
+      var lines = (it.lines && it.lines.length) ? it.lines : [{ t: it.text || '' }];
+      var jc = it.align === 'center' ? 'center' : it.align === 'right' ? 'right' : 'left';
+      var runs = '';
+      for (var L = 0; L < lines.length; L++) {
+        if (L) runs += '<w:br/>';
+        runs += '<w:t xml:space="preserve">' + xm(lines[L].t) + '</w:t>';
+      }
+      var rpr = docxRpr(it, szHalf);
+      var fw = Math.max(120, twOf(it.w));
+      var fh = Math.max(twOf(lhPx), twOf(it.h > 0 ? it.h : lhPx * lines.length));
+      return '<w:p><w:pPr>'
+        + '<w:framePr w:w="' + fw + '" w:h="' + fh + '" w:hRule="atLeast"'
+        + ' w:x="' + Math.max(0, twOf(it.x)) + '" w:y="' + Math.max(0, twOf(it.y)) + '"'
+        + ' w:hAnchor="margin" w:vAnchor="margin" w:wrap="none" w:hSpace="0" w:vSpace="0"/>'
+        + '<w:spacing w:before="0" w:after="0" w:line="' + Math.max(1, Math.round(240 * (lhPx / sizePx))) + '" w:lineRule="auto"/>'
+        + '<w:jc w:val="' + jc + '"/>'
+        + '<w:rPr>' + rpr + '</w:rPr>'
+        + '</w:pPr><w:r><w:rPr>' + rpr + '</w:rPr>' + runs + '</w:r></w:p>';
+    }
+
+    for (var i = 0; i < items.length; i++) {
+      var it = items[i];
+      body += (it.kind === 'shape' || it.kind === 'placeholder') ? floatingBox(it) : framedText(it);
+    }
+    // 浮动对象后面必须有一个普通段落收尾，否则 Word 会报错
+    body += '<w:p><w:pPr><w:spacing w:before="0" w:after="0" w:line="1" w:lineRule="exact"/></w:pPr></w:p>';
+
+    var pgBorder = '';
+    if (plan.border) {
+      var bc = hx(plan.border.color);
+      pgBorder = '<w:pgBorders w:offsetFrom="page">'
+        + '<w:top w:val="single" w:sz="12" w:space="24" w:color="' + bc + '"/>'
+        + '<w:left w:val="single" w:sz="12" w:space="24" w:color="' + bc + '"/>'
+        + '<w:bottom w:val="single" w:sz="12" w:space="24" w:color="' + bc + '"/>'
+        + '<w:right w:val="single" w:sz="12" w:space="24" w:color="' + bc + '"/>'
+        + '</w:pgBorders>';
+    }
+
+    var doc = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>'
+      + '<w:document xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main"'
+      + ' xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships">'
+      + '<w:body>' + body
+      + '<w:sectPr>'
+      + '<w:pgSz w:w="11906" w:h="16838"/>'
+      + '<w:pgMar w:top="' + MARGIN + '" w:right="' + MARGIN + '" w:bottom="' + MARGIN + '" w:left="' + MARGIN
+      + '" w:header="0" w:footer="0" w:gutter="0"/>'
+      + pgBorder
+      + '</w:sectPr></w:body></w:document>';
+
+    var ct = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>'
+      + '<Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types">'
+      + '<Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/>'
+      + '<Default Extension="xml" ContentType="application/xml"/>'
+      + '<Override PartName="/word/document.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.document.main+xml"/>'
+      + '</Types>';
+    var rels = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>'
+      + '<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">'
+      + '<Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="word/document.xml"/>'
+      + '</Relationships>';
+
+    return zipStore([
+      { name: '[Content_Types].xml', data: utf8(ct) },
+      { name: '_rels/.rels', data: utf8(rels) },
+      { name: 'word/document.xml', data: utf8(doc) }
+    ]);
+  }
+
+  /* ---------- PDF ---------- */
+  function pdfN(n) { return String(Math.round(n * 100) / 100); }
+  function pdfRgb(c) {
+    var r = rgbOf(c);
+    return pdfN(r[0]) + ' ' + pdfN(r[1]) + ' ' + pdfN(r[2]);
+  }
+  /* PDF 的 Tj 字符串是 WinAnsi 单字节编码，不能直接塞 UTF-8。
+     这里把每个字符映射到 WinAnsi（0x20-0xFF），无法表示的字符用 '?' 代替；
+     常见标点单独映射，避免导出成乱码。 */
+  var PDF_WINANSI_MAP = {
+    0x2018: 0x91, 0x2019: 0x92, 0x201C: 0x93, 0x201D: 0x94,
+    0x2013: 0x96, 0x2014: 0x97, 0x2026: 0x85, 0x2022: 0x95,
+    0x00B7: 0xB7, 0x00B0: 0xB0, 0x00A9: 0xA9, 0x00AE: 0xAE,
+    0x2122: 0x99, 0x00E9: 0xE9, 0x00E8: 0xE8, 0x00FC: 0xFC,
+    0x00F6: 0xF6, 0x00E4: 0xE4, 0x00DF: 0xDF, 0x00E7: 0xE7,
+    0x00C9: 0xC9, 0x00D6: 0xD6, 0x00DC: 0xDC, 0x00E1: 0xE1,
+    0x00ED: 0xED, 0x00F3: 0xF3, 0x00FA: 0xFA, 0x00F1: 0xF1
+  };
+  function pdfStr(s) {
+    var t = String(s == null ? '' : s);
+    var out = '';
+    for (var i = 0; i < t.length; i++) {
+      var code = t.charCodeAt(i);
+      if (code >= 0x20 && code <= 0x7E) out += t.charAt(i);
+      else if (PDF_WINANSI_MAP[code] !== undefined) out += String.fromCharCode(PDF_WINANSI_MAP[code]);
+      else if (code >= 0xA0 && code <= 0xFF) out += t.charAt(i);
+      else out += '?';   // 中文等 WinAnsi 表示不了，已由图片回退处理；这里只兜底
+    }
+    return '(' + out.replace(/\\/g, '\\\\').replace(/\(/g, '\\(').replace(/\)/g, '\\)') + ')';
+  }
+  var PDF_FONTS = [
+    { key: 'sans', base: 'Helvetica', bold: false, italic: false, res: 'F1' },
+    { key: 'sans', base: 'Helvetica-Bold', bold: true, italic: false, res: 'F2' },
+    { key: 'sans', base: 'Helvetica-Oblique', bold: false, italic: true, res: 'F3' },
+    { key: 'serif', base: 'Times-Roman', bold: false, italic: false, res: 'F4' },
+    { key: 'serif', base: 'Times-Bold', bold: true, italic: false, res: 'F5' },
+    { key: 'serif', base: 'Times-Italic', bold: false, italic: true, res: 'F6' },
+    { key: 'mono', base: 'Courier', bold: false, italic: false, res: 'F7' },
+    { key: 'mono', base: 'Courier-Bold', bold: true, italic: false, res: 'F8' }
+  ];
+  function pdfFontRes(family, bold, italic) {
+    var fam = (family === 'serif' || family === 'mono') ? family : 'sans';
+    var pick = { res: 'F1', base: 'Helvetica' };
+    for (var i = 0; i < PDF_FONTS.length; i++) {
+      var f = PDF_FONTS[i];
+      if (f.key !== fam) continue;
+      if (f.bold === !!bold && f.italic === !!italic) return f;
+      if (f.bold === !!bold && !f.italic && !italic) return f;
+      if (!f.bold && f.italic === !!italic && !bold) return f;
+      pick = f;
+    }
+    return pick;
+  }
+
+  /* 透明度：PDF 需要 ExtGState，避免半透明色块变成实心或黑色 */
+  var PDF_ALPHA_STEPS = [0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45, 0.5, 0.55, 0.6, 0.65, 0.7, 0.75, 0.8, 0.85, 0.9, 0.95, 1];
+  function pdfAlphaName(a) {
+    var best = 1, diff = 9;
+    for (var i = 0; i < PDF_ALPHA_STEPS.length; i++) {
+      var d = Math.abs(PDF_ALPHA_STEPS[i] - a);
+      if (d < diff) { diff = d; best = PDF_ALPHA_STEPS[i]; }
+    }
+    return 'GS' + String(best).replace('.', '_');
+  }
+  function gsAlpha(a) {
+    var v = a == null ? 1 : a;
+    if (v >= 0.999) return 'q ';
+    return 'q /' + pdfAlphaName(v) + ' gs ';
+  }
+
+  function makePdf(plan) {
+    var W = plan.w, H = plan.h;
+    var ops = [];
+    var imgs = [];
+    var imgIndex = 0;
+
+    function addImg(bytes, pw, ph) {
+      imgIndex++;
+      var name = 'Im' + imgIndex;
+      imgs.push({ name: name, data: bytes, w: pw, h: ph });
+      return name;
+    }
+
+    if (plan.bgJpeg && plan.bgJpeg.length) {
+      var bgName = addImg(plan.bgJpeg, plan.bgJpegW, plan.bgJpegH);
+      ops.push('q ' + pdfN(W) + ' 0 0 ' + pdfN(H) + ' 0 0 cm /' + bgName + ' Do Q');
+    } else {
+      ops.push(pdfRgb(plan.bg) + ' rg 0 0 ' + pdfN(W) + ' ' + pdfN(H) + ' re f');
+    }
+
+    for (var i = 0; i < plan.items.length; i++) {
+      var it = plan.items[i];
+
+      if (it.kind === 'shape') {
+        var sh = Math.max(1, it.h);
+        var sa = it.alpha == null ? 1 : it.alpha;
+        ops.push(gsAlpha(sa) + pdfRgb(it.fill || '#FFFFFF') + ' rg ' +
+          pdfN(it.x) + ' ' + pdfN(H - it.y - sh) + ' ' + pdfN(it.w) + ' ' + pdfN(sh) + ' re f Q');
+        continue;
+      }
+
+      if (it.kind === 'placeholder') {
+        var y1 = H - it.y - it.h;
+        ops.push('0.95 0.95 0.95 rg ' + pdfN(it.x) + ' ' + pdfN(y1) + ' ' + pdfN(it.w) + ' ' + pdfN(it.h) + ' re f');
+        ops.push('0.75 0.75 0.75 RG 1 w [6 4] 0 d ' + pdfN(it.x) + ' ' + pdfN(y1) + ' ' + pdfN(it.w) + ' ' + pdfN(it.h) + ' re S [] 0 d');
+        var lab = 'IMAGE';
+        var lsz = 9;
+        ops.push('BT /F1 ' + lsz + ' Tf 0.55 0.55 0.55 rg ' +
+          pdfN(it.x + it.w / 2 - 16) + ' ' + pdfN(y1 + it.h / 2 - 3) + ' Td ' + pdfStr(lab) + ' Tj ET');
+        continue;
+      }
+
+      // 纯英文走真文字；含中文走位图（标准 PDF 字体没有中文字形）
+      if (it.ascii && !(it.jpeg && it.jpeg.data)) {
+        var f = pdfFontRes(it.family, it.bold, it.italic);
+        var sz = it.size;
+        var lh = it.lh > 0 ? it.lh : sz * 1.6;
+        var ta = it.alpha == null ? 1 : it.alpha;
+        var lines = (it.lines && it.lines.length) ? it.lines : [{ t: it.text || '', width: 0 }];
+        for (var L = 0; L < lines.length; L++) {
+          var line = lines[L];
+          var lw = line.width || 0;
+          var x = it.x;
+          if (it.align === 'center') x = it.x + (it.w - lw) / 2;
+          else if (it.align === 'right') x = it.x + it.w - lw;
+          var baseline = it.y + L * lh + sz * 0.85;
+          var textOp = 'BT /' + f.res + ' ' + pdfN(sz) + ' Tf ' + pdfRgb(it.color) + ' rg ' +
+            pdfN(x) + ' ' + pdfN(H - baseline) + ' Td ' + pdfStr(line.t) + ' Tj ET';
+          // 透明度状态必须整体包住 BT..ET，否则 q/Q 栈会错位
+          ops.push(ta < 0.999 ? (gsAlpha(ta) + textOp + ' Q') : textOp);
+        }
+        continue;
+      }
+
+      if (it.jpeg && it.jpeg.data) {
+        var nm = addImg(it.jpeg.data, it.jpeg.w, it.jpeg.h);
+        var bh = it.h > 0 ? it.h : it.jpeg.h / 2;
+        ops.push('q ' + pdfN(it.w) + ' 0 0 ' + pdfN(bh) + ' ' + pdfN(it.x) + ' ' + pdfN(H - it.y - bh) + ' cm /' + nm + ' Do Q');
+      }
+    }
+
+    var content = ops.join('\n');
+
+    var parts = [], offsets = [], total = 0;
+    /* PDF 是字节格式：语法和字符串都必须是 Latin-1 单字节。
+       之前用 utf8() 会让 0xB7 之类的 WinAnsi 字符被编成 C2 B7 双字节，阅读器解出乱码。 */
+    function pushStr(s) {
+      var t = String(s), b = new Uint8Array(t.length);
+      for (var q = 0; q < t.length; q++) {
+        var code = t.charCodeAt(q);
+        b[q] = code > 0xFF ? 0x3F : code;
+      }
+      parts.push(b);
+      total += b.length;
+    }
+    function obj(num, bodyStr) {
+      offsets[num] = total;
+      pushStr(num + ' 0 obj\n' + bodyStr + '\nendobj\n');
+    }
+
+    var fontObjs = PDF_FONTS.map(function (f) {
+      return '<< /Type /Font /Subtype /Type1 /BaseFont /' + f.base + ' /Encoding /WinAnsiEncoding >>';
+    });
+
+    // 对象编号：1 catalog, 2 pages, 3 page, 4 contents, 5.. fonts, 之后 ExtGState, 之后 images
+    var firstFont = 5;
+    var firstGs = firstFont + fontObjs.length;
+    var gsObjs = PDF_ALPHA_STEPS.map(function (a) {
+      return '<< /Type /ExtGState /ca ' + a + ' /CA ' + a + ' >>';
+    });
+    var firstImg = firstGs + gsObjs.length;
+
+    pushStr('%PDF-1.4\n');
+    obj(1, '<< /Type /Catalog /Pages 2 0 R >>');
+    obj(2, '<< /Type /Pages /Kids [3 0 R] /Count 1 >>');
+
+    var fontDict = '<</Font <<';
+    for (var fi = 0; fi < PDF_FONTS.length; fi++) fontDict += ' /' + PDF_FONTS[fi].res + ' ' + (firstFont + fi) + ' 0 R';
+    fontDict += ' >>';
+    fontDict += ' /ExtGState <<';
+    for (var gi = 0; gi < PDF_ALPHA_STEPS.length; gi++) {
+      fontDict += ' /' + pdfAlphaName(PDF_ALPHA_STEPS[gi]) + ' ' + (firstGs + gi) + ' 0 R';
+    }
+    fontDict += ' >>';
+    var xoDict = '';
+    if (imgs.length) {
+      xoDict = ' /XObject <<';
+      for (var ii = 0; ii < imgs.length; ii++) xoDict += ' /' + imgs[ii].name + ' ' + (firstImg + ii) + ' 0 R';
+      xoDict += ' >>';
+    }
+    fontDict += xoDict + ' >>';
+
+    obj(3, '<< /Type /Page /Parent 2 0 R /MediaBox [0 0 ' + pdfN(W) + ' ' + pdfN(H) + ']'
+      + ' /Resources ' + fontDict + ' /Contents 4 0 R >>');
+
+    offsets[4] = total;
+    pushStr('4 0 obj\n<< /Length ' + utf8(content).length + ' >>\nstream\n' + content + '\nendstream\nendobj\n');
+
+    for (var fo = 0; fo < fontObjs.length; fo++) obj(firstFont + fo, fontObjs[fo]);
+    for (var go = 0; go < gsObjs.length; go++) obj(firstGs + go, gsObjs[go]);
+
+    for (var im = 0; im < imgs.length; im++) {
+      var o = imgs[im];
+      offsets[firstImg + im] = total;
+      pushStr((firstImg + im) + ' 0 obj\n<< /Type /XObject /Subtype /Image /Width ' + o.w +
+        ' /Height ' + o.h + ' /ColorSpace /DeviceRGB /BitsPerComponent 8 /Filter /DCTDecode /Length ' +
+        o.data.length + ' >>\nstream\n');
+      parts.push(o.data);
+      total += o.data.length;
+      pushStr('\nendstream\nendobj\n');
+    }
+
+    var maxObj = firstImg + imgs.length;
+    var xrefPos = total;
+    var xref = 'xref\n0 ' + maxObj + '\n0000000000 65535 f \n';
+    for (var x = 1; x < maxObj; x++) {
+      var off = String(offsets[x] == null ? 0 : offsets[x]);
+      while (off.length < 10) off = '0' + off;
+      xref += off + ' 00000 n \n';
+    }
+    pushStr(xref);
+    pushStr('trailer\n<< /Size ' + maxObj + ' /Root 1 0 R >>\nstartxref\n' + xrefPos + '\n%%EOF\n');
+    return concatBytes(parts);
+  }
+
+  var __exportLib = {
+    crc32: crc32, utf8: utf8, concatBytes: concatBytes, zipStore: zipStore,
+    makePdf: makePdf, makeDocx: makeDocx, makePptx: makePptx,
+    makePdfImage: makePdfImage, makeDocxImage: makeDocxImage, makePptxImage: makePptxImage
+  };
+  /*<<EXPORT-LIB-END>>*/
+
+  /* ================= 画布导出（Canvas2D 重绘，不依赖任何库） ================= */
+  function dataURLBytes(url) {
+    var b64 = String(url).split(',')[1] || '';
+    var bin = atob(b64);
+    var u8 = new Uint8Array(bin.length);
+    for (var i = 0; i < bin.length; i++) u8[i] = bin.charCodeAt(i);
+    return u8;
+  }
+
+  function wrapTokens(g, text, maxW) {
+    var paras = String(text == null ? '' : text).split('\n');
+    var lines = [];
+    for (var p = 0; p < paras.length; p++) {
+      var words = paras[p].split(' ');
+      var toks = [];
+      for (var i = 0; i < words.length; i++) {
+        var w = words[i];
+        if (!w) { continue; }
+        if (g.measureText(w).width <= maxW) {
+          toks.push({ t: w, glue: false });
+        } else {
+          for (var k = 0; k < w.length; k++) toks.push({ t: w.charAt(k), glue: k > 0 });
+        }
+      }
+      if (!toks.length) { lines.push(''); continue; }
+      var cur = toks[0].t;
+      var curGlue = false;
+      for (var j = 1; j < toks.length; j++) {
+        var tk = toks[j];
+        var joiner = (tk.glue || cur === '') ? '' : ' ';
+        var test = cur + joiner + tk.t;
+        if (g.measureText(test).width <= maxW) {
+          cur = test;
+        } else {
+          lines.push(cur);
+          cur = tk.t;
+        }
+      }
+      lines.push(cur);
+    }
+    return lines;
+  }
+
+  function roundRectPath(g, x, y, w, h, r) {
+    var rr = Math.max(0, Math.min(r || 0, Math.min(w, h) / 2));
+    g.beginPath();
+    g.moveTo(x + rr, y);
+    g.lineTo(x + w - rr, y);
+    g.quadraticCurveTo(x + w, y, x + w, y + rr);
+    g.lineTo(x + w, y + h - rr);
+    g.quadraticCurveTo(x + w, y + h, x + w - rr, y + h);
+    g.lineTo(x + rr, y + h);
+    g.quadraticCurveTo(x, y + h, x, y + h - rr);
+    g.lineTo(x, y + rr);
+    g.quadraticCurveTo(x, y, x + rr, y);
+    g.closePath();
+  }
+
+  function drawBlock(g, b) {
+    if (b.bg) {
+      roundRectPath(g, b.x, b.y, b.w, b.h > 0 ? b.h : 0, b.radius || 0);
+      g.fillStyle = b.bg;
+      g.fill();
+    }
+    if (b.type === 'deco') {
+      var items = decoItems(b.style, b.w, b.h, b);
+      var baseA = b.alpha == null ? 1 : b.alpha;
+      g.save();
+      g.translate(b.x, b.y);
+      for (var k = 0; k < items.length; k++) {
+        var it = items[k];
+        var col = rgba(b.color, baseA * (it.op == null ? 1 : it.op));
+        var path = new Path2D(it.d);
+        if (it.kind === 'fill') {
+          g.fillStyle = col;
+          g.fill(path);
+        } else {
+          g.strokeStyle = col;
+          g.lineWidth = it.sw;
+          g.lineCap = it.cap || 'butt';
+          g.setLineDash(it.dash || []);
+          g.stroke(path);
+        }
+      }
+      g.setLineDash([]);
+      g.restore();
+      return;
+    }
+    if (b.type === 'image') {
+      g.fillStyle = 'rgba(0,0,0,.045)';
+      g.fillRect(b.x, b.y, b.w, b.h);
+      g.strokeStyle = 'rgba(0,0,0,.28)';
+      g.setLineDash([6, 4]);
+      g.lineWidth = 1;
+      g.strokeRect(b.x + 0.5, b.y + 0.5, b.w - 1, b.h - 1);
+      g.setLineDash([]);
+      g.fillStyle = 'rgba(0,0,0,.38)';
+      g.font = '11px ' + fontFamily('sans');
+      g.textAlign = 'center';
+      g.textBaseline = 'middle';
+      g.fillText('插图区域', b.x + b.w / 2, b.y + b.h / 2);
+      return;
+    }
+    if (!b.text) return;
+
+    var size = b.size || 13;
+    var lh = size * (b.type === 'title' ? 1.16 : b.type === 'footer' ? 1.5 : 1.62);
+    g.font = (b.weight || 400) + ' ' + size + 'px ' + fontFamily(b.font);
+    g.fillStyle = rgba(b.color, b.alpha);
+    g.textBaseline = 'top';
+    g.textAlign = b.align === 'center' ? 'center' : b.align === 'right' ? 'right' : 'left';
+
+    var x = b.align === 'center' ? b.x + b.w / 2 : b.align === 'right' ? b.x + b.w : b.x;
+    var lines = wrapTokens(g, b.text, b.w);
+    for (var i = 0; i < lines.length; i++) {
+      var ly = b.y + i * lh;
+      if (b.h > 0 && ly > b.y + b.h) break;
+      g.fillText(lines[i], x, ly + 1);
+    }
+  }
+
+  function drawTree(t, scale) {
+    scale = scale || 2;
+    var cv = document.createElement('canvas');
+    cv.width = Math.round(CW * scale);
+    cv.height = Math.round(CH * scale);
+    var g = cv.getContext('2d');
+    g.scale(scale, scale);
+    g.fillStyle = t.bg;
+    g.fillRect(0, 0, CW, CH);
+    for (var i = 0; i < t.blocks.length; i++) drawBlock(g, t.blocks[i]);
+    return cv;
+  }
+
+  function currentState() {
+    var ed = document.getElementById('editor');
+    if (ed && !ed.hidden && edit) {
+      return { blocks: edit.blocks, bg: edit.bg, color: edit.color };
+    }
+    if (currentPreview) {
+      return { blocks: currentPreview.blocks, bg: currentPreview.bg, color: currentPreview.color };
+    }
+    return null;
+  }
+
+  function titleOf(t) {
+    for (var i = 0; i < t.blocks.length; i++) {
+      if (t.blocks[i].type === 'title' && t.blocks[i].text) return t.blocks[i].text;
+    }
+    return 'poster';
+  }
+
+  function downloadBlob(bytes, mime, name) {
+    var blob = new Blob([bytes], { type: mime });
+    var a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = name;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    setTimeout(function () { URL.revokeObjectURL(a.href); }, 4000);
+  }
+
+  /* ---------- 把画布状态整理成「元素级」导出计划 ---------- */
+  function renderBlockImage(b, hPx) {
+    var hh = hPx || (b.h > 0 ? b.h : (b.size || 13) * 1.6);
+    var cv = document.createElement('canvas');
+    cv.width = Math.max(2, Math.round(b.w * 2));
+    cv.height = Math.max(2, Math.round(hh * 2));
+    var g = cv.getContext('2d');
+    g.scale(2, 2);
+    var bb = {};
+    for (var k in b) { if (Object.prototype.hasOwnProperty.call(b, k)) bb[k] = b[k]; }
+    bb.x = 0; bb.y = 0;
+    drawBlock(g, bb);
+    return { data: dataURLBytes(cv.toDataURL('image/jpeg', 0.92)), w: cv.width, h: cv.height };
+  }
+
+  function buildPlan(t) {
+    var plan = { w: CW, h: CH, bg: t.bg, items: [], decoPng: null, bgJpeg: null, bgJpegW: 0, bgJpegH: 0, border: null };
+    var meas = document.createElement('canvas').getContext('2d');
+    var decos = [];
+    var i, b;
+
+    for (i = 0; i < t.blocks.length; i++) {
+      b = t.blocks[i];
+      if (b.type === 'deco') { decos.push(b); continue; }
+
+      if (b.type === 'shape') {
+        var shAlpha = alphaOf(b.bg, 1);
+        plan.items.push({
+          kind: 'shape', x: b.x, y: b.y, w: b.w, h: b.h > 0 ? b.h : 0,
+          fill: b.bg || '#FFFFFF', alpha: shAlpha, radius: b.radius || 0
+        });
+        continue;
+      }
+
+      if (b.type === 'image') {
+        plan.items.push({ kind: 'placeholder', x: b.x, y: b.y, w: b.w, h: b.h });
+        continue;
+      }
+
+      if (!b.text) continue;
+
+      var size = b.size || 13;
+      var lh = size * (b.type === 'title' ? 1.16 : b.type === 'footer' ? 1.5 : 1.62);
+      meas.font = (b.weight || 400) + ' ' + size + 'px ' + fontFamily(b.font);
+      var raw = wrapTokens(meas, b.text, b.w);
+      var lines = [];
+      var ascii = true;
+      for (var k = 0; k < raw.length; k++) {
+        lines.push({ t: raw[k], width: meas.measureText(raw[k]).width });
+        if (/[^\x00-\xFF]/.test(raw[k])) ascii = false;
+      }
+      var est = b.h > 0 ? b.h : Math.max(lh * lines.length, lh);
+      var item = {
+        kind: 'text', x: b.x, y: b.y, w: b.w, h: est,
+        lines: lines, size: size, lh: lh,
+        bold: (b.weight || 400) >= 600, italic: !!b.italic,
+        letters: b.letters || 0, align: b.align || 'left',
+        color: b.color, alpha: b.alpha == null ? 1 : b.alpha,
+        family: b.font || 'sans', ascii: ascii
+      };
+      if (!ascii) item.jpeg = renderBlockImage(b, est);
+      plan.items.push(item);
+    }
+
+    if (decos.length) {
+      var cv = document.createElement('canvas');
+      cv.width = CW * 2; cv.height = CH * 2;
+      var g2 = cv.getContext('2d');
+      g2.scale(2, 2);
+      for (i = 0; i < decos.length; i++) drawBlock(g2, decos[i]);
+      plan.decoPng = dataURLBytes(cv.toDataURL('image/png'));
+
+      var c2 = document.createElement('canvas');
+      c2.width = CW * 2; c2.height = CH * 2;
+      var g3 = c2.getContext('2d');
+      g3.scale(2, 2);
+      g3.fillStyle = t.bg;
+      g3.fillRect(0, 0, CW, CH);
+      for (i = 0; i < decos.length; i++) drawBlock(g3, decos[i]);
+      plan.bgJpeg = dataURLBytes(c2.toDataURL('image/jpeg', 0.9));
+      plan.bgJpegW = c2.width;
+      plan.bgJpegH = c2.height;
+      plan.border = { color: decos[0].color, style: decos[0].style };
+    }
+
+    return plan;
+  }
+
+  function doExport(kind, btn) {
+    var t = currentState();
+    if (!t) { setStatus('exportStatus', '没有可导出的内容'); return; }
+    var label = kind === 'pdf' ? 'PDF' : kind === 'docx' ? 'Word' : 'PPT';
+    var editorOpen = !document.getElementById('editor').hidden;
+    var statusId = editorOpen ? 'exportStatus' : 'previewStatus';
+    setStatus(statusId, '正在生成 ' + label + '…');
+    if (btn) btn.disabled = true;
+
+    setTimeout(function () {
+      try {
+        var plan = buildPlan(t);
+        var name = safeName(titleOf(t));
+        if (kind === 'pdf') {
+          downloadBlob(makePdf(plan), 'application/pdf', name + '.pdf');
+        } else if (kind === 'docx') {
+          downloadBlob(makeDocx(plan), 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', name + '.docx');
+        } else {
+          downloadBlob(makePptx(plan), 'application/vnd.openxmlformats-officedocument.presentationml.presentation', name + '.pptx');
+        }
+        setStatus(statusId, label + ' 已导出（文字可编辑）：' + name);
+      } catch (e) {
+        setStatus(statusId, label + ' 导出失败：' + (e && e.message ? e.message : e));
+      } finally {
+        if (btn) btn.disabled = false;
+      }
+    }, 30);
+  }
+
+  /* ================= 启动 ================= */
+  function detectCat(prompt) {
+    for (var cat in KEYWORDS) {
+      var words = KEYWORDS[cat];
+      for (var i = 0; i < words.length; i++) {
+        if (prompt.indexOf(words[i]) >= 0) return cat;
+      }
+    }
+    return currentCat;
+  }
+  function detectStyle(prompt) {
+    for (var i = 0; i < STYLES.length; i++) {
+      if (prompt.indexOf(STYLES[i]) >= 0) return STYLES[i];
+    }
+    return null;
+  }
+
+  function generateFromPrompt() {
+    var input = document.getElementById('prompt');
+    var prompt = input ? input.value.trim() : '';
+    var sel = document.getElementById('genCategory');
+    var cat = prompt ? detectCat(prompt) : (sel ? sel.value : currentCat);
+    var style = prompt ? detectStyle(prompt) : null;
+    var t = makeTemplate(cat, style || undefined);
+    var box = document.getElementById('genResult');
+    box.innerHTML = '<div class="grid"><div>' + cardHTML(t, true) + '</div></div>';
+    fitCards(box);
+    if (!batch[cat]) batch[cat] = genBatch(cat);
+    batch[cat].unshift(t);
+    if (batch[cat].length > BATCH_SIZE) batch[cat].pop();
+    if (cat !== currentCat) {
+      currentCat = cat;
+      renderTabs();
+    }
+    renderLibrary();
+  }
+
+  function boot() {
+    var sel = document.getElementById('genCategory');
+    if (sel) {
+      var opts = '';
+      for (var i = 0; i < CATS.length; i++) opts += '<option value="' + CATS[i] + '">' + CATS[i] + '</option>';
+      sel.innerHTML = opts;
+    }
+
+    var ds = document.getElementById('edDecoStyle');
+    if (ds) {
+      var dopts = '';
+      for (var di2 = 0; di2 < DECO_STYLES.length; di2++) {
+        dopts += '<option value="' + DECO_STYLES[di2].id + '">' + DECO_STYLES[di2].name + '</option>';
+      }
+      ds.innerHTML = dopts;
+    }
+
+    for (var j = 0; j < CATS.length; j++) batch[CATS[j]] = genBatch(CATS[j]);
+
+    renderTabs();
+    renderLibrary();
+    saveFav();
+    renderFavGrid();
+
+    document.addEventListener('click', function (e) {
+      var heart = e.target.closest ? e.target.closest('.tpl-heart') : null;
+      if (heart) {
+        toggleFav(heart.getAttribute('data-id'));
+        return;
+      }
+      var editBtn = e.target.closest ? e.target.closest('[data-edit]') : null;
+      if (editBtn) {
+        var t0 = findTemplate(editBtn.getAttribute('data-edit'));
+        if (t0) openEditor(t0);
+        return;
+      }
+      var tpl = e.target.closest ? e.target.closest('.tpl') : null;
+      if (tpl && !(e.target.closest('.modal')) && !(e.target.closest('.mini-tools'))) {
+        openPreview(tpl.getAttribute('data-id'));
+        return;
+      }
+      var tab = e.target.closest ? e.target.closest('.tab') : null;
+      if (tab && tab.getAttribute('data-cat')) {
+        switchCat(tab.getAttribute('data-cat'));
+        return;
+      }
+    });
+
+    var refreshBtn = document.getElementById('refreshBtn');
+    if (refreshBtn) refreshBtn.addEventListener('click', refreshBatch);
+    var genBtn = document.getElementById('genBtn');
+    if (genBtn) genBtn.addEventListener('click', generateFromPrompt);
+
+    var openFav = document.getElementById('openFav');
+    if (openFav) openFav.addEventListener('click', function () {
+      document.getElementById('favModal').classList.add('open');
+      renderFavGrid();
+    });
+    var closeFav = document.getElementById('closeFav');
+    if (closeFav) closeFav.addEventListener('click', function () {
+      document.getElementById('favModal').classList.remove('open');
+    });
+    var closePreview = document.getElementById('closePreview');
+    if (closePreview) closePreview.addEventListener('click', function () {
+      document.getElementById('previewModal').classList.remove('open');
+    });
+    var previewEdit = document.getElementById('previewEdit');
+    if (previewEdit) previewEdit.addEventListener('click', function () {
+      if (currentPreview) openEditor(currentPreview);
+    });
+
+    document.getElementById('previewModal').addEventListener('click', function (e) {
+      if (e.target === this) this.classList.remove('open');
+    });
+    document.getElementById('favModal').addEventListener('click', function (e) {
+      if (e.target === this) this.classList.remove('open');
+    });
+
+    var previewBody = document.getElementById('previewBody');
+    if (previewBody) previewBody.addEventListener('dblclick', function (e) {
+      if (e.target.closest && e.target.closest('.cv') && currentPreview) openEditor(currentPreview);
+    });
+
+    document.getElementById('favGrid').addEventListener('input', function (e) {
+      var el = e.target;
+      if (el && el.classList && el.classList.contains('mini-color')) {
+        var id = el.getAttribute('data-id');
+        for (var i = 0; i < favorites.length; i++) {
+          if (favorites[i].id !== id) continue;
+          var f = favorites[i];
+          f.color = el.value;
+          if (f.bgMode !== 'main') f.bg = mix(el.value, '#ffffff', 0.92); else f.bg = el.value;
+          for (var k = 0; k < f.blocks.length; k++) {
+            var b = f.blocks[k];
+            if (b.role !== 'main') continue;
+            if (b.roleKind === 'bg') b.bg = el.value; else b.color = el.value;
+          }
+          break;
+        }
+        saveFav();
+        renderFavGrid();
+      }
+    });
+
+    bindEditor();
+
+    window.addEventListener('resize', function () {
+      fitCards(document.getElementById('libGrid'));
+      fitCards(document.getElementById('favGrid'));
+      fitCards(document.getElementById('genResult'));
+      if (edit && !document.getElementById('editor').hidden) renderEditor();
+    });
+
+    // 调试钩子
+    if (location.search.indexOf('preview=fav') >= 0) {
+      if (!favorites.length) {
+        favorites = [makeTemplate('学术'), makeTemplate('活动宣传'), makeTemplate('比赛招募')];
+        saveFav();
+      }
+      renderFavGrid();
+      document.getElementById('favModal').classList.add('open');
+    }
+    if (location.search.indexOf('demo=tpl') >= 0) {
+      var first = batch[currentCat] && batch[currentCat][0];
+      if (first) openPreview(first.id);
+    }
+    if (location.search.indexOf('demo=edit') >= 0) {
+      var fe = batch[currentCat] && batch[currentCat][0];
+      if (fe) openEditor(fe);
+    }
+    if (location.search.indexOf('demo=all') >= 0) {
+      var arr = [];
+      for (var di = 0; di < DESIGNS.length; di++) arr.push(makeTemplate('学术', null, DESIGNS[di]));
+      batch['学术'] = arr;
+      currentCat = '学术';
+      renderTabs();
+      renderLibrary();
+    }
+    if (location.search.indexOf('demo=cat') >= 0) {
+      var picks = [], ci, k2;
+      for (ci = 0; ci < CATS.length; ci++) {
+        var cb = batch[CATS[ci]] || [];
+        for (k2 = 0; k2 < 2 && k2 < cb.length && picks.length < 9; k2++) picks.push({ cat: CATS[ci], t: cb[k2] });
+      }
+      var junk = '', g2 = document.getElementById('genResult');
+      for (ci = 0; ci < picks.length; ci++) {
+        junk += '<div><div class="cat-cap">' + picks[ci].cat + '</div>' + cardHTML(picks[ci].t, false) + '</div>';
+      }
+      g2.innerHTML = '<div class="grid lib-grid">' + junk + '</div>';
+      fitCards(g2);
+    }
+    if (location.search.indexOf('demo=deco') >= 0) {
+      var dfrag = '', g3 = document.getElementById('genResult');
+      for (var qi = 0; qi < DECO_STYLES.length; qi++) {
+        var qt = makeTemplate('学术', null, 'academic');
+        var keep = [];
+        for (var qk = 0; qk < qt.blocks.length; qk++) if (qt.blocks[qk].type !== 'deco') keep.push(qt.blocks[qk]);
+        qt.blocks = keep;
+        qt.blocks.push(decoBlock(DECO_STYLES[qi].id, qt.accent, 'accent'));
+        dfrag += '<div><div class="cat-cap">' + DECO_STYLES[qi].name + '</div>' + cardHTML(qt, false) + '</div>';
+      }
+      g3.innerHTML = '<div class="grid lib-grid">' + dfrag + '</div>';
+      fitCards(g3);
+    }
+    if (location.search.indexOf('demo=export') >= 0) {
+      runSelfTest();
+    }
+  }
+
+  function runSelfTest() {
+    var out = [];
+    var t = makeTemplate('学术');
+    openEditor(t);
+    out.push('design=' + t.design + ' blocks=' + edit.blocks.length);
+    var cv = null;
+    try {
+      cv = drawTree({ blocks: edit.blocks, bg: edit.bg, color: edit.color }, 2);
+      out.push('canvas=' + cv.width + 'x' + cv.height);
+      var plan = buildPlan({ blocks: edit.blocks, bg: edit.bg, color: edit.color });
+      out.push('items=' + plan.items.length + ' deco=' + (plan.decoPng ? 'yes' : 'no'));
+      out.push('pdf=' + makePdf(plan).length);
+      out.push('docx=' + makeDocx(plan).length);
+      out.push('pptx=' + makePptx(plan).length);
+    } catch (e) {
+      out.push('ERR ' + (e && e.message ? e.message : e));
+    }
+    if (cv) {
+      document.getElementById('editor').hidden = true;
+      var img = document.createElement('img');
+      img.id = 'selftest-img';
+      img.src = cv.toDataURL('image/png');
+      img.style.cssText = 'width:520px;height:735px;display:block;box-shadow:0 10px 30px rgba(0,0,0,.2);margin:0 0 10px 0';
+      document.body.insertBefore(img, document.body.firstChild);
+    }
+    var pre = document.createElement('pre');
+    pre.id = 'selftest';
+    pre.textContent = out.join('\n');
+    document.body.appendChild(pre);
+    document.title = 'SELFTEST ' + out.join(' | ');
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', boot);
+  } else {
+    boot();
+  }
+
+  /* 自测钩子：?test=undo 用来验证撤销/重做链路 */
+  window.__fcTest = function () {
+    var out = [];
+    function say(s) { out.push(s); }
+    try {
+      var items = document.querySelectorAll('.blk-item');
+      say('blocks=' + items.length);
+      say('selected=' + (selectedId ? 'yes' : 'no'));
+      items[1].dispatchEvent(new MouseEvent('click', { bubbles: true }));
+      var before = document.getElementById('edSize').value;
+      var el = document.getElementById('edSize');
+      el.value = String(Number(before) + 12);
+      el.dispatchEvent(new Event('input', { bubbles: true }));
+      say('size ' + before + ' -> ' + el.value);
+      say('undoDisabled=' + document.getElementById('edUndo').disabled);
+      document.getElementById('edUndo').click();
+      say('afterUndo=' + document.getElementById('edSize').value);
+      document.getElementById('edRedo').click();
+      say('afterRedo=' + document.getElementById('edSize').value);
+      // 图层：把最后一项拖到第一位
+      var listBefore = [];
+      var its = document.querySelectorAll('.blk-item');
+      for (var i = 0; i < its.length; i++) listBefore.push(its[i].querySelector('.btype').textContent);
+      say('orderBefore=' + listBefore.join(','));
+      moveLayer(its[its.length - 1].getAttribute('data-id'), its[0].getAttribute('data-id'));
+      var listAfter = [];
+      var its2 = document.querySelectorAll('.blk-item');
+      for (var k = 0; k < its2.length; k++) listAfter.push(its2[k].querySelector('.btype').textContent);
+      say('orderAfter=' + listAfter.join(','));
+      say('DONE');
+    } catch (e) {
+      say('ERR ' + (e && e.message ? e.message : e));
+    }
+    return out.join('\n');
+  };
+  if (location.search.indexOf('test=undo') >= 0) {
+    var runTest = function () {
+      setTimeout(function () {
+        var pre = document.createElement('pre');
+        pre.id = 'testout';
+        pre.textContent = window.__fcTest();
+        document.body.appendChild(pre);
+      }, 400);
+    };
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', runTest);
+    else runTest();
+  }
+})();
+</script>
+</body>
+</html>

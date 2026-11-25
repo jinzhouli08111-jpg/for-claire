@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>款式 C · 深夜墨绿</title>
+<style>
+  :root {
+    --font-sans: "Manrope", -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
+    --font-mono: ui-monospace, SFMono-Regular, "JetBrains Mono", Menlo, monospace;
+    --bg: #08110d;
+    --panel: #0d1a14;
+    --panel-2: #102018;
+    --line: #1c3327;
+    --line-hi: #2a4d39;
+    --text: #e6f4ec;
+    --muted: #7e9a89;
+    --faint: #4d6b5b;
+    --neon: #34d399;
+    --ease: cubic-bezier(.22,1,.36,1);
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; min-height: 100vh;
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    position: relative;
+  }
+  body::before {
+    content: ""; position: fixed; inset: 0; pointer-events: none; z-index: 0;
+    background-image:
+      linear-gradient(rgba(52,211,153,.045) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(52,211,153,.045) 1px, transparent 1px);
+    background-size: 56px 56px;
+    mask-image: radial-gradient(ellipse 70% 55% at 50% 0%, #000 20%, transparent 75%);
+  }
+  .wrap { position: relative; z-index: 1; max-width: 1080px; margin: 0 auto; padding: 56px 28px 96px; }
+
+  .top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 96px; }
+  .brand { display: flex; align-items: center; gap: 10px; font-weight: 700; letter-spacing: -.01em; }
+  .brand .sq { width: 10px; height: 10px; background: var(--neon); border-radius: 2px; box-shadow: 0 0 16px rgba(52,211,153,.8); }
+  .meta { font-family: var(--font-mono); font-size: 11px; letter-spacing: .16em; text-transform: uppercase; color: var(--faint); }
+
+  .hero { margin-bottom: 72px; }
+  .tag { font-family: var(--font-mono); font-size: 11px; letter-spacing: .2em; text-transform: uppercase; color: var(--neon); margin: 0 0 20px; }
+  h1 {
+    font-size: 88px; line-height: .92; letter-spacing: -.045em; font-weight: 700; margin: 0;
+    background: linear-gradient(180deg, #f2fff9 10%, #8fe8c2 100%);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  .sub { font-size: 16px; line-height: 28px; color: var(--muted); margin: 24px 0 0; max-width: 44ch; }
+
+  .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 16px; overflow: hidden; }
+  .cell {
+    display: flex; flex-direction: column; padding: 30px 26px 26px;
+    background: var(--panel); text-decoration: none; color: inherit;
+    transition: background-color .3s var(--ease);
+  }
+  .cell:hover { background: var(--panel-2); }
+  .cell:hover .num { color: var(--neon); }
+  .cell:hover .ttl { color: #fff; }
+  .cell:hover .arr { opacity: 1; transform: translate(0,0); }
+  .num {
+    font-family: var(--font-mono); font-size: 11px; letter-spacing: .12em;
+    color: var(--faint); margin-bottom: 26px; transition: color .3s var(--ease);
+  }
+  .ttl { font-size: 19px; line-height: 26px; font-weight: 600; margin: 0 0 10px; letter-spacing: -.01em; transition: color .3s var(--ease); }
+  .cell p { font-size: 13.5px; line-height: 22px; color: var(--muted); margin: 0; flex: 1; }
+  .arr {
+    margin-top: 22px; opacity: 0; transform: translate(-6px, 0);
+    color: var(--neon); font-family: var(--font-mono); font-size: 12px;
+    transition: opacity .3s var(--ease), transform .3s var(--ease);
+  }
+  .cell.soon { background: #0a1510; }
+  .cell.soon .ttl { color: var(--faint); }
+  .cell.soon p { color: var(--faint); }
+
+  footer {
+    margin-top: 72px; padding-top: 24px; border-top: 1px solid var(--line);
+    display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap;
+    font-family: var(--font-mono); font-size: 11px; letter-spacing: .1em; color: var(--faint);
+  }
+  @media (max-width: 900px) { .grid { grid-template-columns: 1fr 1fr; } h1 { font-size: 64px; } }
+  @media (max-width: 640px) {
+    .wrap { padding: 36px 18px 64px; }
+    .top { margin-bottom: 56px; }
+    h1 { font-size: 46px; }
+    .grid { grid-template-columns: 1fr; }
+  }
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="top">
+      <div class="brand"><span class="sq"></span>For Claire</div>
+      <div class="meta">Study Toolkit · v2</div>
+    </div>
+
+    <header class="hero">
+      <p class="tag">— 五个工具，一张书桌</p>
+      <h1>For Claire</h1>
+      <p class="sub">论文、查重、模板、幻灯与导图。少一点在网站之间搬运，多一点真正写字的时间。</p>
+    </header>
+
+    <main class="grid">
+      <a class="cell" href="./preview.html">
+        <span class="num">01 / PAPER</span>
+        <h2 class="ttl">论文打磨</h2>
+        <p>先给任务清单，再逐段改：降 AI 痕迹、学术化、语法校对，最后交三份 A 级版本。</p>
+        <span class="arr">→ 开始打磨</span>
+      </a>
+      <a class="cell" href="./ai-check.html">
+        <span class="num">02 / CHECK</span>
+        <h2 class="ttl">AI 查重</h2>
+        <p>先用在线工具粗筛，再用站内检测看「改前 → 改后」的趋势变化。</p>
+        <span class="arr">→ 去查重</span>
+      </a>
+      <a class="cell" href="./ai-template.html">
+        <span class="num">03 / TEMPLATE</span>
+        <h2 class="ttl">AI 模板</h2>
+        <p>一句话生成版式，五类模板库随手收藏微调，导出的文字都能直接改。</p>
+        <span class="arr">→ 去生成</span>
+      </a>
+      <a class="cell" href="./ppt.html">
+        <span class="num">04 / DECK</span>
+        <h2 class="ttl">智能 PPT</h2>
+        <p>说出想法，边聊边改，导出可编辑的 PPT / Word / PDF。</p>
+        <span class="arr">→ 去生成</span>
+      </a>
+      <a class="cell" href="./mindmap.html">
+        <span class="num">05 / MAP</span>
+        <h2 class="ttl">思维导图</h2>
+        <p>拖拽建图，自动排版，一张图理清一篇文章的骨架。</p>
+        <span class="arr">→ 去画导图</span>
+      </a>
+      <div class="cell soon">
+        <span class="num">06 / SOON</span>
+        <h2 class="ttl">润色翻译</h2>
+        <p>中英互译与地道润色。还在做，先把位置留出来。</p>
+        <span class="arr" style="opacity:1;transform:none;color:var(--faint);">— 敬请期待</span>
+      </div>
+    </main>
+
+    <footer><span>FOR CLAIRE · 专属于你的学习小站</span><span>2026</span></footer>
+  </div>
+</body>
+</html>

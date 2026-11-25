@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="theme-color" content="#16a34a" />
+<meta name="description" content="说出主题和页数，对话式生成演示文稿，实时预览，导出可编辑的 PPT、Word 与 PDF。" />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="智能 PPT · For Claire" />
+<meta property="og:description" content="说出主题和页数，对话式生成演示文稿，实时预览，导出可编辑的 PPT、Word 与 PDF。" />
+<meta property="og:locale" content="zh_CN" />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cpath d='M14 22 L18 4 L32 15 Z' fill='%2316a34a'/%3E%3Cpath d='M50 22 L46 4 L32 15 Z' fill='%2316a34a'/%3E%3Ccircle cx='32' cy='37' r='21' fill='%2322c55e'/%3E%3Ccircle cx='25' cy='35' r='3' fill='%231f2a23'/%3E%3Ccircle cx='39' cy='35' r='3' fill='%231f2a23'/%3E%3C/svg%3E" />
+<link rel="stylesheet" href="/ds.css" />
+<title>智能 PPT · For Claire</title>
+<style>
+  :root {
+    --bg: #f5f9f6;
+    --panel: #ffffff;
+    --ink: #1f2a23;
+    --muted: #6b7a70;
+    --line: #e3ebe5;
+    --brand: #16a34a;
+    --brand-dark: #15803d;
+    --brand-soft: #e9f7ee;
+    --teal: #0d9488;
+    --warn: #b45309;
+  }
+  * { box-sizing: border-box; }
+  html, body { height: 100%; }
+  body {
+    margin: 0;
+    background:
+      radial-gradient(circle at 12% 8%, #e4f6ea 0%, transparent 42%),
+      radial-gradient(circle at 88% 4%, #e2f6f2 0%, transparent 40%),
+      var(--bg);
+    color: var(--ink);
+    font-family: var(--font);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+
+  /* ---------- 顶栏 ---------- */
+  header {
+    display: flex;
+    align-items: center;
+    gap: var(--s-100);
+    height: 64px;
+    padding: 0 var(--s-300);
+    background: rgba(255, 255, 255, .82);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--line);
+    position: sticky;
+    top: 0;
+    z-index: 30;
+    flex: 0 0 auto;
+  }
+  .logo {
+    font-family: Georgia, "Songti SC", serif;
+    font-style: italic;
+    font-weight: 700;
+    font-size: 18px;
+    color: var(--brand-dark);
+    text-decoration: none;
+    white-space: nowrap;
+  }
+  .logo span { color: var(--muted); font-style: normal; font-weight: 500; font-size: 14px; margin-left: 8px; }
+
+  .top-actions { margin-left: auto; display: flex; gap: 8px; align-items: center; }
+  .btn {
+    appearance: none;
+    border: 1px solid var(--line);
+    background: #fff;
+    color: var(--ink);
+    font: 600 13px/1 inherit;
+    padding: 8px 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all var(--dur) var(--ease);
+    white-space: nowrap;
+  }
+  .btn:hover { border-color: var(--brand); color: var(--brand-dark); }
+  .btn:disabled { opacity: .5; cursor: not-allowed; }
+  .btn.primary { background: var(--brand); border-color: var(--brand); color: #fff; }
+  .btn.primary:hover { background: var(--brand-dark); border-color: var(--brand-dark); }
+  .btn.sm { padding: 8px 12px; font-size: 12px; }
+
+  /* ---------- 主体：左对话 / 右预览 ---------- */
+  .layout {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 400px 1fr;
+    gap: 0;
+    min-height: 0;
+    overflow: hidden;
+  }
+  @media (max-width: 900px) {
+    .layout { grid-template-columns: 1fr; grid-template-rows: 1fr auto; }
+  }
+
+  /* 对话区 */
+  .chat-col {
+    display: flex;
+    flex-direction: column;
+    border-right: 1px solid var(--line);
+    background: rgba(255,255,255,.6);
+    min-height: 0;
+  }
+  .msgs {
+    flex: 1;
+    overflow-y: auto;
+    padding: 16px 16px 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .msg { display: flex; gap: 8px; max-width: 100%; }
+  .msg .who {
+    flex: 0 0 auto;
+    width: 26px; height: 26px;
+    border-radius: 50%;
+    display: grid; place-items: center;
+    font-size: 12px; font-weight: 700;
+    margin-top: 2px;
+  }
+  .msg.ai .who { background: var(--brand-soft); color: var(--brand-dark); }
+  .msg.me .who { background: #eef1f0; color: var(--muted); }
+  .bubble {
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 12px 12px;
+    font-size: 14px;
+    line-height: 1.62;
+    white-space: pre-wrap;
+    word-break: break-word;
+  }
+  .msg.me { flex-direction: row-reverse; }
+  .msg.me .bubble { background: var(--brand-soft); border-color: #d3eddd; }
+  .bubble .hint { display: block; margin-top: 8px; font-size: 12px; color: var(--muted); }
+
+  /* 输入区 */
+  .composer {
+    border-top: 1px solid var(--line);
+    padding: 12px 12px 12px;
+    background: #fff;
+  }
+  .composer textarea {
+    width: 100%;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 12px 12px;
+    font: 13.5px/1.6 inherit;
+    resize: none;
+    min-height: 62px;
+    max-height: 160px;
+    outline: none;
+    transition: border-color var(--dur) var(--ease);
+  }
+  .composer textarea:focus { border-color: var(--brand); }
+  .composer .row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 8px;
+  }
+  .composer .tip { font-size: 12px; color: var(--muted); flex: 1; }
+  .quicks { display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: 8px; }
+  .quick {
+    border: 1px solid var(--line);
+    background: #fbfdfc;
+    color: var(--muted);
+    font: 12px/1 inherit;
+    padding: 4px 8px;
+    border-radius: 999px;
+    cursor: pointer;
+    transition: all var(--dur) var(--ease);
+  }
+  .quick:hover { border-color: var(--brand); color: var(--brand-dark); background: #f2fbf5; }
+
+  /* 预览区 */
+  .preview-col {
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+    background: #e8eeea;
+  }
+  .pv-bar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    border-bottom: 1px solid #d8e2dc;
+    background: rgba(255,255,255,.7);
+    flex-wrap: wrap;
+  }
+  .pv-bar .name { font-size: 14px; font-weight: 600; }
+  .pv-bar .spacer { flex: 1; }
+  .anim-switch {
+    display: inline-flex; align-items: center; gap: 4px; cursor: pointer;
+    font-size: 12px; color: var(--muted); user-select: none;
+    border: 1px solid var(--line); background: #fff; border-radius: 8px; padding: 4px 8px;
+  }
+  .anim-switch:hover { border-color: var(--brand); color: var(--brand-dark); }
+  .anim-switch input { accent-color: var(--brand); width: 14px; height: 14px; margin: 0; }
+  .anim-switch.on { border-color: #bfe6cd; background: var(--brand-soft); color: var(--brand-dark); font-weight: 600; }
+  .pager { display: flex; align-items: center; gap: 4px; font-size: 12px; color: var(--muted); }
+  .pager button {
+    border: 1px solid var(--line); background: #fff; border-radius: 8px;
+    width: 26px; height: 26px; cursor: pointer; font-size: 14px; line-height: 1;
+    display: grid; place-items: center;
+  }
+  .pager button:disabled { opacity: .4; cursor: default; }
+
+  .stage {
+    flex: 1;
+    overflow: auto;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 24px;
+    min-height: 0;
+  }
+  .paper {
+    background: #fff;
+    box-shadow: 0 10px 36px rgba(16,24,40,.16), 0 1px 0 rgba(16,24,40,.05);
+    position: relative;
+    flex: 0 0 auto;
+    max-width: 100%;
+  }
+  .paper svg { display: block; width: 100%; height: auto; }
+
+  .empty {
+    margin: auto;
+    text-align: center;
+    color: var(--muted);
+    font-size: 14px;
+    line-height: 1.8;
+    max-width: 320px;
+  }
+  .empty b { color: var(--ink); display: block; font-size: 16px; margin-bottom: 8px; }
+
+  /* 主题 */
+  .themes { display: flex; gap: 4px; align-items: center; }
+  .sw {
+    width: 24px; height: 24px; border-radius: 8px; cursor: pointer;
+    border: 2px solid transparent; transition: all var(--dur) var(--ease);
+  }
+  .sw:hover { transform: translateY(-1px); }
+  .sw.active { border-color: var(--ink); }
+
+  /* 状态条 */
+  #status {
+    font-size: 12px;
+    color: var(--muted);
+    padding: 0 16px 8px;
+    min-height: 18px;
+  }
+
+  .spinner {
+    display: inline-block;
+    width: 12px; height: 12px;
+    border: 2px solid #cfe6d8;
+    border-top-color: var(--brand);
+    border-radius: 50%;
+    animation: spin .7s linear infinite;
+    vertical-align: -2px;
+    margin-right: 4px;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  @media (max-width: 900px) {
+    .stage { padding: 12px; }
+    .chat-col { border-right: 0; border-bottom: 1px solid var(--line); max-height: 52vh; }
+  }
+
+  /* __responsive__ */
+  @media (max-width: 640px) {
+    header { padding: 0 var(--s-200); gap: var(--s-75); }
+    .logo { font-size: 16px; }
+    .logo span { display: none; }
+  }
+</style>
+</head>
+<body>
+  <a class="skip-link" href="#main">跳到主要内容</a>
+<header>
+  <a class="logo" href="./">For Claire<span>智能 PPT</span></a>
+  <div class="top-actions">
+    <div class="themes" id="themes" title="换配色"></div>
+    <button class="btn sm" id="btn-reset">重新开始</button>
+  </div>
+</header>
+
+<div id="main" role="main" class="layout">
+
+  <!-- 左：对话 -->
+  <section class="chat-col">
+    <div class="msgs" id="msgs"></div>
+
+    <div class="composer">
+      <div class="quicks" id="quicks"></div>
+      <textarea id="input" rows="2" placeholder="说说你想要什么 PPT，比如：给大二学生讲「时间管理」，8 页"></textarea>
+      <div class="row">
+        <span class="tip" id="tip">Enter 发送 · Shift+Enter 换行</span>
+        <button class="btn primary" id="btn-send">发送</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- 右：预览 -->
+  <section class="preview-col">
+    <div class="pv-bar">
+      <span class="name" id="deck-name">还没有内容</span>
+      <span class="pager">
+        <button id="prev" disabled>‹</button>
+        <span id="page-label">–</span>
+        <button id="next" disabled>›</button>
+      </span>
+      <span class="spacer"></span>
+      <label class="anim-switch" title="导出时给每个元素加上入场动画">
+        <input type="checkbox" id="chk-anim" checked />
+        <span>动画</span>
+      </label>
+      <button class="btn sm" id="btn-ppt" disabled>导出 PPT</button>
+      <button class="btn sm" id="btn-pdf" disabled>PDF</button>
+      <button class="btn sm" id="btn-docx" disabled>Word</button>
+    </div>
+    <div class="stage" id="stage">
+      <div class="empty" id="empty">
+        <b>先说说的想法</b>
+        左边告诉我这份 PPT 讲什么、给谁看、大概几页。<br>
+        我会先问几个关键问题，确认后再出稿。
+      </div>
+    </div>
+    <div id="status"></div>
+  </section>
+
+</div>
+
+<script src="/ppt-engine.js"></script>
+<script src="/ppt-export.js"></script>
+<script>
+(function () {
+  'use strict';
+  var E = window.PPTEngine;
+
+  var $ = function (id) { return document.getElementById(id); };
+  var msgs = $('msgs');
+  var input = $('input');
+  var stage = $('stage');
+  var empty = $('empty');
+
+  /* ---------------- 状态 ---------------- */
+  var state = {
+    history: [],        // {role:'user'|'assistant', content:string}
+    deck: null,         // 当前 deck 规格
+    rendered: null,     // renderDeck 结果
+    page: 0,
+    themeId: 'old-money',
+    busy: false,
+    disabled: false,
+    anim: true
+  };
+
+  var THEME_KEY = 'ppt.theme.v1';
+  try {
+    var saved = localStorage.getItem(THEME_KEY);
+    if (saved && E.PRESETS.some(function (p) { return p.id === saved; })) state.themeId = saved;
+  } catch (e) {}
+
+  function currentTheme() {
+    return E.PRESETS.filter(function (p) { return p.id === state.themeId; })[0] || E.PRESETS[0];
+  }
+
+  /* ---------------- 主题色块 ---------------- */
+  function buildThemes() {
+    var box = $('themes');
+    box.innerHTML = '';
+    E.PRESETS.forEach(function (p) {
+      var d = document.createElement('div');
+      d.className = 'sw' + (p.id === state.themeId ? ' active' : '');
+      d.title = p.name;
+      d.style.background = 'linear-gradient(135deg, ' + p.main + ' 0%, ' + p.main + ' 52%, ' + p.accent + ' 52%, ' + p.accent + ' 100%)';
+      d.onclick = function () {
+        state.themeId = p.id;
+        try { localStorage.setItem(THEME_KEY, p.id); } catch (e) {}
+        buildThemes();
+        rerender();
+      };
+      box.appendChild(d);
+    });
+  }
+
+  /* ---------------- 消息 ---------------- */
+  function addMsg(role, text) {
+    var wrap = document.createElement('div');
+    wrap.className = 'msg ' + (role === 'user' ? 'me' : 'ai');
+    var who = document.createElement('div');
+    who.className = 'who';
+    who.textContent = role === 'user' ? '你' : 'AI';
+    var bub = document.createElement('div');
+    bub.className = 'bubble';
+    bub.textContent = text;
+    wrap.appendChild(who);
+    wrap.appendChild(bub);
+    msgs.appendChild(wrap);
+    msgs.scrollTop = msgs.scrollHeight;
+    return bub;
+  }
+
+  function addTyping() {
+    var wrap = document.createElement('div');
+    wrap.className = 'msg ai';
+    wrap.id = 'typing';
+    var who = document.createElement('div');
+    who.className = 'who';
+    who.textContent = 'AI';
+    var bub = document.createElement('div');
+    bub.className = 'bubble';
+    bub.innerHTML = '<span class="spinner"></span>正在思考…';
+    wrap.appendChild(who); wrap.appendChild(bub);
+    msgs.appendChild(wrap);
+    msgs.scrollTop = msgs.scrollHeight;
+  }
+  function removeTyping() {
+    var t = $('typing');
+    if (t && t.parentNode) t.parentNode.removeChild(t);
+  }
+
+  function setStatus(t) { $('status').textContent = t || ''; }
+
+  function setBusy(v) {
+    state.busy = v;
+    $('btn-send').disabled = v;
+    input.disabled = v;
+    $('tip').textContent = v ? '生成中，请稍候…' : 'Enter 发送 · Shift+Enter 换行';
+  }
+
+  /* ---------------- 渲染预览 ---------------- */
+  function blockToSVG(blocks, p, w, h) {
+    var out = [];
+    out.push('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ' + w + ' ' + h + '" width="' + w + '" height="' + h + '">');
+    out.push('<rect x="0" y="0" width="' + w + '" height="' + h + '" fill="' + (p.bg || '#fff') + '"/>');
+
+    blocks.forEach(function (b) {
+      if (b.type === 'shape') {
+        out.push('<rect x="' + b.x + '" y="' + b.y + '" width="' + Math.max(0, b.w) + '" height="' + Math.max(0, b.h) + '" fill="' + (b.bg || '#000') + '"' +
+          (b.radius ? ' rx="' + b.radius + '"' : '') + ' opacity="' + (b.alpha == null ? 1 : b.alpha) + '"/>');
+        return;
+      }
+      if (b.type === 'placeholder') {
+        out.push('<rect x="' + b.x + '" y="' + b.y + '" width="' + b.w + '" height="' + b.h + '" fill="none" stroke="' + p.line + '" stroke-dasharray="4,4"/>');
+        return;
+      }
+      if (!b.text) return;
+
+      /* 文字：按宽度手工折行，模拟 canvas 量宽 */
+      var size = b.size || 13;
+      var charsPerLine = Math.max(6, Math.floor(b.w / (size * (b.font === 'serif' ? 0.62 : 0.58))));
+      var rawLines = String(b.text).split('\n');
+      var lines = [];
+      rawLines.forEach(function (para) {
+        if (!para) { lines.push(''); return; }
+        var cur = '';
+        Array.from(para).forEach(function (ch) {
+          cur += ch;
+          if (cur.length >= charsPerLine) { lines.push(cur); cur = ''; }
+        });
+        if (cur) lines.push(cur);
+      });
+
+      var lh = size * (b.type === 'title' ? 1.28 : 1.62);
+      var anchor = b.align === 'center' ? 'middle' : (b.align === 'right' ? 'end' : 'start');
+      var tx = b.align === 'center' ? b.x + b.w / 2 : (b.align === 'right' ? b.x + b.w : b.x);
+      var fam = b.font === 'serif'
+        ? 'Georgia, Times New Roman, Songti SC, SimSun, serif'
+        : '-apple-system, Segoe UI, PingFang SC, Microsoft YaHei, sans-serif';
+
+      out.push('<text x="' + tx + '" y="' + (b.y + size) + '" font-family="' + fam + '" font-size="' + size +
+        '" font-weight="' + (b.weight || 400) + '"' +
+        (b.italic ? ' font-style="italic"' : '') +
+        (b.letters ? ' letter-spacing="' + b.letters + '"' : '') +
+        ' text-anchor="' + anchor + '" fill="' + (b.color || '#000') + '" opacity="' + (b.alpha == null ? 1 : b.alpha) + '">');
+
+      lines.forEach(function (ln, i) {
+        out.push('<tspan x="' + tx + '" dy="' + (i === 0 ? 0 : lh) + '">' + escapeXML(ln || ' ') + '</tspan>');
+      });
+      out.push('</text>');
+    });
+
+    out.push('</svg>');
+    return out.join('');
+  }
+
+  function escapeXML(s) {
+    return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  }
+
+  function paint() {
+    if (!state.rendered || !state.rendered.pages.length) return;
+    var page = state.rendered.pages[state.page];
+    var p = state.rendered.palette;
+    if (empty.parentNode) empty.parentNode.removeChild(empty);
+
+    var old = stage.querySelector('.paper');
+    if (old) old.parentNode.removeChild(old);
+
+    var paper = document.createElement('div');
+    paper.className = 'paper';
+    paper.innerHTML = blockToSVG(page.blocks, p, state.rendered.w, state.rendered.h);
+    stage.appendChild(paper);
+
+    $('page-label').textContent = (state.page + 1) + ' / ' + state.rendered.pages.length;
+    $('prev').disabled = state.page <= 0;
+    $('next').disabled = state.page >= state.rendered.pages.length - 1;
+
+    var has = !!state.deck;
+    $('btn-ppt').disabled = !has;
+    $('btn-pdf').disabled = !has;
+    $('btn-docx').disabled = !has;
+  }
+
+  function rerender() {
+    if (!state.deck) return;
+    state.rendered = E.renderDeck({
+      title: state.deck.title,
+      slides: state.deck.slides,
+      theme: currentTheme()
+    });
+    if (state.page >= state.rendered.pages.length) state.page = state.rendered.pages.length - 1;
+    $('deck-name').textContent = state.deck.title || '未命名';
+    paint();
+  }
+
+  /* ---------------- 调后端 ---------------- */
+  async function callAI(userText) {
+    state.history.push({ role: 'user', content: userText });
+
+    var res = await fetch('/api/ppt-chat', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        messages: state.history.slice(-12),
+        has_deck: !!state.deck,
+        current_deck: state.deck ? { title: state.deck.title, page_count: state.deck.slides.length } : null
+      })
+    });
+
+    if (!res.ok) {
+      var t = await res.text();
+      throw new Error('接口错误 ' + res.status + '：' + t.slice(0, 200));
+    }
+
+    var data = await res.json();
+    if (data.error) throw new Error(data.error);
+    return data;
+  }
+
+  /* ---------------- 发送 ---------------- */
+  async function send() {
+    var text = input.value.trim();
+    if (!text || state.busy) return;
+
+    input.value = '';
+    addMsg('user', text);
+    addTyping();
+    setBusy(true);
+    setStatus('');
+
+    try {
+      var data = await callAI(text);
+      removeTyping();
+
+      var reply = data.reply || '';
+      state.history.push({ role: 'assistant', content: reply });
+
+      if (data.deck) {
+        var clean = E.sanitizeDeck(data.deck);
+        if (clean) {
+          state.deck = clean;
+          state.page = 0;
+          addMsg('assistant', reply || '已经生成，右侧可以预览。想改哪里直接说。');
+          rerender();
+          setStatus('共 ' + clean.slides.length + ' 页 · 可以继续提要求修改');
+        } else {
+          addMsg('assistant', reply || '生成的方案格式有问题，能再说详细一点吗？');
+        }
+      } else {
+        addMsg('assistant', reply || '（没有返回内容）');
+      }
+    } catch (err) {
+      removeTyping();
+      addMsg('assistant', '出错了：' + (err && err.message ? err.message : String(err)));
+      setStatus('请求失败，可以重试');
+      state.history.pop();
+    } finally {
+      setBusy(false);
+      input.focus();
+    }
+  }
+
+  /* ---------------- 导出 ----------------
+   * 优先调用 Python 服务（真实 ppt-master 转换，质量高）
+   * 服务未配置或失败时，回退到本地纯前端导出（保证可用）
+   */
+  function downloadBlob(blob, mime, name) {
+    var a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = name;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    setTimeout(function () { URL.revokeObjectURL(a.href); }, 4000);
+  }
+
+  /* 用服务端生成（返回 pptx 二进制） */
+  async function buildOnServer(btn) {
+    var slides = state.deck.slides.map(function (s) {
+      var o = { layout: s.layout };
+      ['kicker', 'title', 'subtitle', 'hook', 'hookSub', 'seal', 'body', 'pull', 'attribution', 'translation'].forEach(function (k) {
+        if (s[k]) o[k] = s[k];
+      });
+      if (s.lines) o.lines = s.lines;
+      if (s.items) o.items = s.items;
+      if (s.left) o.left = s.left;
+      if (s.right) o.right = s.right;
+      return o;
+    });
+
+    var res = await fetch('/api/ppt-build', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        topic: state.deck.title || '未命名',
+        audience: '普通读者',
+        pages: slides.length,
+        style: state.themeId || 'old-money',
+        outline: { title: state.deck.title, slides: slides }
+      })
+    });
+
+    if (!res.ok) {
+      var msg = '';
+      try { var j = await res.json(); msg = j.error || JSON.stringify(j); } catch (e) {}
+      throw new Error(msg || ('服务返回 ' + res.status));
+    }
+
+    var blob = await res.blob();
+    var pages = res.headers.get('x-deck-pages') || '?';
+    var secs = res.headers.get('x-deck-seconds') || '?';
+    var fallback = res.headers.get('x-deck-fallback') || '';
+    var name = (state.deck.title || 'ppt').replace(/[\\/:*?"<>|]/g, '-').slice(0, 50);
+    downloadBlob(blob, 'application/vnd.openxmlformats-officedocument.presentationml.presentation', name + '.pptx');
+    return pages + ' 页 · ' + secs + ' 秒' + (fallback && fallback !== 'none' ? ' · 部分页用了简版' : '');
+  }
+
+  function exportKind(kind, btn) {
+    if (!state.deck || !state.rendered) return;
+    var label = kind === 'pdf' ? 'PDF' : kind === 'docx' ? 'Word' : 'PPT';
+    btn.disabled = true;
+
+    /* 一律走前端引擎导出，保证页面预览与文件完全一致（横屏 16:9、带动画）。
+       服务端排版是旧版接口，尺寸与本地引擎不同步，已不再使用。 */
+    localExport(kind, btn);
+  }
+
+  /* 本地导出（纯前端，秒出） */
+  function localExport(kind, btn) {
+    var label = kind === 'pdf' ? 'PDF' : kind === 'docx' ? 'Word' : 'PPT';
+    setStatus('正在生成 ' + label + '…');
+
+    setTimeout(function () {
+      try {
+        var exporter = window.PPTExport;
+        if (!exporter) throw new Error('导出引擎未加载');
+
+        var wantAnim = state.anim;
+        var pages = state.rendered.pages.map(function (pg) {
+          var bl = pg.blocks;
+          if (!wantAnim) {
+            bl = bl.map(function (b) {
+              var c = {};
+              for (var k in b) { if (Object.prototype.hasOwnProperty.call(b, k) && k !== 'anim') c[k] = b[k]; }
+              return c;
+            });
+          }
+          return { blocks: bl, bg: state.rendered.palette.bg };
+        });
+
+        var name = (state.deck.title || 'ppt').replace(/[\\/:*?"<>|]/g, '-').slice(0, 50);
+        var out = exporter.exportDeck(pages, kind, name, {
+          w: state.rendered.w,
+          h: state.rendered.h
+        });
+        downloadBlob(out.blob, out.mime, out.filename);
+        setStatus(label + ' 已生成（本地）');
+      } catch (e) {
+        setStatus('导出失败：' + (e && e.message ? e.message : e));
+        console.error(e);
+      } finally {
+        btn.disabled = false;
+      }
+    }, 30);
+  }
+
+  /* ---------------- 快捷提示 ---------------- */
+  var QUICKS = [
+    '做一个给大一新生的时间管理 PPT，8 页',
+    '老钱风，讲穿衣品味，6 页',
+    '给老板汇报季度数据，10 页',
+    '改成藏青色，标题再大一点'
+  ];
+  function buildQuicks() {
+    var box = $('quicks');
+    QUICKS.forEach(function (q) {
+      var b = document.createElement('button');
+      b.className = 'quick';
+      b.textContent = q;
+      b.onclick = function () {
+        input.value = q;
+        input.focus();
+      };
+      box.appendChild(b);
+    });
+  }
+
+  /* ---------------- 事件 ---------------- */
+  $('btn-send').onclick = send;
+  input.addEventListener('keydown', function (e) {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      send();
+    }
+  });
+  $('prev').onclick = function () { if (state.page > 0) { state.page--; paint(); } };
+  $('next').onclick = function () {
+    if (state.rendered && state.page < state.rendered.pages.length - 1) { state.page++; paint(); }
+  };
+  $('btn-ppt').onclick = function () { exportKind('pptx', this); };
+  $('btn-pdf').onclick = function () { exportKind('pdf', this); };
+  $('btn-docx').onclick = function () { exportKind('docx', this); };
+
+  /* 动画开关：只管导出 PPT 时要不要写入动画 */
+  var chkAnim = $('chk-anim');
+  if (chkAnim) {
+    state.anim = chkAnim.checked;
+    var syncAnim = function () {
+      state.anim = chkAnim.checked;
+      var lab = chkAnim.closest ? chkAnim.closest('.anim-switch') : null;
+      if (lab) lab.classList.toggle('on', state.anim);
+    };
+    chkAnim.addEventListener('change', syncAnim);
+    syncAnim();
+  }
+  $('btn-reset').onclick = function () {
+    state.history = [];
+    state.deck = null;
+    state.rendered = null;
+    state.page = 0;
+    msgs.innerHTML = '';
+    stage.innerHTML = '';
+    var e2 = document.createElement('div');
+    e2.className = 'empty';
+    e2.id = 'empty';
+    e2.innerHTML = '<b>先说说的想法</b>左边告诉我这份 PPT 讲什么、给谁看、大概几页。<br>我会先问几个关键问题，确认后再出稿。';
+    stage.appendChild(e2);
+    empty = e2;
+    $('deck-name').textContent = '还没有内容';
+    $('page-label').textContent = '–';
+    $('prev').disabled = true;
+    $('next').disabled = true;
+    ['btn-ppt', 'btn-pdf', 'btn-docx'].forEach(function (id) { $(id).disabled = true; });
+    setStatus('');
+    greet();
+  };
+
+  /* ---------------- 开场 ---------------- */
+  function greet() {
+    addMsg('assistant', '你好，我来帮你做 PPT。\n\n先说说你的想法吧：这份 PPT 讲什么、给谁看、大概多少页？\n\n如果有特定风格偏好（比如老钱风、极简、商务），也可以直接说。');
+  }
+
+  buildThemes();
+  buildQuicks();
+  greet();
+  input.focus();
+})();
+</script>
+</body>
+</html>

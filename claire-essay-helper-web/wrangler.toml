@@ -1,0 +1,11 @@
+﻿name = "lijinzhou-love-claire"
+main = "worker.js"
+compatibility_date = "2025-01-01"
+workers_dev = true
+
+# 自定义域名（由 wrangler 自动创建 DNS 记录与证书）
+routes = [
+  { pattern = "ljz-love-claire.asia", custom_domain = true },
+  { pattern = "www.ljz-love-claire.asia", custom_domain = true }
+]
+

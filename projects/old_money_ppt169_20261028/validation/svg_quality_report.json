@@ -1,0 +1,754 @@
+{
+  "schema": "ppt-master.svg-quality-report.v1",
+  "stage": "final",
+  "target": "D:\\dsworkplace_eassy\\projects\\old_money_ppt169_20261028",
+  "source_fingerprint": {
+    "algorithm": "sha256",
+    "digest": "2938434ddce4a37192fb90db7f1d86a9847ea0587f492a939d5095fd30266b2d",
+    "file_count": 8,
+    "files": [
+      {
+        "file": "01_cover.svg",
+        "sha256": "21bdf9660d1c2ef006627a412f14ddccc87f5b199db16ef45865cf856b7586af"
+      },
+      {
+        "file": "02_definition.svg",
+        "sha256": "dd0c191643f4e67fd78e8aa1b89d4dcd36cad8f7a10c359deb90c15bd17be068"
+      },
+      {
+        "file": "03_palette.svg",
+        "sha256": "eaaf222ae352009535545856c862168d35698a797c1ada9eaa33650fb08ebf58"
+      },
+      {
+        "file": "04_material.svg",
+        "sha256": "fff7b21114952daea19881825fe842d0c3b40c46b236f47ec2b1b1053b40032a"
+      },
+      {
+        "file": "05_quote.svg",
+        "sha256": "6af054f7bdd384f60b5ac6c4fe76ba8be9f29829b121cb16aba1c7c3f58478de"
+      },
+      {
+        "file": "06_contrasts.svg",
+        "sha256": "788a7e8b7cae8637730767334fe534d61b0c1d62f6bf6b604b24145fcf78d0c6"
+      },
+      {
+        "file": "07_why_now.svg",
+        "sha256": "9cd1948e82ccda8872d52993a9a96318934939f8914bfaecf159dd37696efbc2"
+      },
+      {
+        "file": "08_ending.svg",
+        "sha256": "ed36b69606b8a3eb22c3db3bbbbf06ca3d7c3b57e10251153a0ac4f78ef305f1"
+      }
+    ]
+  },
+  "summary": {
+    "total": 8,
+    "passed": 0,
+    "warnings": 8,
+    "errors": 0
+  },
+  "issue_types": {},
+  "categories": {
+    "blocking": {
+      "count": 0,
+      "issues": []
+    },
+    "introduced": {
+      "count": 13,
+      "issues": [
+        {
+          "file": "01_cover.svg",
+          "message": "Noncanonical compact authoring: Authoring SVG contains noncanonical or redundant inherited style declarations (8 change(s)); examples (group:attr None -> value hoists the shared value onto that group; child:attr value -> None drops the copy the child now inherits): cover-title:font-family None -> 'Georgia, SimSun'; text[7]:font-family 'Georgia, SimSun' -> None; text[8]:font-family 'Georgia, SimSun' -> None (advisory; normalize with `python3 scripts/compact_svg_styles.py <svg_output> --inplace`, re-stamp pages that carry Chart/Table fallbacks, and rerun the final gate, or leave the explicit form)"
+        },
+        {
+          "file": "02_definition.svg",
+          "message": "Noncanonical compact authoring: Authoring SVG contains noncanonical or redundant inherited style declarations (15 change(s)); examples (group:attr None -> value hoists the shared value onto that group; child:attr value -> None drops the copy the child now inherits): text[4]:font-family 'Arial, Microsoft YaHei' -> None; text[11]:font-family 'Arial, Microsoft YaHei' -> None; text[12]:font-family 'Arial, Microsoft YaHei' -> None (advisory; normalize with `python3 scripts/compact_svg_styles.py <svg_output> --inplace`, re-stamp pages that carry Chart/Table fallbacks, and rerun the final gate, or leave the explicit form)"
+        },
+        {
+          "file": "02_definition.svg",
+          "message": "Detected 2 paragraph-like line run(s) split across sibling <text> elements (<g id=\"lead\"> x=96.0, y=266.0..346.0, 3 lines; <g id=\"lead\"> x=96.0, y=416.0..446.0, 2 lines). If each run is one prose paragraph, combine it into one <text>: keep its first line as direct text and use direct <tspan> children with the parent x and positive relative dy values for later lines. An all-<tspan> form may start with dy=\"0\". Keep semantically independent text frames separate."
+        },
+        {
+          "file": "03_palette.svg",
+          "message": "Noncanonical compact authoring: Authoring SVG contains noncanonical or redundant inherited style declarations (10 change(s)); examples (group:attr None -> value hoists the shared value onto that group; child:attr value -> None drops the copy the child now inherits): text[4]:font-family 'Arial, Microsoft YaHei' -> None; text[8]:font-family 'Arial, Microsoft YaHei' -> None; text[12]:font-family 'Arial, Microsoft YaHei' -> None (advisory; normalize with `python3 scripts/compact_svg_styles.py <svg_output> --inplace`, re-stamp pages that carry Chart/Table fallbacks, and rerun the final gate, or leave the explicit form)"
+        },
+        {
+          "file": "04_material.svg",
+          "message": "Noncanonical compact authoring: Authoring SVG contains noncanonical or redundant inherited style declarations (5 change(s)); examples (group:attr None -> value hoists the shared value onto that group; child:attr value -> None drops the copy the child now inherits): text[4]:font-family 'Arial, Microsoft YaHei' -> None; text[8]:font-family 'Arial, Microsoft YaHei' -> None; text[12]:font-family 'Arial, Microsoft YaHei' -> None (advisory; normalize with `python3 scripts/compact_svg_styles.py <svg_output> --inplace`, re-stamp pages that carry Chart/Table fallbacks, and rerun the final gate, or leave the explicit form)"
+        },
+        {
+          "file": "05_quote.svg",
+          "message": "Noncanonical compact authoring: Authoring SVG contains noncanonical or redundant inherited style declarations (5 change(s)); examples (group:attr None -> value hoists the shared value onto that group; child:attr value -> None drops the copy the child now inherits): pull-quote:font-family None -> 'Georgia, SimSun'; text[5]:font-family 'Georgia, SimSun' -> None; text[6]:font-family 'Georgia, SimSun' -> None (advisory; normalize with `python3 scripts/compact_svg_styles.py <svg_output> --inplace`, re-stamp pages that carry Chart/Table fallbacks, and rerun the final gate, or leave the explicit form)"
+        },
+        {
+          "file": "05_quote.svg",
+          "message": "Detected 1 paragraph-like line run(s) split across sibling <text> elements (<g id=\"pull-quote\"> x=96.0, y=268.0..342.0, 2 lines). If each run is one prose paragraph, combine it into one <text>: keep its first line as direct text and use direct <tspan> children with the parent x and positive relative dy values for later lines. An all-<tspan> form may start with dy=\"0\". Keep semantically independent text frames separate."
+        },
+        {
+          "file": "06_contrasts.svg",
+          "message": "Noncanonical compact authoring: Authoring SVG contains noncanonical or redundant inherited style declarations (28 change(s)); examples (group:attr None -> value hoists the shared value onto that group; child:attr value -> None drops the copy the child now inherits): text[4]:font-family 'Arial, Microsoft YaHei' -> None; text[10]:font-family 'Arial, Microsoft YaHei' -> None; text[12]:font-family 'Arial, Microsoft YaHei' -> None (advisory; normalize with `python3 scripts/compact_svg_styles.py <svg_output> --inplace`, re-stamp pages that carry Chart/Table fallbacks, and rerun the final gate, or leave the explicit form)"
+        },
+        {
+          "file": "06_contrasts.svg",
+          "message": "Detected 8 paragraph-like line run(s) split across sibling <text> elements (<g id=\"card-static\"> x=126.0, y=402.0..454.0, 3 lines; <g id=\"card-static\"> x=126.0, y=500.0..520.0, 2 lines; <g id=\"card-prep\"> x=408.0, y=402.0..454.0, 3 lines; +5 more). If each run is one prose paragraph, combine it into one <text>: keep its first line as direct text and use direct <tspan> children with the parent x and positive relative dy values for later lines. An all-<tspan> form may start with dy=\"0\". Keep semantically independent text frames separate."
+        },
+        {
+          "file": "07_why_now.svg",
+          "message": "Noncanonical compact authoring: Authoring SVG contains noncanonical or redundant inherited style declarations (13 change(s)); examples (group:attr None -> value hoists the shared value onto that group; child:attr value -> None drops the copy the child now inherits): text[4]:font-family 'Arial, Microsoft YaHei' -> None; text[11]:font-family 'Arial, Microsoft YaHei' -> None; text[12]:font-family 'Arial, Microsoft YaHei' -> None (advisory; normalize with `python3 scripts/compact_svg_styles.py <svg_output> --inplace`, re-stamp pages that carry Chart/Table fallbacks, and rerun the final gate, or leave the explicit form)"
+        },
+        {
+          "file": "07_why_now.svg",
+          "message": "Detected 5 paragraph-like line run(s) split across sibling <text> elements (<g id=\"reason-1\"> x=96.0, y=424.0..450.0, 2 lines; <g id=\"reason-1\"> x=96.0, y=476.0..502.0, 2 lines; <g id=\"reason-2\"> x=472.0, y=424.0..450.0, 2 lines; +2 more). If each run is one prose paragraph, combine it into one <text>: keep its first line as direct text and use direct <tspan> children with the parent x and positive relative dy values for later lines. An all-<tspan> form may start with dy=\"0\". Keep semantically independent text frames separate."
+        },
+        {
+          "file": "08_ending.svg",
+          "message": "Noncanonical compact authoring: Authoring SVG contains noncanonical or redundant inherited style declarations (18 change(s)); examples (group:attr None -> value hoists the shared value onto that group; child:attr value -> None drops the copy the child now inherits): closing-title:fill None -> '#1E3527'; closing-title:font-family None -> 'Georgia, SimSun'; closing-title:font-size None -> '72' (advisory; normalize with `python3 scripts/compact_svg_styles.py <svg_output> --inplace`, re-stamp pages that carry Chart/Table fallbacks, and rerun the final gate, or leave the explicit form)"
+        },
+        {
+          "file": "08_ending.svg",
+          "message": "Detected 2 paragraph-like line run(s) split across sibling <text> elements (<g id=\"closing-title\"> x=96.0, y=248.0..336.0, 2 lines; <g id=\"closing-body\"> x=96.0, y=442.0..476.0, 2 lines). If each run is one prose paragraph, combine it into one <text>: keep its first line as direct text and use direct <tspan> children with the parent x and positive relative dy values for later lines. An all-<tspan> form may start with dy=\"0\". Keep semantically independent text frames separate."
+        }
+      ]
+    },
+    "inherited": {
+      "count": 0,
+      "issues": []
+    },
+    "source-import": {
+      "count": 0,
+      "summary": {
+        "warning_count": 0,
+        "by_code": {}
+      }
+    }
+  },
+  "drift": {
+    "colors": {
+      "#3A4F3E": [
+        "02_definition.svg",
+        "05_quote.svg"
+      ],
+      "#8A9A8C": [
+        "02_definition.svg",
+        "05_quote.svg"
+      ],
+      "#9A9284": [
+        "02_definition.svg"
+      ],
+      "#A39A8C": [
+        "02_definition.svg",
+        "03_palette.svg",
+        "06_contrasts.svg",
+        "08_ending.svg"
+      ],
+      "#C9C2B4": [
+        "02_definition.svg"
+      ],
+      "#E3DCCF": [
+        "04_material.svg",
+        "06_contrasts.svg"
+      ]
+    },
+    "fonts": {},
+    "sizes": {
+      "21": [
+        "07_why_now.svg"
+      ],
+      "64": [
+        "01_cover.svg"
+      ]
+    }
+  },
+  "carrier_receipt": {
+    "scope": "informational-not-a-quota",
+    "pages": 8,
+    "totals": {
+      "text_elements": 123,
+      "image_placements": 0,
+      "icons": 0,
+      "svg_geometry_elements": 46,
+      "preset_shapes": 0,
+      "page_frame_elements": 21,
+      "marker_uses": 0,
+      "inline_emphasis_runs": 0,
+      "gradient_uses": 0,
+      "filter_uses": 0,
+      "text_effects": 0
+    },
+    "pages_with": {
+      "images": 0,
+      "icons": 0,
+      "presets": 0,
+      "charts": 0,
+      "tables": 0,
+      "formulas": 0,
+      "inline_emphasis_runs": 0,
+      "gradient_uses": 0,
+      "filter_uses": 0,
+      "text_effects": 0
+    },
+    "relationship_pages": null,
+    "geometry_elements": {
+      "circle": 4,
+      "ellipse": 0,
+      "line": 0,
+      "path": 0,
+      "polygon": 0,
+      "polyline": 0,
+      "rect": 42
+    },
+    "preset_names": {},
+    "native_objects": {
+      "chart": 0,
+      "formula_block": 0,
+      "formula_inline": 0,
+      "other": 0,
+      "table": 0
+    },
+    "image_page_max_frame_share_range": []
+  },
+  "project_issues": {
+    "template": [],
+    "animation": [],
+    "illustration": [],
+    "communication_trace": [],
+    "pptx_structure": []
+  },
+  "files": [
+    {
+      "file": "01_cover.svg",
+      "path": "D:\\dsworkplace_eassy\\projects\\old_money_ppt169_20261028\\svg_output\\01_cover.svg",
+      "exists": true,
+      "errors": [],
+      "warnings": [
+        "Noncanonical compact authoring: Authoring SVG contains noncanonical or redundant inherited style declarations (8 change(s)); examples (group:attr None -> value hoists the shared value onto that group; child:attr value -> None drops the copy the child now inherits): cover-title:font-family None -> 'Georgia, SimSun'; text[7]:font-family 'Georgia, SimSun' -> None; text[8]:font-family 'Georgia, SimSun' -> None (advisory; normalize with `python3 scripts/compact_svg_styles.py <svg_output> --inplace`, re-stamp pages that carry Chart/Table fallbacks, and rerun the final gate, or leave the explicit form)"
+      ],
+      "info": {
+        "viewbox": "0 0 1280 720",
+        "carrier_receipt": {
+          "text_elements": 8,
+          "images": {
+            "placements": 0,
+            "files": [],
+            "max_frame_share": 0.0
+          },
+          "icons": 0,
+          "effects": {
+            "inline_emphasis_runs": 0,
+            "gradient_uses": 0,
+            "filter_uses": 0,
+            "text_effects": 0
+          },
+          "geometry": {
+            "svg_elements": {
+              "rect": 3,
+              "circle": 2,
+              "ellipse": 0,
+              "line": 0,
+              "polyline": 0,
+              "polygon": 0,
+              "path": 0
+            },
+            "preset_shapes": 0,
+            "preset_names": {},
+            "page_frame_elements": 3,
+            "marker_uses": {
+              "start": 0,
+              "mid": 0,
+              "end": 0
+            }
+          },
+          "native_objects": {
+            "chart": 0,
+            "table": 0,
+            "formula_block": 0,
+            "formula_inline": 0,
+            "other": 0
+          }
+        },
+        "fonts": [
+          "Arial, Microsoft YaHei",
+          "Georgia, SimSun"
+        ],
+        "text_elements": 8,
+        "tspan_elements": 0,
+        "sparse_typography_sizes": {
+          "64": 1
+        }
+      },
+      "passed": true,
+      "source_sha256": "21bdf9660d1c2ef006627a412f14ddccc87f5b199db16ef45865cf856b7586af"
+    },
+    {
+      "file": "02_definition.svg",
+      "path": "D:\\dsworkplace_eassy\\projects\\old_money_ppt169_20261028\\svg_output\\02_definition.svg",
+      "exists": true,
+      "errors": [],
+      "warnings": [
+        "Noncanonical compact authoring: Authoring SVG contains noncanonical or redundant inherited style declarations (15 change(s)); examples (group:attr None -> value hoists the shared value onto that group; child:attr value -> None drops the copy the child now inherits): text[4]:font-family 'Arial, Microsoft YaHei' -> None; text[11]:font-family 'Arial, Microsoft YaHei' -> None; text[12]:font-family 'Arial, Microsoft YaHei' -> None (advisory; normalize with `python3 scripts/compact_svg_styles.py <svg_output> --inplace`, re-stamp pages that carry Chart/Table fallbacks, and rerun the final gate, or leave the explicit form)",
+        "Detected 2 paragraph-like line run(s) split across sibling <text> elements (<g id=\"lead\"> x=96.0, y=266.0..346.0, 3 lines; <g id=\"lead\"> x=96.0, y=416.0..446.0, 2 lines). If each run is one prose paragraph, combine it into one <text>: keep its first line as direct text and use direct <tspan> children with the parent x and positive relative dy values for later lines. An all-<tspan> form may start with dy=\"0\". Keep semantically independent text frames separate."
+      ],
+      "info": {
+        "viewbox": "0 0 1280 720",
+        "carrier_receipt": {
+          "text_elements": 16,
+          "images": {
+            "placements": 0,
+            "files": [],
+            "max_frame_share": 0.0
+          },
+          "icons": 0,
+          "effects": {
+            "inline_emphasis_runs": 0,
+            "gradient_uses": 0,
+            "filter_uses": 0,
+            "text_effects": 0
+          },
+          "geometry": {
+            "svg_elements": {
+              "rect": 5,
+              "circle": 0,
+              "ellipse": 0,
+              "line": 0,
+              "polyline": 0,
+              "polygon": 0,
+              "path": 0
+            },
+            "preset_shapes": 0,
+            "preset_names": {},
+            "page_frame_elements": 2,
+            "marker_uses": {
+              "start": 0,
+              "mid": 0,
+              "end": 0
+            }
+          },
+          "native_objects": {
+            "chart": 0,
+            "table": 0,
+            "formula_block": 0,
+            "formula_inline": 0,
+            "other": 0
+          }
+        },
+        "fonts": [
+          "Arial, Microsoft YaHei",
+          "Georgia, SimSun"
+        ],
+        "text_elements": 16,
+        "tspan_elements": 0,
+        "contextual_values": {
+          "colors": [
+            "#3A4F3E",
+            "#8A9A8C",
+            "#9A9284",
+            "#A39A8C",
+            "#C9C2B4"
+          ]
+        }
+      },
+      "passed": true,
+      "source_sha256": "dd0c191643f4e67fd78e8aa1b89d4dcd36cad8f7a10c359deb90c15bd17be068"
+    },
+    {
+      "file": "03_palette.svg",
+      "path": "D:\\dsworkplace_eassy\\projects\\old_money_ppt169_20261028\\svg_output\\03_palette.svg",
+      "exists": true,
+      "errors": [],
+      "warnings": [
+        "Noncanonical compact authoring: Authoring SVG contains noncanonical or redundant inherited style declarations (10 change(s)); examples (group:attr None -> value hoists the shared value onto that group; child:attr value -> None drops the copy the child now inherits): text[4]:font-family 'Arial, Microsoft YaHei' -> None; text[8]:font-family 'Arial, Microsoft YaHei' -> None; text[12]:font-family 'Arial, Microsoft YaHei' -> None (advisory; normalize with `python3 scripts/compact_svg_styles.py <svg_output> --inplace`, re-stamp pages that carry Chart/Table fallbacks, and rerun the final gate, or leave the explicit form)"
+      ],
+      "info": {
+        "viewbox": "0 0 1280 720",
+        "carrier_receipt": {
+          "text_elements": 16,
+          "images": {
+            "placements": 0,
+            "files": [],
+            "max_frame_share": 0.0
+          },
+          "icons": 0,
+          "effects": {
+            "inline_emphasis_runs": 0,
+            "gradient_uses": 0,
+            "filter_uses": 0,
+            "text_effects": 0
+          },
+          "geometry": {
+            "svg_elements": {
+              "rect": 7,
+              "circle": 0,
+              "ellipse": 0,
+              "line": 0,
+              "polyline": 0,
+              "polygon": 0,
+              "path": 0
+            },
+            "preset_shapes": 0,
+            "preset_names": {},
+            "page_frame_elements": 3,
+            "marker_uses": {
+              "start": 0,
+              "mid": 0,
+              "end": 0
+            }
+          },
+          "native_objects": {
+            "chart": 0,
+            "table": 0,
+            "formula_block": 0,
+            "formula_inline": 0,
+            "other": 0
+          }
+        },
+        "fonts": [
+          "Arial, Microsoft YaHei",
+          "Georgia, SimSun"
+        ],
+        "text_elements": 16,
+        "tspan_elements": 0,
+        "contextual_values": {
+          "colors": [
+            "#A39A8C"
+          ]
+        }
+      },
+      "passed": true,
+      "source_sha256": "eaaf222ae352009535545856c862168d35698a797c1ada9eaa33650fb08ebf58"
+    },
+    {
+      "file": "04_material.svg",
+      "path": "D:\\dsworkplace_eassy\\projects\\old_money_ppt169_20261028\\svg_output\\04_material.svg",
+      "exists": true,
+      "errors": [],
+      "warnings": [
+        "Noncanonical compact authoring: Authoring SVG contains noncanonical or redundant inherited style declarations (5 change(s)); examples (group:attr None -> value hoists the shared value onto that group; child:attr value -> None drops the copy the child now inherits): text[4]:font-family 'Arial, Microsoft YaHei' -> None; text[8]:font-family 'Arial, Microsoft YaHei' -> None; text[12]:font-family 'Arial, Microsoft YaHei' -> None (advisory; normalize with `python3 scripts/compact_svg_styles.py <svg_output> --inplace`, re-stamp pages that carry Chart/Table fallbacks, and rerun the final gate, or leave the explicit form)"
+      ],
+      "info": {
+        "viewbox": "0 0 1280 720",
+        "carrier_receipt": {
+          "text_elements": 13,
+          "images": {
+            "placements": 0,
+            "files": [],
+            "max_frame_share": 0.0
+          },
+          "icons": 0,
+          "effects": {
+            "inline_emphasis_runs": 0,
+            "gradient_uses": 0,
+            "filter_uses": 0,
+            "text_effects": 0
+          },
+          "geometry": {
+            "svg_elements": {
+              "rect": 5,
+              "circle": 0,
+              "ellipse": 0,
+              "line": 0,
+              "polyline": 0,
+              "polygon": 0,
+              "path": 0
+            },
+            "preset_shapes": 0,
+            "preset_names": {},
+            "page_frame_elements": 2,
+            "marker_uses": {
+              "start": 0,
+              "mid": 0,
+              "end": 0
+            }
+          },
+          "native_objects": {
+            "chart": 0,
+            "table": 0,
+            "formula_block": 0,
+            "formula_inline": 0,
+            "other": 0
+          }
+        },
+        "fonts": [
+          "Arial, Microsoft YaHei",
+          "Georgia, SimSun"
+        ],
+        "text_elements": 13,
+        "tspan_elements": 0,
+        "contextual_values": {
+          "colors": [
+            "#E3DCCF"
+          ]
+        }
+      },
+      "passed": true,
+      "source_sha256": "fff7b21114952daea19881825fe842d0c3b40c46b236f47ec2b1b1053b40032a"
+    },
+    {
+      "file": "05_quote.svg",
+      "path": "D:\\dsworkplace_eassy\\projects\\old_money_ppt169_20261028\\svg_output\\05_quote.svg",
+      "exists": true,
+      "errors": [],
+      "warnings": [
+        "Noncanonical compact authoring: Authoring SVG contains noncanonical or redundant inherited style declarations (5 change(s)); examples (group:attr None -> value hoists the shared value onto that group; child:attr value -> None drops the copy the child now inherits): pull-quote:font-family None -> 'Georgia, SimSun'; text[5]:font-family 'Georgia, SimSun' -> None; text[6]:font-family 'Georgia, SimSun' -> None (advisory; normalize with `python3 scripts/compact_svg_styles.py <svg_output> --inplace`, re-stamp pages that carry Chart/Table fallbacks, and rerun the final gate, or leave the explicit form)",
+        "Detected 1 paragraph-like line run(s) split across sibling <text> elements (<g id=\"pull-quote\"> x=96.0, y=268.0..342.0, 2 lines). If each run is one prose paragraph, combine it into one <text>: keep its first line as direct text and use direct <tspan> children with the parent x and positive relative dy values for later lines. An all-<tspan> form may start with dy=\"0\". Keep semantically independent text frames separate."
+      ],
+      "info": {
+        "viewbox": "0 0 1280 720",
+        "carrier_receipt": {
+          "text_elements": 4,
+          "images": {
+            "placements": 0,
+            "files": [],
+            "max_frame_share": 0.0
+          },
+          "icons": 0,
+          "effects": {
+            "inline_emphasis_runs": 0,
+            "gradient_uses": 0,
+            "filter_uses": 0,
+            "text_effects": 0
+          },
+          "geometry": {
+            "svg_elements": {
+              "rect": 3,
+              "circle": 0,
+              "ellipse": 0,
+              "line": 0,
+              "polyline": 0,
+              "polygon": 0,
+              "path": 0
+            },
+            "preset_shapes": 0,
+            "preset_names": {},
+            "page_frame_elements": 3,
+            "marker_uses": {
+              "start": 0,
+              "mid": 0,
+              "end": 0
+            }
+          },
+          "native_objects": {
+            "chart": 0,
+            "table": 0,
+            "formula_block": 0,
+            "formula_inline": 0,
+            "other": 0
+          }
+        },
+        "fonts": [
+          "Arial, Microsoft YaHei",
+          "Georgia, SimSun"
+        ],
+        "text_elements": 4,
+        "tspan_elements": 0,
+        "contextual_values": {
+          "colors": [
+            "#3A4F3E",
+            "#8A9A8C"
+          ]
+        }
+      },
+      "passed": true,
+      "source_sha256": "6af054f7bdd384f60b5ac6c4fe76ba8be9f29829b121cb16aba1c7c3f58478de"
+    },
+    {
+      "file": "06_contrasts.svg",
+      "path": "D:\\dsworkplace_eassy\\projects\\old_money_ppt169_20261028\\svg_output\\06_contrasts.svg",
+      "exists": true,
+      "errors": [],
+      "warnings": [
+        "Noncanonical compact authoring: Authoring SVG contains noncanonical or redundant inherited style declarations (28 change(s)); examples (group:attr None -> value hoists the shared value onto that group; child:attr value -> None drops the copy the child now inherits): text[4]:font-family 'Arial, Microsoft YaHei' -> None; text[10]:font-family 'Arial, Microsoft YaHei' -> None; text[12]:font-family 'Arial, Microsoft YaHei' -> None (advisory; normalize with `python3 scripts/compact_svg_styles.py <svg_output> --inplace`, re-stamp pages that carry Chart/Table fallbacks, and rerun the final gate, or leave the explicit form)",
+        "Detected 8 paragraph-like line run(s) split across sibling <text> elements (<g id=\"card-static\"> x=126.0, y=402.0..454.0, 3 lines; <g id=\"card-static\"> x=126.0, y=500.0..520.0, 2 lines; <g id=\"card-prep\"> x=408.0, y=402.0..454.0, 3 lines; +5 more). If each run is one prose paragraph, combine it into one <text>: keep its first line as direct text and use direct <tspan> children with the parent x and positive relative dy values for later lines. An all-<tspan> form may start with dy=\"0\". Keep semantically independent text frames separate."
+      ],
+      "info": {
+        "viewbox": "0 0 1280 720",
+        "carrier_receipt": {
+          "text_elements": 36,
+          "images": {
+            "placements": 0,
+            "files": [],
+            "max_frame_share": 0.0
+          },
+          "icons": 0,
+          "effects": {
+            "inline_emphasis_runs": 0,
+            "gradient_uses": 0,
+            "filter_uses": 0,
+            "text_effects": 0
+          },
+          "geometry": {
+            "svg_elements": {
+              "rect": 10,
+              "circle": 0,
+              "ellipse": 0,
+              "line": 0,
+              "polyline": 0,
+              "polygon": 0,
+              "path": 0
+            },
+            "preset_shapes": 0,
+            "preset_names": {},
+            "page_frame_elements": 2,
+            "marker_uses": {
+              "start": 0,
+              "mid": 0,
+              "end": 0
+            }
+          },
+          "native_objects": {
+            "chart": 0,
+            "table": 0,
+            "formula_block": 0,
+            "formula_inline": 0,
+            "other": 0
+          }
+        },
+        "fonts": [
+          "Arial, Microsoft YaHei",
+          "Georgia, SimSun"
+        ],
+        "text_elements": 36,
+        "tspan_elements": 0,
+        "contextual_values": {
+          "colors": [
+            "#A39A8C",
+            "#E3DCCF"
+          ]
+        }
+      },
+      "passed": true,
+      "source_sha256": "788a7e8b7cae8637730767334fe534d61b0c1d62f6bf6b604b24145fcf78d0c6"
+    },
+    {
+      "file": "07_why_now.svg",
+      "path": "D:\\dsworkplace_eassy\\projects\\old_money_ppt169_20261028\\svg_output\\07_why_now.svg",
+      "exists": true,
+      "errors": [],
+      "warnings": [
+        "Noncanonical compact authoring: Authoring SVG contains noncanonical or redundant inherited style declarations (13 change(s)); examples (group:attr None -> value hoists the shared value onto that group; child:attr value -> None drops the copy the child now inherits): text[4]:font-family 'Arial, Microsoft YaHei' -> None; text[11]:font-family 'Arial, Microsoft YaHei' -> None; text[12]:font-family 'Arial, Microsoft YaHei' -> None (advisory; normalize with `python3 scripts/compact_svg_styles.py <svg_output> --inplace`, re-stamp pages that carry Chart/Table fallbacks, and rerun the final gate, or leave the explicit form)",
+        "Detected 5 paragraph-like line run(s) split across sibling <text> elements (<g id=\"reason-1\"> x=96.0, y=424.0..450.0, 2 lines; <g id=\"reason-1\"> x=96.0, y=476.0..502.0, 2 lines; <g id=\"reason-2\"> x=472.0, y=424.0..450.0, 2 lines; +2 more). If each run is one prose paragraph, combine it into one <text>: keep its first line as direct text and use direct <tspan> children with the parent x and positive relative dy values for later lines. An all-<tspan> form may start with dy=\"0\". Keep semantically independent text frames separate."
+      ],
+      "info": {
+        "viewbox": "0 0 1280 720",
+        "carrier_receipt": {
+          "text_elements": 21,
+          "images": {
+            "placements": 0,
+            "files": [],
+            "max_frame_share": 0.0
+          },
+          "icons": 0,
+          "effects": {
+            "inline_emphasis_runs": 0,
+            "gradient_uses": 0,
+            "filter_uses": 0,
+            "text_effects": 0
+          },
+          "geometry": {
+            "svg_elements": {
+              "rect": 6,
+              "circle": 0,
+              "ellipse": 0,
+              "line": 0,
+              "polyline": 0,
+              "polygon": 0,
+              "path": 0
+            },
+            "preset_shapes": 0,
+            "preset_names": {},
+            "page_frame_elements": 3,
+            "marker_uses": {
+              "start": 0,
+              "mid": 0,
+              "end": 0
+            }
+          },
+          "native_objects": {
+            "chart": 0,
+            "table": 0,
+            "formula_block": 0,
+            "formula_inline": 0,
+            "other": 0
+          }
+        },
+        "fonts": [
+          "Arial, Microsoft YaHei",
+          "Georgia, SimSun"
+        ],
+        "text_elements": 21,
+        "tspan_elements": 0,
+        "sparse_typography_sizes": {
+          "21": 1
+        }
+      },
+      "passed": true,
+      "source_sha256": "9cd1948e82ccda8872d52993a9a96318934939f8914bfaecf159dd37696efbc2"
+    },
+    {
+      "file": "08_ending.svg",
+      "path": "D:\\dsworkplace_eassy\\projects\\old_money_ppt169_20261028\\svg_output\\08_ending.svg",
+      "exists": true,
+      "errors": [],
+      "warnings": [
+        "Noncanonical compact authoring: Authoring SVG contains noncanonical or redundant inherited style declarations (18 change(s)); examples (group:attr None -> value hoists the shared value onto that group; child:attr value -> None drops the copy the child now inherits): closing-title:fill None -> '#1E3527'; closing-title:font-family None -> 'Georgia, SimSun'; closing-title:font-size None -> '72' (advisory; normalize with `python3 scripts/compact_svg_styles.py <svg_output> --inplace`, re-stamp pages that carry Chart/Table fallbacks, and rerun the final gate, or leave the explicit form)",
+        "Detected 2 paragraph-like line run(s) split across sibling <text> elements (<g id=\"closing-title\"> x=96.0, y=248.0..336.0, 2 lines; <g id=\"closing-body\"> x=96.0, y=442.0..476.0, 2 lines). If each run is one prose paragraph, combine it into one <text>: keep its first line as direct text and use direct <tspan> children with the parent x and positive relative dy values for later lines. An all-<tspan> form may start with dy=\"0\". Keep semantically independent text frames separate."
+      ],
+      "info": {
+        "viewbox": "0 0 1280 720",
+        "carrier_receipt": {
+          "text_elements": 9,
+          "images": {
+            "placements": 0,
+            "files": [],
+            "max_frame_share": 0.0
+          },
+          "icons": 0,
+          "effects": {
+            "inline_emphasis_runs": 0,
+            "gradient_uses": 0,
+            "filter_uses": 0,
+            "text_effects": 0
+          },
+          "geometry": {
+            "svg_elements": {
+              "rect": 3,
+              "circle": 2,
+              "ellipse": 0,
+              "line": 0,
+              "polyline": 0,
+              "polygon": 0,
+              "path": 0
+            },
+            "preset_shapes": 0,
+            "preset_names": {},
+            "page_frame_elements": 3,
+            "marker_uses": {
+              "start": 0,
+              "mid": 0,
+              "end": 0
+            }
+          },
+          "native_objects": {
+            "chart": 0,
+            "table": 0,
+            "formula_block": 0,
+            "formula_inline": 0,
+            "other": 0
+          }
+        },
+        "fonts": [
+          "Arial, Microsoft YaHei",
+          "Georgia, SimSun"
+        ],
+        "text_elements": 9,
+        "tspan_elements": 0,
+        "contextual_values": {
+          "colors": [
+            "#A39A8C"
+          ]
+        }
+      },
+      "passed": true,
+      "source_sha256": "ed36b69606b8a3eb22c3db3bbbbf06ca3d7c3b57e10251153a0ac4f78ef305f1"
+    }
+  ]
+}

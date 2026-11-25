@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720" font-family="Arial, Microsoft YaHei" data-pptx-page-role="content">
+  <rect id="bg" data-pptx-role="background" x="0" y="0" width="1280" height="720" fill="#FAF7F1"/>
+
+  <g id="header" data-pptx-bounds="96 72 1084 108">
+    <text x="96" y="104" font-family="Arial, Microsoft YaHei" font-size="14" letter-spacing="5" fill="#A98A57">壹 · DEFINITION</text>
+    <text x="96" y="158" font-family="Georgia, SimSun" font-size="46" fill="#1E3527">它不是一个品牌，是一种阶层语法</text>
+  </g>
+
+  <rect id="header-rule" data-pptx-role="decoration" x="96" y="196" width="1084" height="1" fill="#D9D2C5"/>
+
+  <g id="lead" data-pptx-bounds="96 226 620 300">
+    <text x="96" y="266" font-family="Georgia, SimSun" font-size="26" fill="#23201C">老钱风指的不是某种单品或价位，</text>
+    <text x="96" y="306" font-family="Georgia, SimSun" font-size="26" fill="#23201C">而是一整套关于“什么不必证明”的</text>
+    <text x="96" y="346" font-family="Georgia, SimSun" font-size="26" fill="#23201C">审美与行为规则。</text>
+    <text x="96" y="416" font-family="Arial, Microsoft YaHei" font-size="18" fill="#7A7268">它由少数家族数代累积的生活方式沉淀而来，</text>
+    <text x="96" y="446" font-family="Arial, Microsoft YaHei" font-size="18" fill="#7A7268">包括着装、居住、教育、社交与消费的分寸感。</text>
+    <text x="96" y="494" font-family="Arial, Microsoft YaHei" font-size="18" fill="#7A7268">核心不是“拥有”，而是“无需解释地拥有”。</text>
+  </g>
+
+  <g id="contrast-card" data-pptx-bounds="796 226 384 372">
+    <rect x="796" y="226" width="384" height="372" fill="#1E3527"/>
+    <text x="836" y="278" font-family="Arial, Microsoft YaHei" font-size="13" letter-spacing="4" fill="#A98A57">对照</text>
+    <rect x="836" y="298" width="60" height="1" fill="#A98A57"/>
+
+    <text x="836" y="352" font-family="Georgia, SimSun" font-size="24" fill="#FAF7F1">老钱</text>
+    <text x="836" y="388" font-family="Arial, Microsoft YaHei" font-size="16" fill="#C9C2B4">沉默的品质</text>
+
+    <rect x="836" y="416" width="304" height="1" fill="#3A4F3E"/>
+
+    <text x="836" y="464" font-family="Georgia, SimSun" font-size="24" fill="#C9AE7E">新钱</text>
+    <text x="836" y="500" font-family="Arial, Microsoft YaHei" font-size="16" fill="#9A9284">可见的符号</text>
+
+    <text x="836" y="556" font-family="Arial, Microsoft YaHei" font-size="14" fill="#8A9A8C">前者做减法，后者做加法。</text>
+  </g>
+
+  <g id="footer" data-pptx-bounds="96 648 1084 36">
+    <text x="96" y="676" font-family="Arial, Microsoft YaHei" font-size="13" fill="#A39A8C">老钱风 · 风格解析</text>
+    <text x="1180" y="676" text-anchor="end" font-family="Georgia, SimSun" font-size="13" fill="#A39A8C">02</text>
+  </g>
+</svg>

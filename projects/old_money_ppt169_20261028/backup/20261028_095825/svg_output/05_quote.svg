@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720" font-family="Arial, Microsoft YaHei" data-pptx-page-role="section">
+  <rect id="bg" data-pptx-role="background" x="0" y="0" width="1280" height="720" fill="#1E3527"/>
+
+  <rect id="quote-mark" data-pptx-role="decoration" x="96" y="150" width="72" height="3" fill="#A98A57"/>
+
+  <g id="pull-quote" data-pptx-bounds="96 190 1000 290">
+    <text x="96" y="268" font-family="Georgia, SimSun" font-size="46" fill="#FAF7F1">“风格是你不在场时，</text>
+    <text x="96" y="342" font-family="Georgia, SimSun" font-size="46" fill="#FAF7F1">别人替你形容词的方式。</text>
+    <text x="96" y="440" font-family="Georgia, SimSun" font-size="24" font-style="italic" fill="#C9AE7E">Style is how people describe you when you leave the room.</text>
+  </g>
+
+  <rect id="quote-rule" data-pptx-role="decoration" x="96" y="520" width="360" height="1" fill="#3A4F3E"/>
+
+  <g id="attribution" data-pptx-bounds="96 540 480 50">
+    <text x="96" y="576" font-family="Arial, Microsoft YaHei" font-size="15" letter-spacing="3" fill="#8A9A8C">— 关于老钱风的一种说法</text>
+  </g>
+</svg>

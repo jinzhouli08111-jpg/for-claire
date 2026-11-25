@@ -1,0 +1,247 @@
+/* ============================================================
+   For Claire · 设计系统
+   字体：Manrope（拉丁）+ 系统中文字体
+   排版：Tailwind 字阶 / 命名文字样式
+   间距：8 基准 token
+   动效：cubic-bezier(0.22,1,0.36,1)
+   ============================================================ */
+
+@font-face {
+  font-family: "Manrope";
+  src: url("/fonts/manrope-latin.woff2") format("woff2");
+  font-weight: 400 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  /* —— 字体 —— */
+  --font: "Manrope", -apple-system, BlinkMacSystemFont, "PingFang SC",
+          "Hiragino Sans GB", "Microsoft YaHei", "Source Han Sans SC", sans-serif;
+
+  /* —— 颜色 —— */
+  --bg: #f5f9f6;
+  --bg-soft: #edf5f0;
+  --panel: #ffffff;
+  --ink: #1f2a23;
+  --ink-2: #374151;
+  --muted: #6b7a70;
+  --faint: #9aa79f;
+  --line: #e3ebe5;
+  --line-strong: #cfdcd4;
+  --brand: #16a34a;
+  --brand-dark: #15803d;
+  --brand-soft: #e9f7ee;
+  --brand-soft-2: #dcf5e5;
+
+  /* —— 间距（8 基准）—— */
+  --s-25: 2px;
+  --s-50: 4px;
+  --s-75: 8px;
+  --s-100: 12px;
+  --s-200: 16px;
+  --s-300: 24px;
+  --s-400: 32px;
+  --s-500: 40px;
+  --s-600: 48px;
+  --s-700: 64px;
+  --s-800: 80px;
+  --s-900: 96px;
+
+  /* —— 圆角（Tailwind）—— */
+  --r-sm: 2px;
+  --r: 4px;
+  --r-md: 6px;
+  --r-lg: 8px;
+  --r-xl: 12px;
+  --r-2xl: 16px;
+  --r-3xl: 24px;
+  --r-full: 999px;
+
+  /* —— 动效 —— */
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --dur-fast: 200ms;
+  --dur: 300ms;
+  --dur-slow: 500ms;
+
+  /* —— 层级与阴影 —— */
+  --shadow-1: 0 1px 2px rgba(16, 24, 40, .04);
+  --shadow-2: 0 1px 2px rgba(16, 24, 40, .05), 0 8px 24px rgba(16, 24, 40, .06);
+  --shadow-3: 0 12px 32px rgba(16, 24, 40, .12);
+}
+
+/* ============================================================
+   基础
+   ============================================================ */
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  font-family: var(--font);
+  font-feature-settings: "tnum" 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* 无斜体（logo 除外，由品牌字样式单独指定） */
+body, input, textarea, select, button { font-style: normal; }
+
+button, input, textarea, select { font-family: inherit; }
+
+/* 焦点环 —— 键盘可见 */
+:focus-visible {
+  outline: 2px solid var(--brand);
+  outline-offset: 2px;
+  border-radius: var(--r);
+}
+
+/* 选中态 */
+::selection { background: var(--brand-soft-2); color: var(--ink); }
+
+/* 滚动条（WebKit） */
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb {
+  background: var(--line-strong);
+  border-radius: var(--r-full);
+  border: 3px solid transparent;
+  background-clip: content-box;
+}
+::-webkit-scrollbar-thumb:hover { background: #b9c9c0; background-clip: content-box; }
+
+/* 减少动效 */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ============================================================
+   文字样式（命名，直接用 class）
+   ============================================================ */
+
+.heading-1 { font-size: 60px; line-height: 1;    font-weight: 600; letter-spacing: -.02em; text-wrap: balance; }
+.heading-2 { font-size: 48px; line-height: 1;    font-weight: 600; letter-spacing: -.02em; text-wrap: balance; }
+.heading-3 { font-size: 36px; line-height: 40px; font-weight: 600; letter-spacing: -.01em; text-wrap: balance; }
+.heading-4 { font-size: 30px; line-height: 36px; font-weight: 600; letter-spacing: -.01em; text-wrap: balance; }
+.heading-5 { font-size: 24px; line-height: 32px; font-weight: 600; text-wrap: balance; }
+.heading-6 { font-size: 20px; line-height: 28px; font-weight: 600; }
+
+.title-1 { font-size: 20px; line-height: 28px; font-weight: 500; }
+.title-2 { font-size: 18px; line-height: 28px; font-weight: 500; }
+.title-3 { font-size: 16px; line-height: 24px; font-weight: 500; }
+.title-4 { font-size: 14px; line-height: 20px; font-weight: 500; }
+.title-5 { font-size: 12px; line-height: 16px; font-weight: 500; }
+
+.body-1 { font-size: 16px; line-height: 24px; font-weight: 600; }
+.body-2 { font-size: 16px; line-height: 24px; font-weight: 500; }
+.body-3 { font-size: 16px; line-height: 24px; font-weight: 400; }
+.body-4 { font-size: 14px; line-height: 20px; font-weight: 600; }
+.body-5 { font-size: 14px; line-height: 20px; font-weight: 500; }
+.body-6 { font-size: 14px; line-height: 20px; font-weight: 400; }
+
+.button-lg  { font-size: 18px; line-height: 28px; font-weight: 600; }
+.button-md  { font-size: 16px; line-height: 24px; font-weight: 600; }
+.button-sm  { font-size: 14px; line-height: 20px; font-weight: 600; }
+.button-xsm { font-size: 12px; line-height: 16px; font-weight: 600; }
+
+.caption-1 { font-size: 14px; line-height: 20px; font-weight: 500; }
+.caption-2 { font-size: 14px; line-height: 20px; font-weight: 400; }
+.caption-3 { font-size: 12px; line-height: 16px; font-weight: 600; }
+.caption-4 { font-size: 12px; line-height: 16px; font-weight: 500; }
+.caption-5 { font-size: 12px; line-height: 16px; font-weight: 400; }
+
+/* 正文防孤行 */
+p, li { text-wrap: pretty; }
+
+/* ============================================================
+   通用组件
+   ============================================================ */
+
+/* 跳转到主内容（键盘可达性） */
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  z-index: 999;
+  padding: var(--s-75) var(--s-200);
+  background: var(--brand);
+  color: #fff;
+  border-radius: 0 0 var(--r-lg) 0;
+  text-decoration: none;
+}
+.skip-link:focus { left: 0; }
+
+/* 返回 / 次要按钮 */
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-75);
+  padding: var(--s-75) var(--s-100);
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  background: var(--panel);
+  color: var(--brand-dark);
+  text-decoration: none;
+  cursor: pointer;
+  transition: border-color var(--dur) var(--ease),
+              background-color var(--dur) var(--ease),
+              transform var(--dur) var(--ease);
+}
+.btn-secondary:hover { border-color: var(--brand); background: var(--brand-soft); }
+.btn-secondary:active { transform: translateY(1px); }
+
+/* 主按钮 */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--s-75);
+  padding: var(--s-75) var(--s-100);
+  border: none;
+  border-radius: var(--r-lg);
+  background: var(--brand);
+  color: #fff;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color var(--dur) var(--ease),
+              transform var(--dur) var(--ease),
+              box-shadow var(--dur) var(--ease);
+}
+.btn-primary:hover { background: var(--brand-dark); box-shadow: 0 6px 18px rgba(22, 163, 74, .22); }
+.btn-primary:active { transform: translateY(1px); }
+.btn-primary:disabled { background: #c3cdc6; cursor: not-allowed; box-shadow: none; }
+
+/* 输入框 */
+.field-input {
+  width: 100%;
+  padding: var(--s-100);
+  border: 1px solid var(--line);
+  border-radius: var(--r-xl);
+  background: var(--bg-soft);
+  color: var(--ink);
+  transition: border-color var(--dur) var(--ease),
+              background-color var(--dur) var(--ease),
+              box-shadow var(--dur) var(--ease);
+}
+.field-input::placeholder { color: var(--faint); }
+.field-input:focus {
+  outline: none;
+  border-color: var(--brand);
+  background: var(--panel);
+  box-shadow: 0 0 0 3px rgba(22, 163, 74, .12);
+}
+
+/* 卡片 */
+.card-flat {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: var(--r-2xl);
+  box-shadow: var(--shadow-1);
+}
